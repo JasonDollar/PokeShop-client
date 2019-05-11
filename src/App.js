@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import './App.css';
@@ -17,18 +17,36 @@ function App() {
   return (
     <div className="App">
       <Query query={GET_POKEMONS} variables={{skip: 0}}>
-        {({data, error, loading}) => {
+        {({data, error, loading, fetchMore}) => {
           if (loading) return <p>Loading...</p>
           console.log(data)
           return (
-            <ul>
-              {data.pokemons.map(item => (
-                <li key={item.id}>
-                  <img src={item.url} alt={item.name}/>
-                  <p>{item.name}</p>
-                </li>
-              ))}
-            </ul>
+            <Fragment>
+              <ul>
+                {data.pokemons.map(item => (
+                  <li key={item.id}>
+                    <img src={item.url} alt={item.name}/>
+                    <p>{item.name}</p>
+                  </li>
+                ))}
+              </ul>
+              <button onClick={() => {
+                fetchMore({
+                  variables: {
+                    skip: data.pokemons.length
+                  },
+                  updateQuery: (prev, {fetchMoreResult, ...rest}) => {
+                    if (!fetchMoreResult) return prev;
+                    return {
+                      pokemons: [
+                        ...prev.pokemons,
+                        ...fetchMoreResult.pokemons
+                      ]
+                    }
+                  }
+                })
+              }}>Fetch More</button>
+            </Fragment>
           )
         }}
       </Query>
