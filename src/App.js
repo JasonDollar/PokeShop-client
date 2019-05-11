@@ -1,24 +1,37 @@
 import React from 'react';
-import logo from './logo.svg';
+import gql from 'graphql-tag';
+import { Query } from 'react-apollo';
 import './App.css';
+
+const GET_POKEMONS = gql`
+  query GET_POKEMONS($skip: Int = 0) {
+    pokemons(skip: $skip) {
+      id
+      name
+      url
+    }
+  }
+`
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Query query={GET_POKEMONS} variables={{skip: 0}}>
+        {({data, error, loading}) => {
+          if (loading) return <p>Loading...</p>
+          console.log(data)
+          return (
+            <ul>
+              {data.pokemons.map(item => (
+                <li key={item.id}>
+                  <img src={item.url} alt={item.name}/>
+                  <p>{item.name}</p>
+                </li>
+              ))}
+            </ul>
+          )
+        }}
+      </Query>
     </div>
   );
 }
