@@ -13,9 +13,11 @@ const ME_QUERY = gql`
       offers {
         id
         name
-        image
         price
-        pokemonId
+        pokemon {
+          id
+          image
+        }
       }
     }
   }

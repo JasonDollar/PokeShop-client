@@ -8,9 +8,11 @@ const POKEMON_OFFER_QUERY = gql`
     pokemonOffer(id: $id) {
       id
       name
-      image
       price
-      pokemonId
+      pokemon {
+        image
+        id
+      }
       seller {
         id
         name
@@ -29,8 +31,8 @@ const OfferDetail = (props) => {
         return (
           <div>
             <Link to="/">Home</Link>
-            <h2>#{data.pokemonOffer.pokemonId} {data.pokemonOffer.name}</h2>
-            <img src={data.pokemonOffer.image} alt={data.pokemonOffer.name} style={{width: '20%', height: '20%'}}/>
+            <h2>#{data.pokemonOffer.pokemon.id} {data.pokemonOffer.name}</h2>
+            <img src={data.pokemonOffer.pokemon.image} alt={data.pokemonOffer.name} style={{width: '20%', height: '20%'}}/>
             <p>Price: {data.pokemonOffer.price}</p>
             <p>
               Seller: 

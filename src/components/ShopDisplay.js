@@ -8,9 +8,11 @@ const POKEMON_OFFERS_QUERY = gql`
     pokemonOffers {
       id
       name
-      image
       price
-      pokemonId
+      pokemon {
+        image
+        url
+      }
     }
   }
 `
