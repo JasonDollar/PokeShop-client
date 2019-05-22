@@ -3,7 +3,7 @@ import {Query} from 'react-apollo'
 import gql from 'graphql-tag'
 import OfferListItem from './OfferListItem'
 
-const POKEMON_OFFERS_QUERY = gql`
+export const POKEMON_OFFERS_QUERY = gql`
   query POKEMON_OFFERS_QUERY {
     pokemonOffers {
       id
