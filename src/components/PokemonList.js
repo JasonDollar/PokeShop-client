@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import PokemonListItem from './PokemonListItem'
 
 const GET_POKEMONS = gql`
-  query GET_POKEMONS($skip: Int = 0) {
+  query GET_POKEMONS($skip: Int!) {
     pokemons(skip: $skip) {
       id
       name
@@ -20,11 +20,12 @@ const PokemonList = () => {
     <Query query={GET_POKEMONS} variables={{skip: 0}}>
         {({data, error, loading, fetchMore}) => {
           if (loading) return <p>Loading...</p>
+          if (error) return <p>{error.message}</p>
           console.log(data)
           return (
             <Fragment>
               <ul>
-                {data.pokemons.map(item => (
+                {data.pokemons && data.pokemons.map(item => (
                   <li key={item.id}>
                     <PokemonListItem pokemon={item} />
                   </li>

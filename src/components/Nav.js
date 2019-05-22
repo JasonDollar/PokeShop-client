@@ -48,10 +48,13 @@ const Nav = () => {
       <NavBar>
         <NavList>
           <li>
-            <NavLink to="/">Home</NavLink>
+            <NavLink to="/">Shop</NavLink>
           </li>
           <li>
             <NavLink to="/sell">Sell</NavLink>
+          </li>
+          <li>
+            <NavLink to="/pokedex">pokedex</NavLink>
           </li>
           <li>
             <Mutation mutation={LOGIN_MUTATION} variables={{email: 'qwe@qwe.qwe', password: 'qweqwe'}}>
@@ -59,7 +62,7 @@ const Nav = () => {
                 console.log(data)
                 if (data) {
 
-                  localStorage.setItem('token', JSON.stringify(data.login.token))
+                  localStorage.setItem('token', data.login.token)
                 }
                 return (
                   <button onClick={login}>
