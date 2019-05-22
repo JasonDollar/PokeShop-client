@@ -4,17 +4,7 @@ import gql from 'graphql-tag'
 import {NavLink} from 'react-router-dom'
 import styled from 'styled-components'
 
-const LOGIN_MUTATION = gql`
-  mutation login($email: String!, $password:String!) {
-    login(data: { email: $email, password: $password}) {
-      user {
-        name
-      }
-      token
-    }
-  
-}
-`
+
 
 const Container = styled.div`
   width: 100%;
@@ -57,21 +47,15 @@ const Nav = () => {
             <NavLink to="/pokedex">pokedex</NavLink>
           </li>
           <li>
-            <Mutation mutation={LOGIN_MUTATION} variables={{email: 'qwe@qwe.qwe', password: 'qweqwe'}}>
-              {(login, {data, error, loading}) => {
-                console.log(data)
-                if (data) {
-
-                  localStorage.setItem('token', data.login.token)
-                }
-                return (
-                  <button onClick={login}>
-                    {(error && error.message) || 'LOGIN'}
-                  </button>
-                )
-              }}
-            </Mutation>
+            <NavLink to="/login">Login</NavLink>
           </li>
+          <li>
+            <NavLink to="/register">Register</NavLink>
+          </li>
+          <li>
+            <NavLink to="/me">Me</NavLink>
+          </li>
+
         </NavList>
       </NavBar>
     </Container>

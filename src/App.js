@@ -7,6 +7,9 @@ import ShopDisplay from './components/ShopDisplay'
 import TypeDetail from './components/TypeDetail'
 import OfferDetail from './components/OfferDetail'
 import UserDetail from './components/UserDetail'
+import Login from './components/Login'
+import Register from './components/Register'
+import Me from './components/Me'
 import Sell from './components/Sell'
 
 import Nav from './components/Nav'
@@ -25,6 +28,9 @@ function App() {
         <Route path="/offer/:offerId" exact component={OfferDetail}/>
         <Route path="/user/:userId" exact component={UserDetail}/>
         <Route path="/sell" exact component={Sell}/>
+        <Route path="/me" exact component={Me}/>
+        <Route path="/login" exact component={Login}/>
+        <Route path="/register" exact component={Register}/>
       </Switch>
     </div>
   );
