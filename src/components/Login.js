@@ -1,7 +1,8 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import {Mutation} from 'react-apollo'
 import gql from 'graphql-tag'
 import {Redirect, Link} from 'react-router-dom'
+import {UserContext} from '../userContext'
 
 import AuthForm from './styles/AuthForm'
 
@@ -21,7 +22,7 @@ const LOGIN_MUTATION = gql`
 const Login = (props) => {
   const [email, changeEmail] = useState('')
   const [password, changePassword] = useState('')
-
+  const {setUserId} = useContext(UserContext)
 
   return (
 
@@ -43,6 +44,7 @@ const Login = (props) => {
 
                     localStorage.setItem('token', data.data.login.token)
                     localStorage.setItem('userId', data.data.login.user.id)
+                    setUserId(data.data.login.user.id)
                     // document.cookie = `token=${data.data.login.token}`
                     props.history.push('/')
                   }

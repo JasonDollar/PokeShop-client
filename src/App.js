@@ -12,6 +12,7 @@ import Login from './components/Login'
 import Register from './components/Register'
 import Me from './components/Me'
 import Sell from './components/Sell'
+import Cart from './components/Cart'
 
 import Nav from './components/Nav'
 
@@ -26,14 +27,15 @@ function App() {
         <Switch>
           <Route path="/" exact component={ShopDisplay}/>
           <Route path="/pokedex" component={PokemonList}/>
-          <Route path="/pokemon/:pokemonId" exact component={PokemonDetail}/>
-          <Route path="/type/:typeId" exact component={TypeDetail}/>
-          <Route path="/offer/:offerId" exact component={OfferDetail}/>
-          <Route path="/user/:userId" exact component={UserDetail}/>
-          <Route path="/sell" exact component={Sell}/>
-          <Route path="/me" exact component={Me}/>
-          <Route path="/login" exact component={Login}/>
-          <Route path="/register" exact component={Register}/>
+          <Route path="/pokemon/:pokemonId"  component={PokemonDetail}/>
+          <Route path="/type/:typeId"  component={TypeDetail}/>
+          <Route path="/offer/:offerId"  component={OfferDetail}/>
+          <Route path="/user/:userId"  component={UserDetail}/>
+          <Route path="/sell"  component={Sell}/>
+          <Route path="/me"  component={Me}/>
+          <Route path="/login"  component={Login}/>
+          <Route path="/register"  component={Register}/>
+          <Route path="/cart"  component={Cart}/>
         </Switch>
       </div>
     </UserProvider>

@@ -60,6 +60,9 @@ const Nav = () => {
             <NavLink to="/me">Me</NavLink>
           </li>
           <li>
+            <NavLink to="/cart">Cart</NavLink>
+          </li>
+          <li>
             <ShowMyMoney />
           </li>
 
