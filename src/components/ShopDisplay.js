@@ -2,6 +2,7 @@ import React from 'react'
 import {Query} from 'react-apollo'
 import gql from 'graphql-tag'
 import OfferListItem from './OfferListItem'
+import {CURRENT_USER_QUERY} from './User'
 
 export const POKEMON_OFFERS_QUERY = gql`
   query POKEMON_OFFERS_QUERY {
@@ -10,6 +11,8 @@ export const POKEMON_OFFERS_QUERY = gql`
       name
       price
       pokemon {
+        id
+        pokeId
         image
         url
       }
@@ -19,7 +22,7 @@ export const POKEMON_OFFERS_QUERY = gql`
 
 const ShopDisplay = () => {
   return (
-    <Query query={POKEMON_OFFERS_QUERY}>
+    <Query query={POKEMON_OFFERS_QUERY} >
       {({data, loading, error}) => {
         if (loading) return <p>Loading...</p>
         if (error) return <p>{error.message}</p>

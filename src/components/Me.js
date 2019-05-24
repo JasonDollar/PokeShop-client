@@ -1,38 +1,20 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
-import {Query} from 'react-apollo'
-import gql from 'graphql-tag'
-import OfferListItem from './OfferListItem'
 
-const ME_QUERY = gql`
-  query ME_QUERY {
-    me {
-      id
-      name
-      email
-      offers {
-        id
-        name
-        price
-        pokemon {
-          id
-          image
-        }
-      }
-    }
-  }
-`
+import OfferListItem from './OfferListItem'
+import User from './User'
+
 
 const Me = (props) => {
   return (
-    <Query query={ME_QUERY}>
+    <User>
       {({data, loading, error}) => {
         if (loading) return <p>Loading...</p>
         if (error) return <p>{error.message}</p>
-
+        console.log(data)
         return (
           <div>
             <h2>{data.me.name}</h2>
+            <p>Balance: {data.me.wallet.balance}</p>
             <ul>
               {data.me.offers.map(item => (
                 <OfferListItem key={item.id} pokemonOffer={item}/>
@@ -41,7 +23,8 @@ const Me = (props) => {
           </div>
         )
       }}
-    </Query>
+    </User>
+
   )
 }
 

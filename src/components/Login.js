@@ -17,51 +17,59 @@ const LOGIN_MUTATION = gql`
 }
 `
 
-const Login = () => {
+const Login = (props) => {
   const [email, changeEmail] = useState('')
   const [password, changePassword] = useState('')
 
 
   return (
-    <Mutation mutation={LOGIN_MUTATION} variables={{email, password}}>
-      {(login, {data, error, loading}) => {
-        console.log(data)
-        if (data && data.login && data.login.token) {
 
-          localStorage.setItem('token', data.login.token)
-          return (
-            <Redirect to="/"/>
-          )
-        }
-        return (
-          <AuthForm>
-            <form onSubmit={e => {
-              e.preventDefault()
-            }} className="form">
+        <Mutation mutation={LOGIN_MUTATION} variables={{email, password}}>
+          {(login, {data, error, loading}) => {
+            
+            // if (data && data.login && data.login.token) {
 
-              <h1 className="form__name">Login</h1>
+              // localStorage.setItem('token', data.login.token)
+              // props.history.push('/')
+            // }
+            return (
+              <AuthForm>
+                <form onSubmit={async e => {
+                  e.preventDefault()
+                  const data = await login()
+                  console.log(data)
+                  if (data) {
 
-              <div className="inputGroup">
-                <label htmlFor="email">Email:</label>
-                <input type="email" id="email" value={email} onChange={e => changeEmail(e.target.value)}/>
-              </div>
+                    localStorage.setItem('token', data.data.login.token)
+                    // document.cookie = `token=${data.data.login.token}`
+                    props.history.push('/')
+                  }
+                }} className="form">
 
-              <div className="inputGroup">
-                <label htmlFor="password">Password:</label>
-                <input type="password" id="password" value={password} onChange={e => changePassword(e.target.value)}/>
-              </div>
-              {error && <span className="errorMessage">{error.message}</span> }
+                  <h1 className="form__name">Login</h1>
 
-              <button type="submit" className="form__button" onClick={login} disabled={loading}>Login</button>
-              <div className="form__link--container">
-                <Link to="/signup" className="form__link">New User? Create an account</Link>
-                <Link to="/reset" className="form__link">Forgot your password?</Link>
-              </div>
-            </form>
-          </AuthForm>
-        )
-      }}
-    </Mutation>
+                  <div className="inputGroup">
+                    <label htmlFor="email">Email:</label>
+                    <input type="email" id="email" value={email} onChange={e => changeEmail(e.target.value)}/>
+                  </div>
+
+                  <div className="inputGroup">
+                    <label htmlFor="password">Password:</label>
+                    <input type="password" id="password" value={password} onChange={e => changePassword(e.target.value)}/>
+                  </div>
+                  {error && <span className="errorMessage">{error.message}</span> }
+
+                  <button type="submit" className="form__button" disabled={loading}>Login</button>
+                  <div className="form__link--container">
+                    <Link to="/signup" className="form__link">New User? Create an account</Link>
+                    <Link to="/reset" className="form__link">Forgot your password?</Link>
+                  </div>
+                </form>
+              </AuthForm>
+            )
+          }}
+        </Mutation>
+
   )
 
 }

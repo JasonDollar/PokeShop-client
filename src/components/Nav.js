@@ -1,8 +1,10 @@
 import React from 'react'
-import {Mutation} from 'react-apollo'
+import {Mutation, Query} from 'react-apollo'
 import gql from 'graphql-tag'
 import {NavLink} from 'react-router-dom'
 import styled from 'styled-components'
+
+import ShowMyMoney from './ShowMyMoney'
 
 
 
@@ -26,11 +28,13 @@ const NavList = styled.ul`
     margin-right: 15px;
   }
   
-  a {
+  a, span {
     text-decoration: none;
     color: white;
   }
 `
+
+
 
 const Nav = () => {
   return (
@@ -54,6 +58,9 @@ const Nav = () => {
           </li>
           <li>
             <NavLink to="/me">Me</NavLink>
+          </li>
+          <li>
+            <ShowMyMoney />
           </li>
 
         </NavList>
