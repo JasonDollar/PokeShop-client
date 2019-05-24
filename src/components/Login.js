@@ -9,6 +9,7 @@ const LOGIN_MUTATION = gql`
   mutation login($email: String!, $password:String!) {
     login(data: { email: $email, password: $password}) {
       user {
+        id
         name
       }
       token
@@ -41,6 +42,7 @@ const Login = (props) => {
                   if (data) {
 
                     localStorage.setItem('token', data.data.login.token)
+                    localStorage.setItem('userId', data.data.login.user.id)
                     // document.cookie = `token=${data.data.login.token}`
                     props.history.push('/')
                   }

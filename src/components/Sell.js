@@ -29,16 +29,18 @@ const Sell = (props) => {
   const [name, setName] = useState('')
   const [price, setPrice] = useState(0)
 
+
   return (
     <Mutation mutation={SELL_POKEMON_MUTATION} variables={{name, price: parseInt(price)}} refetchQueries={[{query: POKEMON_OFFERS_QUERY}]}>
       {(sellPokemon, {data, loading, error, ...rest}) => {
-        console.log(data)
         return (
           <AuthForm>
             <form onSubmit={async e => {
               e.preventDefault()
+
               const res = await sellPokemon()
-              props.history.push(`/offer/${res.id}`)
+              console.log(res)
+              props.history.push(`/offer/${res.data.sellPokemon.id}`)
             }} className="form">
 
               <h1 className="form__name">Sell</h1>
@@ -54,7 +56,7 @@ const Sell = (props) => {
               </div>
               {error && <span className="errorMessage">{error.message}</span> }
 
-              <button type="submit" className="form__button" onClick={sellPokemon} disabled={loading}>Login</button>
+              <button type="submit" className="form__button" disabled={loading}>Sell</button>
             </form>
           </AuthForm>
         )

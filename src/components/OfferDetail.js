@@ -1,7 +1,8 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {Link} from 'react-router-dom'
 import {Query} from 'react-apollo'
 import gql from 'graphql-tag'
+import {UserContext} from '../userContext'
 
 const POKEMON_OFFER_QUERY = gql`
   query POKEMON_OFFER_QUERY($id: ID!) {
@@ -23,6 +24,8 @@ const POKEMON_OFFER_QUERY = gql`
 `
 
 const OfferDetail = (props) => {
+  const {userId} = useContext(UserContext)
+  console.log(userId)
   return (
     <Query query={POKEMON_OFFER_QUERY} variables={{id: props.match.params.offerId}}>
       {({data, loading, error}) => {
@@ -38,7 +41,7 @@ const OfferDetail = (props) => {
             <p>
               Seller: 
               <Link to={`/user/${data.pokemonOffer.seller.id}`}>
-                {data.pokemonOffer.seller.name}
+                {data.pokemonOffer.seller.name}{data.pokemonOffer.seller.id === userId ? 'You' : ''}
               </Link>
             </p>
           </div>
