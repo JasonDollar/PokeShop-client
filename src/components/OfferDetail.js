@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom'
 import {Query} from 'react-apollo'
 import gql from 'graphql-tag'
 import {UserContext} from '../userContext'
+import AddToCart from './AddToCart'
+
 
 const POKEMON_OFFER_QUERY = gql`
   query POKEMON_OFFER_QUERY($id: ID!) {
@@ -44,6 +46,12 @@ const OfferDetail = (props) => {
                 {data.pokemonOffer.seller.name}{data.pokemonOffer.seller.id === userId ? 'You' : ''}
               </Link>
             </p>
+            <AddToCart 
+              pokemonOfferId={data.pokemonOffer.id} 
+              disabledButton={data.pokemonOffer.seller.id === userId}
+            >
+              Add to cart
+            </AddToCart>
           </div>
         )
       }}
