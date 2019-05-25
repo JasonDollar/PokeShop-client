@@ -13,9 +13,8 @@ const POKEMON_OFFER_QUERY = gql`
       name
       price
       pokemon {
-        image
         id
-        pokeId
+        image
       }
       seller {
         id

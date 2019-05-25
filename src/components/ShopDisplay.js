@@ -12,7 +12,6 @@ export const POKEMON_OFFERS_QUERY = gql`
       price
       pokemon {
         id
-        pokeId
         image
         url
       }

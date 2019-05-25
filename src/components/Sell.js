@@ -14,7 +14,6 @@ const SELL_POKEMON_MUTATION = gql`
       price
       pokemon {
         id
-        pokeId
         name
       }
       seller {

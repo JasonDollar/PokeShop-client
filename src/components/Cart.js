@@ -2,6 +2,8 @@ import React, {Fragment} from 'react'
 import {Query} from 'react-apollo'
 import gql from 'graphql-tag'
 import RemoveFromCart from './RemoveFromCart'
+import Checkout from './Checkout'
+import ShowMyMoney from './ShowMyMoney'
 
 export const CART_ITEMS_QUERY = gql`
   query CART_ITEMS_QUERY {
@@ -19,10 +21,10 @@ export const CART_ITEMS_QUERY = gql`
 
 const Cart = (props) => {
   return (
-    <Query query={CART_ITEMS_QUERY}>
+    <Query query={CART_ITEMS_QUERY} fetchPolicy="cache-and-network">
       {({data, loading, error}) => {
         if (loading) return <p>Loading...</p>
-        console.log(data)
+        const totalPrice  =data.userCart.reduce((acc, item) => acc + item.pokemon.price, 0)
         return (
           <Fragment>
             <ul>
@@ -35,7 +37,8 @@ const Cart = (props) => {
                 </li>
               ))}
             </ul>
-            <p>Total: {data.userCart.reduce((acc, item) => acc + item.pokemon.price, 0)}$$$</p>
+            <p>Total: {totalPrice}$$$</p>
+            <Checkout buttonDisabled={data.userCart.length <= 0} totalPrice={totalPrice}/>
           </Fragment>
 
         )

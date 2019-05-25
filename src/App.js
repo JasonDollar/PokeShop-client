@@ -13,6 +13,7 @@ import Register from './components/Register'
 import Me from './components/Me'
 import Sell from './components/Sell'
 import Cart from './components/Cart'
+import OrderList from './components/OrderList'
 
 import Nav from './components/Nav'
 
@@ -36,6 +37,7 @@ function App() {
           <Route path="/login"  component={Login}/>
           <Route path="/register"  component={Register}/>
           <Route path="/cart"  component={Cart}/>
+          <Route path="/orders"  component={OrderList}/>
         </Switch>
       </div>
     </UserProvider>

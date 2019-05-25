@@ -13,15 +13,9 @@ export const USER_CREDITS_QUERY = gql`
 
 const ShowMyMoney = props => {
   return (
-    <User>
-      {({data, loading, error}) => {
-        if (error || loading) return <p>lol</p>
-        console.log(data.me)
-        return (
-          <p>{data.me.wallet.balance}</p>
-        )
-      }}
-    </User>
+    <Query query={USER_CREDITS_QUERY}>
+      {(payload) => props.children(payload)}
+    </Query>
   )
 }
 

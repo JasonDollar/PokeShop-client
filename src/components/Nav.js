@@ -4,9 +4,6 @@ import gql from 'graphql-tag'
 import {NavLink} from 'react-router-dom'
 import styled from 'styled-components'
 
-import ShowMyMoney from './ShowMyMoney'
-
-
 
 const Container = styled.div`
   width: 100%;
@@ -63,8 +60,9 @@ const Nav = () => {
             <NavLink to="/cart">Cart</NavLink>
           </li>
           <li>
-            <ShowMyMoney />
+            <NavLink to="/orders">Orders</NavLink>
           </li>
+
 
         </NavList>
       </NavBar>
