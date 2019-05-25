@@ -5,6 +5,7 @@ import {Redirect, Link} from 'react-router-dom'
 import {UserContext} from '../userContext'
 
 import AuthForm from './styles/AuthForm'
+import {CURRENT_USER_QUERY} from './User'
 
 const LOGIN_MUTATION = gql`
   mutation login($email: String!, $password:String!) {
@@ -26,7 +27,7 @@ const Login = (props) => {
 
   return (
 
-        <Mutation mutation={LOGIN_MUTATION} variables={{email, password}}>
+        <Mutation mutation={LOGIN_MUTATION} variables={{email, password}} refetchQueries={[{query: CURRENT_USER_QUERY}]}>
           {(login, {data, error, loading}) => {
             
             // if (data && data.login && data.login.token) {

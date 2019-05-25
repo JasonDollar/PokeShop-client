@@ -3,7 +3,7 @@ import {Mutation} from 'react-apollo'
 import gql from 'graphql-tag'
 import {CART_ITEMS_QUERY} from './Cart'
 import {USER_ORDERS_QUERY} from './OrderList'
-import ShowMyMoney from './ShowMyMoney'
+import ShowMyMoney, {USER_CREDITS_QUERY} from './ShowMyMoney'
 
 const ORDER_POKEMONS_MUTATION = gql`
   mutation ORDER_POKEMONS_MUTATION {
@@ -20,7 +20,15 @@ const Checkout = ({children, buttonDisabled, totalPrice}) => {
       {({data: {userCredits}, loading: loadingCredits}) => {
         if (loadingCredits) return <p>Loading...</p>
         return (
-          <Mutation mutation={ORDER_POKEMONS_MUTATION} refetchQueries={[{query: CART_ITEMS_QUERY}, {query: USER_ORDERS_QUERY}]}>
+          <Mutation 
+            mutation={ORDER_POKEMONS_MUTATION} 
+            refetchQueries={[
+              {query: CART_ITEMS_QUERY}, 
+              {query: USER_ORDERS_QUERY},
+              {query: USER_CREDITS_QUERY}
+            ]}
+          
+          >
           {(orderPokemons, {loading, error}) => {
             let message
             // if (loading || loadingCredits) {

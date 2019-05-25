@@ -24,7 +24,7 @@ const Cart = (props) => {
     <Query query={CART_ITEMS_QUERY} fetchPolicy="cache-and-network">
       {({data, loading, error}) => {
         if (loading) return <p>Loading...</p>
-        const totalPrice  =data.userCart.reduce((acc, item) => acc + item.pokemon.price, 0)
+        const totalPrice  = data.userCart.reduce((acc, item) => acc + (item.pokemon.price * item.quantity), 0)
         return (
           <Fragment>
             <ul>

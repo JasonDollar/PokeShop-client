@@ -29,12 +29,12 @@ export const USER_ORDERS_QUERY = gql`
 
 const OrderList = () => {
   return (
-    <Query query={USER_ORDERS_QUERY}>
+    <Query query={USER_ORDERS_QUERY} fetchPolicy="cache-and-network">
       {({data, loading, error}) => {
         if (loading) return (<p>Loading...</p>)
         if (error) return (<p>{error.message}</p>)
+        
         if (data.orders.length <= 0) return <p>No orders found</p>
-        console.log(data)
         return (
           <div>
             <div>

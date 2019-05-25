@@ -26,7 +26,7 @@ export const CURRENT_USER_QUERY = gql`
 
 const User = (props) => {
   return (
-    <Query query={CURRENT_USER_QUERY}>
+    <Query query={CURRENT_USER_QUERY} fetchPolicy="cache-and-network">
       {payload => props.children(payload)}
     </Query>
   )
