@@ -4,6 +4,7 @@ import OfferListItem from './OfferListItem'
 import User from './User'
 import OrderList from './OrderList'
 import WidthContainer from './styles/WidthContainer'
+import GridList from './styles/GridList'
 
 const Me = props => (
     <WidthContainer>
@@ -18,12 +19,12 @@ const Me = props => (
             <h2>{data.me.name}</h2>
             <h3>{data.me.email}</h3>
             <p>Balance: {data.me.wallet.balance}</p>
-            <ul>
               Selling:
+            <GridList>
               {data.me.offers.map(item => (
                 <OfferListItem key={item.id} pokemonOffer={item} />
               ))}
-            </ul>
+            </GridList>
             Orders: 
             <OrderList />
           </div>

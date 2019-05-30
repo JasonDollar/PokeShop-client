@@ -48,12 +48,18 @@ const AuthForm = styled.div`
     margin-bottom: 1.5rem;
     display: flex;
     flex-direction: column;
+    position: relative;
     @media (min-width: 576px) {
       font-size: 3rem;
     }
 
     label {
       margin-bottom: 0.5rem;
+    }
+
+    input {
+      width: 30rem;
+      padding: 1rem;
     }
     
   }

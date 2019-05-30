@@ -3,7 +3,7 @@ import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import qs from 'query-string'
 import OfferListItem from './OfferListItem'
-import { CURRENT_USER_QUERY } from './User'
+// import { CURRENT_USER_QUERY } from './User'
 import GridList from './styles/GridList'
 import WidthContainer from './styles/WidthContainer'
 import Pagination from './Pagination'
@@ -11,7 +11,7 @@ import { itemsPerPage } from '../config'
 
 
 export const POKEMON_OFFERS_QUERY = gql`
-  query POKEMON_OFFERS_QUERY($skip: Int = 0, $limit: Int = 30) {
+  query POKEMON_OFFERS_QUERY($skip: Int = 0, $limit: Int = 24) {
     pokemonOffers(skip: $skip, limit: $limit) {
       count
       offers {
@@ -36,9 +36,9 @@ const ShopDisplay = (props) => {
   console.log(page)
   // }
   return (
-    <Query query={POKEMON_OFFERS_QUERY} variables={{ skip: page * itemsPerPage - itemsPerPage, limit: itemsPerPage }}>
+    <Query query={POKEMON_OFFERS_QUERY} variables={{ skip: page * itemsPerPage - itemsPerPage, limit: itemsPerPage }} fetchPolicy="cache-and-network">
       {({ data, loading, error }) => {
-        if (loading) return <p>Loading...</p>
+        if (loading) return <p />
         if (error) return <p>{error.message}</p>
         const maxPage = Math.ceil(data.pokemonOffers.count / itemsPerPage)
         return (

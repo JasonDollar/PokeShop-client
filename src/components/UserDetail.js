@@ -3,6 +3,7 @@ import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import OfferListItem from './OfferListItem'
 import WidthContainer from './styles/WidthContainer'
+import GridList from './styles/GridList'
 
 const USER_DETAIL_QUERY = gql`
   query USER_DETAIL_QUERY($userId: ID!) {
@@ -32,11 +33,11 @@ const UserDetail = props => (
         return (
           <WidthContainer>
             <h2>{data.user.name}</h2>
-            <ul>
+            <GridList>
               {data.user.offers.map(item => (
                 <OfferListItem key={item.id} pokemonOffer={item} />
               ))}
-            </ul>
+            </GridList>
           </WidthContainer>
         )
       }}
