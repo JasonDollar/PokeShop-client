@@ -1,9 +1,11 @@
-import React, {Fragment} from 'react'
-import {Mutation} from 'react-apollo'
+import React, { Fragment } from 'react'
+import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-import {CART_ITEMS_QUERY} from './Cart'
-import {USER_ORDERS_QUERY} from './OrderList'
-import ShowMyMoney, {USER_CREDITS_QUERY} from './ShowMyMoney'
+import PropTypes from 'prop-types'
+
+import { CART_ITEMS_QUERY } from './Cart'
+import { USER_ORDERS_QUERY } from './OrderList'
+import ShowMyMoney, { USER_CREDITS_QUERY } from './ShowMyMoney'
 
 const ORDER_POKEMONS_MUTATION = gql`
   mutation ORDER_POKEMONS_MUTATION {
@@ -14,41 +16,46 @@ const ORDER_POKEMONS_MUTATION = gql`
   }
 `
 
-const Checkout = ({children, buttonDisabled, totalPrice}) => {
-  return (
+const Checkout = ({ buttonDisabled, totalPrice }) => (
     <ShowMyMoney>
-      {({data: {userCredits}, loading: loadingCredits}) => {
+      {({ data: { userCredits }, loading: loadingCredits }) => {
         if (loadingCredits) return <p>Loading...</p>
         return (
           <Mutation 
             mutation={ORDER_POKEMONS_MUTATION} 
             refetchQueries={[
-              {query: CART_ITEMS_QUERY}, 
-              {query: USER_ORDERS_QUERY},
-              {query: USER_CREDITS_QUERY}
+              { query: CART_ITEMS_QUERY }, 
+              { query: USER_ORDERS_QUERY },
+              { query: USER_CREDITS_QUERY },
             ]}
           
           >
-          {(orderPokemons, {loading, error}) => {
-            let message
-            // if (loading || loadingCredits) {
-            //   message = 'Loading...'
-            // } else if ()
-            return (
+          {(orderPokemons, { loading, error }) => 
+            // let message
+            (
               <Fragment>
-                <button onClick={orderPokemons} disabled={loading || loadingCredits || buttonDisabled || userCredits.balance < totalPrice }>
+                <button onClick={orderPokemons} disabled={loading || loadingCredits || buttonDisabled || userCredits.balance < totalPrice}>
                   Buy these shine pokemons!
                 </button>
                 {userCredits.balance < totalPrice && <p>Yoy don't have enough credits</p> }
                 {error && <p> {alert(error.message)}</p>}
               </Fragment>
             )
-          }}
-        </Mutation>
+          }
+          </Mutation>
         )
       }}
     </ShowMyMoney>
-  )
-}
+)
 
 export default Checkout
+
+Checkout.propTypes = {
+  buttonDisabled: PropTypes.bool,
+  totalPrice: PropTypes.number,
+}
+
+Checkout.defaultProps = {
+  buttonDisabled: false,
+  totalPrice: 0,
+}

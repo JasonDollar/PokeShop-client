@@ -1,7 +1,9 @@
 import React from 'react'
-import {Mutation} from 'react-apollo'
+import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-import {CART_ITEMS_QUERY} from './Cart'
+import PropTypes from 'prop-types'
+
+import { CART_ITEMS_QUERY } from './Cart'
 
 const ADD_TO_CART_MUTATION = gql`
   mutation ADD_TO_CART_MUTATION($id: ID!) {
@@ -16,21 +18,29 @@ const ADD_TO_CART_MUTATION = gql`
   }
 `
 
-const AddToCart = ({pokemonOfferId, children, disabledButton}) => {
-  return (
-    <Mutation mutation={ADD_TO_CART_MUTATION} variables={{id: pokemonOfferId}} refetchQueries={[{query: CART_ITEMS_QUERY}]}>
-      {(addToCart, {data, loading, error}) => {
+const AddToCart = ({ pokemonOfferId, children, disabledButton }) => (
+    <Mutation mutation={ADD_TO_CART_MUTATION} variables={{ id: pokemonOfferId }} refetchQueries={[{ query: CART_ITEMS_QUERY }]}>
+      {(addToCart, { data, loading, error }) => {
         if (data) {
           console.log(data)
         }
         return (
-          <button onClick={addToCart} disabled={loading || disabledButton}>
+          <button type="button" onClick={addToCart} disabled={loading || disabledButton}>
             {children}
           </button>
         )
       }}
     </Mutation>
-  )
-}
+)
 
 export default AddToCart
+
+AddToCart.propTypes = {
+  pokemonOfferId: PropTypes.string.isRequired,
+  children: PropTypes.string,
+  disabledButton: PropTypes.bool.isRequired,
+}
+
+AddToCart.defaultProps = {
+  children: 'Add to Cart',
+}

@@ -1,9 +1,10 @@
-import React, {Fragment} from 'react'
-import {Query} from 'react-apollo'
+import React, { Fragment } from 'react'
+import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import RemoveFromCart from './RemoveFromCart'
 import Checkout from './Checkout'
 import ShowMyMoney from './ShowMyMoney'
+import WidthContainer from './styles/WidthContainer'
 
 export const CART_ITEMS_QUERY = gql`
   query CART_ITEMS_QUERY {
@@ -19,12 +20,13 @@ export const CART_ITEMS_QUERY = gql`
   }
 `
 
-const Cart = (props) => {
-  return (
+const Cart = props => (
+    <WidthContainer>
+
     <Query query={CART_ITEMS_QUERY} fetchPolicy="cache-and-network">
-      {({data, loading, error}) => {
+      {({ data, loading, error }) => {
         if (loading) return <p>Loading...</p>
-        const totalPrice  = data.userCart.reduce((acc, item) => acc + (item.pokemon.price * item.quantity), 0)
+        const totalPrice = data.userCart.reduce((acc, item) => acc + (item.pokemon.price * item.quantity), 0)
         return (
           <Fragment>
             <ul>
@@ -33,18 +35,18 @@ const Cart = (props) => {
                   <p>{item.pokemon.name}</p>
                   <p>{item.quantity}</p>
                   <p>{item.pokemon.price}$$$</p>
-                  <RemoveFromCart cartItemId={item.id}/>
+                  <RemoveFromCart cartItemId={item.id} />
                 </li>
               ))}
             </ul>
             <p>Total: {totalPrice}$$$</p>
-            <Checkout buttonDisabled={data.userCart.length <= 0} totalPrice={totalPrice}/>
+            <Checkout buttonDisabled={data.userCart.length <= 0} totalPrice={totalPrice} />
           </Fragment>
 
         )
       }}
     </Query>
-  )
-}
+    </WidthContainer>
+)
 
 export default Cart

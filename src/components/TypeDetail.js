@@ -1,8 +1,9 @@
 import React from 'react'
-import gql from 'graphql-tag';
-import { Query } from 'react-apollo';
-import {Link} from 'react-router-dom'
+import gql from 'graphql-tag'
+import { Query } from 'react-apollo'
+import { Link } from 'react-router-dom'
 import PokemonListItem from './PokemonListItem'
+import WidthContainer from './styles/WidthContainer'
 
 const TYPE_POKEMONS = gql`
   query TYPE_POKEMONS($id: ID!) {
@@ -18,11 +19,10 @@ const TYPE_POKEMONS = gql`
   }
 `
 
-const TypeDetail = (props) => {
-  return (
-    <div>
-      <Query query={TYPE_POKEMONS} variables={{id: props.match.params.typeId}}>
-        {({data, loading, error}) => {
+const TypeDetail = props => (
+    <WidthContainer>
+      <Query query={TYPE_POKEMONS} variables={{ id: props.match.params.typeId }}>
+        {({ data, loading, error }) => {
           if (loading) return <p>Loading...</p>
           if (error) return <p>Error</p>
           return (
@@ -39,8 +39,7 @@ const TypeDetail = (props) => {
           )
         }}
       </Query>
-    </div>
-  )
-}
+    </WidthContainer>
+)
 
 export default TypeDetail

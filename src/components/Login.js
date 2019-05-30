@@ -1,11 +1,11 @@
-import React, {useState, useContext} from 'react'
-import {Mutation} from 'react-apollo'
+import React, { useState, useContext } from 'react'
+import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-import {Redirect, Link} from 'react-router-dom'
-import {UserContext} from '../userContext'
+import { Redirect, Link } from 'react-router-dom'
+import { UserContext } from '../userContext'
 
 import AuthForm from './styles/AuthForm'
-import {CURRENT_USER_QUERY} from './User'
+import { CURRENT_USER_QUERY } from './User'
 
 const LOGIN_MUTATION = gql`
   mutation login($email: String!, $password:String!) {
@@ -20,47 +20,52 @@ const LOGIN_MUTATION = gql`
 }
 `
 
-const Login = (props) => {
+const Login = props => {
   const [email, changeEmail] = useState('')
   const [password, changePassword] = useState('')
-  const {setUserId} = useContext(UserContext)
+  const { setUserId } = useContext(UserContext)
 
   return (
 
-        <Mutation mutation={LOGIN_MUTATION} variables={{email, password}} refetchQueries={[{query: CURRENT_USER_QUERY}]}>
-          {(login, {data, error, loading}) => {
+        <Mutation mutation={LOGIN_MUTATION} variables={{ email, password }} refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
+          {(login, { data, error, loading }) => 
             
-            // if (data && data.login && data.login.token) {
+          // if (data && data.login && data.login.token) {
 
-              // localStorage.setItem('token', data.login.token)
-              // props.history.push('/')
+          // localStorage.setItem('token', data.login.token)
+          // props.history.push('/')
             // }
-            return (
+            (
               <AuthForm>
-                <form onSubmit={async e => {
-                  e.preventDefault()
-                  const data = await login()
-                  console.log(data)
-                  if (data) {
+                <form
+                  onSubmit={async e => {
+                    e.preventDefault()
+                    const data = await login()
+                    console.log(data)
+                    if (data) {
 
-                    localStorage.setItem('token', data.data.login.token)
-                    localStorage.setItem('userId', data.data.login.user.id)
-                    setUserId(data.data.login.user.id)
-                    // document.cookie = `token=${data.data.login.token}`
-                    props.history.push('/')
-                  }
-                }} className="form">
+                      localStorage.setItem('token', data.data.login.token)
+                      localStorage.setItem('userId', data.data.login.user.id)
+                      setUserId(data.data.login.user.id)
+                      // document.cookie = `token=${data.data.login.token}`
+                      props.history.push('/')
+                    }
+                  }}
+                  className="form"
+                >
 
                   <h1 className="form__name">Login</h1>
 
                   <div className="inputGroup">
-                    <label htmlFor="email">Email:</label>
-                    <input type="email" id="email" value={email} onChange={e => changeEmail(e.target.value)}/>
+                    <label htmlFor="email">Email:
+                    <input type="email" id="email" value={email} onChange={e => changeEmail(e.target.value)} />
+                    </label>
                   </div>
 
                   <div className="inputGroup">
-                    <label htmlFor="password">Password:</label>
-                    <input type="password" id="password" value={password} onChange={e => changePassword(e.target.value)}/>
+                    <label htmlFor="password">Password:
+                    <input type="password" id="password" value={password} onChange={e => changePassword(e.target.value)} />
+                    </label>
                   </div>
                   {error && <span className="errorMessage">{error.message}</span> }
 
@@ -72,7 +77,7 @@ const Login = (props) => {
                 </form>
               </AuthForm>
             )
-          }}
+          }
         </Mutation>
 
   )

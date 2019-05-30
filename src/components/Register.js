@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
-import {Mutation} from 'react-apollo'
+import React, { useState } from 'react'
+import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-import {Redirect, Link} from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 
 import AuthForm from './styles/AuthForm'
 
@@ -24,37 +24,43 @@ const Login = () => {
 
 
   return (
-    <Mutation mutation={CREATE_USER_MUTATION} variables={{email, password, name}}>
-      {(createUser, {data, error, loading}) => {
+    <Mutation mutation={CREATE_USER_MUTATION} variables={{ email, password, name }}>
+      {(createUser, { data, error, loading }) => {
         console.log(data)
         if (data && data.createUser && data.createUser.token) {
 
           localStorage.setItem('token', data.createUser.token)
           return (
-            <Redirect to="/"/>
+            <Redirect to="/" />
           )
         }
         return (
           <AuthForm>
-            <form onSubmit={e => {
-              e.preventDefault()
-            }} className="form">
+            <form
+              onSubmit={e => {
+                e.preventDefault()
+              }}
+              className="form"
+            >
 
               <h1 className="form__name">Login</h1>
 
               <div className="inputGroup">
-                <label htmlFor="name">Name:</label>
-                <input type="name" id="name" value={name} onChange={e => changeName(e.target.value)}/>
+                <label htmlFor="name">Name:
+                  <input type="name" id="name" value={name} onChange={e => changeName(e.target.value)} />
+                </label>
               </div>
               
               <div className="inputGroup">
-                <label htmlFor="email">Email:</label>
-                <input type="email" id="email" value={email} onChange={e => changeEmail(e.target.value)}/>
+                <label htmlFor="email">Email:
+                  <input type="email" id="email" value={email} onChange={e => changeEmail(e.target.value)} />
+                </label>
               </div>
 
               <div className="inputGroup">
-                <label htmlFor="password">Password:</label>
-                <input type="password" id="password" value={password} onChange={e => changePassword(e.target.value)}/>
+                <label htmlFor="password">Password:
+                  <input type="password" id="password" value={password} onChange={e => changePassword(e.target.value)} />
+                </label>
               </div>
               {error && <span className="errorMessage">{error.message}</span> }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Query} from 'react-apollo'
+import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
 export const CURRENT_USER_QUERY = gql`
@@ -7,7 +7,7 @@ export const CURRENT_USER_QUERY = gql`
     me {
       id
       name
-      email
+      email 
       offers {
         id
         name
@@ -24,12 +24,10 @@ export const CURRENT_USER_QUERY = gql`
   }
 `
 
-const User = (props) => {
-  return (
+const User = props => (
     <Query query={CURRENT_USER_QUERY} fetchPolicy="cache-and-network">
       {payload => props.children(payload)}
     </Query>
-  )
-}
+)
 
 export default User

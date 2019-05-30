@@ -1,8 +1,8 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
-import {Query} from 'react-apollo'
+import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import OfferListItem from './OfferListItem'
+import WidthContainer from './styles/WidthContainer'
 
 const USER_DETAIL_QUERY = gql`
   query USER_DETAIL_QUERY($userId: ID!) {
@@ -23,26 +23,24 @@ const USER_DETAIL_QUERY = gql`
   }
 `
 
-const UserDetail = (props) => {
-  return (
-    <Query query={USER_DETAIL_QUERY} variables={{userId: props.match.params.userId}}>
-      {({data, loading, error}) => {
+const UserDetail = props => (
+    <Query query={USER_DETAIL_QUERY} variables={{ userId: props.match.params.userId }}>
+      {({ data, loading, error }) => {
         if (loading) return <p>Loading...</p>
         if (error) return <p>{error.message}</p>
 
         return (
-          <div>
+          <WidthContainer>
             <h2>{data.user.name}</h2>
             <ul>
               {data.user.offers.map(item => (
-                <OfferListItem key={item.id} pokemonOffer={item}/>
+                <OfferListItem key={item.id} pokemonOffer={item} />
               ))}
             </ul>
-          </div>
+          </WidthContainer>
         )
       }}
     </Query>
-  )
-}
+)
 
 export default UserDetail

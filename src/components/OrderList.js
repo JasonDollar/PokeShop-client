@@ -1,6 +1,7 @@
-import React, {Fragment} from 'react'
-import {Query} from 'react-apollo'
+import React, { Fragment } from 'react'
+import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
+import WidthContainer from './styles/WidthContainer'
 
 export const USER_ORDERS_QUERY = gql`
   query USER_ORDERS_QUERY {
@@ -27,22 +28,21 @@ export const USER_ORDERS_QUERY = gql`
   }
 `
 
-const OrderList = () => {
-  return (
+const OrderList = () => (
+    <WidthContainer>
     <Query query={USER_ORDERS_QUERY} fetchPolicy="cache-and-network">
-      {({data, loading, error}) => {
+      {({ data, loading, error }) => {
         if (loading) return (<p>Loading...</p>)
         if (error) return (<p>{error.message}</p>)
         
         if (data.orders.length <= 0) return <p>No orders found</p>
         return (
-          <div>
             <div>
               {data.orders.map(order => (
                 <Fragment key={order.id}>
                   <h3>Order {order.id}</h3>
                   <p>Price: {order.price}</p>
-                  <ul >
+                  <ul>
                     {order.items.map(item => (
                       <li key={item.id}>{item.pokemon.name}</li>
                     ))}
@@ -51,11 +51,10 @@ const OrderList = () => {
                 </Fragment>
               ))}
             </div>
-          </div>
         )
       }}
     </Query>
-  )
-}
+    </WidthContainer>
+)
 
 export default OrderList

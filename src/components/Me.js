@@ -3,12 +3,13 @@ import React from 'react'
 import OfferListItem from './OfferListItem'
 import User from './User'
 import OrderList from './OrderList'
+import WidthContainer from './styles/WidthContainer'
 
+const Me = props => (
+    <WidthContainer>
 
-const Me = (props) => {
-  return (
     <User>
-      {({data, loading, error}) => {
+      {({ data, loading, error }) => {
         if (loading) return <p>Loading...</p>
         if (error) return <p>{error.message}</p>
         console.log(data)
@@ -20,7 +21,7 @@ const Me = (props) => {
             <ul>
               Selling:
               {data.me.offers.map(item => (
-                <OfferListItem key={item.id} pokemonOffer={item}/>
+                <OfferListItem key={item.id} pokemonOffer={item} />
               ))}
             </ul>
             Orders: 
@@ -29,8 +30,8 @@ const Me = (props) => {
         )
       }}
     </User>
+    </WidthContainer>
 
-  )
-}
+)
 
 export default Me

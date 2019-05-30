@@ -1,10 +1,10 @@
-import React, {useContext} from 'react'
-import {Link} from 'react-router-dom'
-import {Query} from 'react-apollo'
+import React, { useContext } from 'react'
+import { Link } from 'react-router-dom'
+import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
-import {UserContext} from '../userContext'
+import { UserContext } from '../userContext'
 import AddToCart from './AddToCart'
-
+import WidthContainer from './styles/WidthContainer'
 
 const POKEMON_OFFER_QUERY = gql`
   query POKEMON_OFFER_QUERY($id: ID!) {
@@ -24,20 +24,20 @@ const POKEMON_OFFER_QUERY = gql`
   }
 `
 
-const OfferDetail = (props) => {
-  const {userId} = useContext(UserContext)
+const OfferDetail = props => {
+  const { userId } = useContext(UserContext)
   console.log(userId)
   return (
-    <Query query={POKEMON_OFFER_QUERY} variables={{id: props.match.params.offerId}}>
-      {({data, loading, error}) => {
+    <Query query={POKEMON_OFFER_QUERY} variables={{ id: props.match.params.offerId }}>
+      {({ data, loading, error }) => {
         if (loading) return <p>Loading...</p>
         if (error) return <p>{error.message}</p>
 
         return (
-          <div>
+          <WidthContainer>
             <Link to="/">Home</Link>
             <h2>#{data.pokemonOffer.pokemon.id} {data.pokemonOffer.name}</h2>
-            <img src={data.pokemonOffer.pokemon.image} alt={data.pokemonOffer.name} style={{width: '20%', height: '20%'}}/>
+            <img src={data.pokemonOffer.pokemon.image} alt={data.pokemonOffer.name} style={{ width: '20%', height: '20%' }} />
             <p>Price: {data.pokemonOffer.price}</p>
             <p>
               Seller: 
@@ -51,7 +51,7 @@ const OfferDetail = (props) => {
             >
               Add to cart
             </AddToCart>
-          </div>
+          </WidthContainer>
         )
       }}
     </Query>

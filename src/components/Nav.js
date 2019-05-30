@@ -1,18 +1,11 @@
 import React from 'react'
-import {Mutation, Query} from 'react-apollo'
-import gql from 'graphql-tag'
-import {NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
-
+import WidthContainer from './styles/WidthContainer'
 
 const Container = styled.div`
   width: 100%;
   background: cadetblue;
-`
-
-const NavBar = styled.nav`
-  max-width: 1040px;
-  margin: 0 auto;
 `
 
 const NavList = styled.ul`
@@ -33,10 +26,9 @@ const NavList = styled.ul`
 
 
 
-const Nav = () => {
-  return (
+const Nav = () => (
     <Container>
-      <NavBar>
+      <WidthContainer as="nav">
         <NavList>
           <li>
             <NavLink to="/">Shop</NavLink>
@@ -65,9 +57,8 @@ const Nav = () => {
 
 
         </NavList>
-      </NavBar>
+      </WidthContainer>
     </Container>
-  )
-}
+)
 
 export default Nav
