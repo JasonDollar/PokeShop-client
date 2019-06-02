@@ -123,7 +123,7 @@ const Sell = props => {
                                   })}
                                 >
                                   {item}
-                                </DropDownItem>
+                                </DropDownItem> 
                             ))
                           : null}
                       </DropDown>
