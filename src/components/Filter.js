@@ -1,4 +1,5 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
+
 import styled from 'styled-components'
 import { FilterContext } from '../filterContext'
 
@@ -16,13 +17,32 @@ const Container = styled.aside`
 
 const Filter = () => {
   const {
-    isFilterOpen, toggleFilter, minPrice, setMinPrice, 
+    isFilterOpen, toggleFilter, minPrice, setMinPrice, maxPrice, setMaxPrice,
   } = useContext(FilterContext)
+  const [filterMinPrice, setFilterMinPrice] = useState(minPrice)
+  const [filterMaxPrice, setFilterMaxPrice] = useState(maxPrice)
+
+  const applyFilter = (e) => {
+    e.preventDefault()
+    setMinPrice(filterMinPrice)
+    setMaxPrice(filterMaxPrice)
+  }
   return (
     <Container isOpen={isFilterOpen}>
       <button onClick={() => toggleFilter(false)}>&times;</button>
-      Set price:
-      <input type="number" value={minPrice} onChange={e => setMinPrice(e.target.value)} />
+      <form onSubmit={applyFilter}>
+
+        Set price:
+        <div>
+          <label htmlFor="minPrice">Min: </label>
+          <input type="number" id="minPrice" value={filterMinPrice} onChange={e => setFilterMinPrice(parseInt(e.target.value))} />
+        </div>
+        <div>
+          <label htmlFor="maxPrice">Max: </label>
+          <input type="number" id="maxPrice" value={filterMaxPrice} onChange={e => setFilterMaxPrice(parseInt(e.target.value))} />
+        </div>
+        <button>Filter</button>
+      </form>
     </Container>
   )
 }

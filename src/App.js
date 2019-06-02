@@ -16,6 +16,7 @@ import Me from './components/Me'
 import Sell from './components/Sell'
 import Cart from './components/Cart'
 import OrderList from './components/OrderList'
+import Filter from './components/Filter'
 import theme from './components/styles/theme'
 
 import Nav from './components/Nav'
@@ -43,6 +44,7 @@ function App() {
           <GlobalStyle />
           <div className="App">
             <Nav />
+            <Route path="/" exact component={Filter} />
             <Switch>
               <Route path="/" exact component={ShopDisplay} />
               <Route path="/pokedex" component={PokemonList} />
