@@ -12,8 +12,8 @@ import { FilterContext } from '../filterContext'
 
 
 export const POKEMON_OFFERS_QUERY = gql`
-  query POKEMON_OFFERS_QUERY($skip: Int = 0, $limit: Int = 24, $minPrice: Int, $maxPrice: Int) {
-    pokemonOffers(skip: $skip, limit: $limit, minPrice: $minPrice, maxPrice: $maxPrice) {
+  query POKEMON_OFFERS_QUERY($skip: Int = 0, $limit: Int = 24, $minPrice: Int, $maxPrice: Int, $pokemonTypes: [String!]) {
+    pokemonOffers(skip: $skip, limit: $limit, minPrice: $minPrice, maxPrice: $maxPrice, pokemonTypes: $pokemonTypes) {
       count
       offers {
         id
@@ -32,7 +32,9 @@ export const POKEMON_OFFERS_QUERY = gql`
 const ShopDisplay = (props) => {
   // console.log(props.location.search)
 
-  const { minPrice, maxPrice, toggleFilter } = useContext(FilterContext)
+  const {
+    minPrice, maxPrice, toggleFilter, pokemonTypes, 
+  } = useContext(FilterContext)
   // console.log(filter)
   const { page = 1 } = qs.parse(props.location.search)
   // console.log(page)
@@ -45,7 +47,7 @@ const ShopDisplay = (props) => {
         limit: itemsPerPage,
         minPrice, 
         maxPrice,
-
+        pokemonTypes,
       }}
       fetchPolicy="cache-and-network"
     >

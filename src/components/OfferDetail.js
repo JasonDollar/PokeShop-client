@@ -15,6 +15,7 @@ const POKEMON_OFFER_QUERY = gql`
       pokemon {
         id
         image
+        pokeType
       }
       seller {
         id
@@ -38,6 +39,7 @@ const OfferDetail = props => {
             <Link to="/">Home</Link>
             <h2>#{data.pokemonOffer.pokemon.id} {data.pokemonOffer.name}</h2>
             <img src={data.pokemonOffer.pokemon.image} alt={data.pokemonOffer.name} style={{ width: '20%', height: '20%' }} />
+            <p>{data.pokemonOffer.pokemon.pokeType.map(item => <span>{item + ' '}</span>)}</p>
             <p>Price: {data.pokemonOffer.price}</p>
             <p>
               Seller: 
