@@ -9,7 +9,7 @@ export const FilterProvider = ({ children }) => {
   const [pokemonTypes, setPokemonTypes] = useState([])
   return (
     <FilterContext.Provider value={{
-      minPrice, setMinPrice, maxPrice, setMaxPrice, isFilterOpen, toggleFilter, pokemonTypes, setPokemonTypes,
+      minPrice, setMinPrice, maxPrice, setMaxPrice, isFilterOpen, toggleFilter, pokemonTypes, setPokemonTypes, 
     }}
     >
       {children}

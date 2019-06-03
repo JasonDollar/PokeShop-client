@@ -32,12 +32,12 @@ const PokeTypesContainer = styled.div`
 
 const Filter = () => {
   const {
-    isFilterOpen, toggleFilter, minPrice, setMinPrice, maxPrice, setMaxPrice, setPokemonTypes,
+    isFilterOpen, toggleFilter, minPrice, setMinPrice, maxPrice, setMaxPrice, setPokemonTypes, pokemonTypes,
   } = useContext(FilterContext)
   const [filterMinPrice, setFilterMinPrice] = useState(minPrice)
   const [filterMaxPrice, setFilterMaxPrice] = useState(maxPrice)
   const [typeValue, setTypeValue] = useState('')
-  const [chosenTypes, setChosenTypes] = useState([])
+  const [chosenTypes, setChosenTypes] = useState(pokemonTypes)
 
   const applyFilter = (e) => {
     e.preventDefault()

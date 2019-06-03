@@ -33,9 +33,8 @@ const ShopDisplay = (props) => {
   // console.log(props.location.search)
 
   const {
-    minPrice, maxPrice, toggleFilter, pokemonTypes, 
+    minPrice, maxPrice, toggleFilter, pokemonTypes,
   } = useContext(FilterContext)
-  // console.log(filter)
   const { page = 1 } = qs.parse(props.location.search)
   // console.log(page)
   // }
