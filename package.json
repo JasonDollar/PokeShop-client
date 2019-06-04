@@ -8,6 +8,7 @@
     "downshift": "^3.2.10",
     "graphql": "^14.3.0",
     "graphql-tag": "^2.10.1",
+    "jwt-decode": "^2.2.0",
     "lodash.debounce": "^4.0.8",
     "prop-types": "^15.7.2",
     "query-string": "^6.5.0",

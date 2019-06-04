@@ -69,7 +69,6 @@ OfferListItem.propTypes = {
     pokemon: PropTypes.shape({
       id: PropTypes.string.isRequired,
       image: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
     }),
     price: PropTypes.number.isRequired,
 

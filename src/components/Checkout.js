@@ -18,7 +18,7 @@ const ORDER_POKEMONS_MUTATION = gql`
 
 const Checkout = ({ buttonDisabled, totalPrice }) => (
     <ShowMyMoney>
-      {({ data: { userCredits }, loading: loadingCredits }) => {
+      {({ data: { userCredits }, loading: loadingCredits, error: errorCredits }) => {
         if (loadingCredits) return <p>Loading...</p>
         return (
           <Mutation 
@@ -34,10 +34,10 @@ const Checkout = ({ buttonDisabled, totalPrice }) => (
             // let message
             (
               <Fragment>
-                <button onClick={orderPokemons} disabled={loading || loadingCredits || buttonDisabled || userCredits.balance < totalPrice}>
+                <button type="button" onClick={orderPokemons} disabled={loading || loadingCredits || buttonDisabled || (userCredits && userCredits.balance < totalPrice)}>
                   Buy these shine pokemons!
                 </button>
-                {userCredits.balance < totalPrice && <p>Yoy don't have enough credits</p> }
+                {errorCredits && <p>{errorCredits.message}</p> }
                 {error && <p> {alert(error.message)}</p>}
               </Fragment>
             )

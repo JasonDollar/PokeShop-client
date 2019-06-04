@@ -77,6 +77,7 @@ const Filter = () => {
         </PokeTypesContainer>
         <Downshift
           onChange={selection => {
+            if (selection === '') return
             const isAlreadyChosen = chosenTypes.includes(selection)
             if (isAlreadyChosen) alert(`You have already chosen ${selection} type`)
             setChosenTypes([...chosenTypes, selection])
