@@ -2,6 +2,10 @@ import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { 
+  faTimes, faFilter, faBars,
+} from '@fortawesome/free-solid-svg-icons'
 import { UserProvider } from './userContext'
 import { FilterProvider } from './filterContext'
 import PokemonList from './components/PokemonList'
@@ -21,6 +25,8 @@ import theme from './components/styles/theme'
 
 import Nav from './components/Nav'
 
+library.add(faTimes, faFilter, faBars)
+
 const GlobalStyle = createGlobalStyle`
   html {
   font-size: 62.5%;
@@ -34,6 +40,12 @@ const GlobalStyle = createGlobalStyle`
 
   *, *::after, *::before {
     box-sizing: inherit;
+  }
+  .onlyMobile {
+    display: block;
+    @media (min-width: 576px) {
+      display: none;
+    }
   }
 `
 

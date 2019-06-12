@@ -1,9 +1,11 @@
 import React, { useState, useContext } from 'react'
 import Downshift from 'downshift'
 import styled from 'styled-components'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FilterContext } from '../filterContext'
 import { pokeTypes } from '../config'
 import { DropDown, DropDownItem } from './styles/Dropdown'
+import NavButton from './styles/NavButton'
 
 const Container = styled.aside`
   position: fixed;
@@ -11,11 +13,14 @@ const Container = styled.aside`
   left: 0;
   bottom: 0;
   width: 80%;
-  background: orangered;
+  background: ${props => props.theme.primaryRed};
   transform: ${props => (props.isOpen ? 'translateX(0)' : 'translateX(-100%)')};
   z-index: 100;
   /* width: 100px; */
   /* height: 200px; */
+  @media (min-width: 576px) {
+    width: 30rem;
+  }
 `
 
 const PokeTypeElement = styled.span`
@@ -52,8 +57,10 @@ const Filter = () => {
     setChosenTypes(newChosenTypes)
   }
   return (
-    <Container isOpen={isFilterOpen}>
-      <button onClick={() => toggleFilter(false)}>&times;</button>
+    <Container isOpen={isFilterOpen} aria-expanded={isFilterOpen}>
+      <NavButton type="button" onClick={() => toggleFilter(false)}>
+        <FontAwesomeIcon icon="times" />
+      </NavButton>
       <form onSubmit={applyFilter}>
 
         Set price:

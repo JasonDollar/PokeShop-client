@@ -59,9 +59,6 @@ const ShopDisplay = (props) => {
         const maxPage = Math.ceil(data.pokemonOffers.count / itemsPerPage)
         return (
           <WidthContainer>
-            {/* This button is here only temporary */}
-            <button onClick={() => toggleFilter(true)}>open filter</button>
-            
             <Pagination maxPage={maxPage} page={parseInt(page)} />
             <GridList>
               {data.pokemonOffers.offers && data.pokemonOffers.offers.map(item => (

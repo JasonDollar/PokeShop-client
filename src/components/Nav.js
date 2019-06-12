@@ -1,13 +1,15 @@
 import React, { useState, useContext } from 'react'
 import { NavLink, withRouter } from 'react-router-dom'
 import styled from 'styled-components'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import WidthContainer from './styles/WidthContainer'
 import Backdrop from './styles/Backdrop'
+import NavButton from './styles/NavButton'
 import { FilterContext } from '../filterContext'
 
 const Container = styled.div`
   width: 100%;
-  background: cadetblue;
+  background:  ${props => props.theme.primaryRed};
 `
 
 
@@ -17,10 +19,10 @@ const NavList = styled.ul`
   top: 0;
   bottom: 0;
   right: 0;
-  width: 80%;
+  width: 70%;
   z-index: 100;
   margin: 0;
-  background: blue;
+  background: ${props => props.theme.primaryRed};
   list-style: none;
   padding: 10px;
   display: flex;
@@ -33,10 +35,27 @@ const NavList = styled.ul`
   @media (min-width: 576px) {
     position: static;
     flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    transform: translateX(0);
+    z-index: 0;
   }
 
   li {
-    margin-right: 15px;
+    &:first-of-type {
+      margin-top: 3rem;
+    }
+    margin-bottom: 1rem;
+    text-align: right;
+    font-size: 3rem;
+    
+    @media (min-width: 576px) {
+    margin-left: 2rem;
+    margin-bottom: 0;
+    position: static;
+    flex-direction: row;
+    transform: translateX(0);
+  }
   }
   
   a, span {
@@ -45,8 +64,10 @@ const NavList = styled.ul`
   }
 `
 
-const NavButton = styled.button`
-  background: none;
+const NavElement = styled(WidthContainer)`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `
 
 
@@ -61,11 +82,17 @@ const Nav = (props) => {
   }
   return (
     <Container>
-      <WidthContainer as="nav">
+      <NavElement as="nav">
         {navOpen && <Backdrop onClick={() => toggleNavOpen(false)} />}
         {isFilterOpen && <Backdrop onClick={() => toggleFilter(false)} />}
-        {props.location.pathname === '/' && <NavButton type="button" onClick={() => toggleFilter(true)}>open filter</NavButton>}
-        <NavButton type="button" onClick={() => toggleNavOpen(!navOpen)}>Toggle</NavButton>
+        {props.location.pathname === '/' && (
+          <NavButton type="button" onClick={() => toggleFilter(true)}>
+            <FontAwesomeIcon icon="filter" />
+          </NavButton>
+        )}
+        <NavButton type="button" className="onlyMobile" onClick={() => toggleNavOpen(!navOpen)}>
+          <FontAwesomeIcon icon="bars" />
+        </NavButton>
         <NavList className={navOpen ? 'open' : ''} onClick={handleLinkClick} aria-expanded={navOpen}>
           <li>
             <NavLink to="/">Shop</NavLink>
@@ -94,7 +121,7 @@ const Nav = (props) => {
 
 
         </NavList>
-      </WidthContainer>
+      </NavElement>
     </Container>
   )
 }
