@@ -24,7 +24,7 @@ const Container = styled.aside`
   /* width: 100px; */
   /* height: 200px; */
   @media (min-width: 576px) {
-    width: 30rem;
+    width: 38rem;
   }
 `
 

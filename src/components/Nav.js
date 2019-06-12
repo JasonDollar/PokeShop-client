@@ -39,11 +39,15 @@ const NavList = styled.ul`
     justify-content: flex-end;
     transform: translateX(0);
     z-index: 0;
+    
   }
 
   li {
     &:first-of-type {
       margin-top: 3rem;
+      @media (min-width: 576px) {
+        margin-top: 0;
+      }
     }
     margin-bottom: 1rem;
     text-align: right;
@@ -66,8 +70,11 @@ const NavList = styled.ul`
 
 const NavElement = styled(WidthContainer)`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
+  .filterButton {
+    margin-right: auto;
+  }
 `
 
 
@@ -86,7 +93,7 @@ const Nav = (props) => {
         {navOpen && <Backdrop onClick={() => toggleNavOpen(false)} />}
         {isFilterOpen && <Backdrop onClick={() => toggleFilter(false)} />}
         {props.location.pathname === '/' && (
-          <NavButton type="button" onClick={() => toggleFilter(true)}>
+          <NavButton className="filterButton" type="button" onClick={() => toggleFilter(true)}>
             <FontAwesomeIcon icon="filter" />
           </NavButton>
         )}
