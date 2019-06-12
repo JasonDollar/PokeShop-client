@@ -11,6 +11,7 @@ export const checkTokenValidity = () => {
     localStorage.removeItem('token')
     return null
   } 
+  localStorage.setItem('userId', decoded.userId)
   return token
   
 }

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, Fragment } from 'react'
 import { NavLink, withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -6,6 +6,7 @@ import WidthContainer from './styles/WidthContainer'
 import Backdrop from './styles/Backdrop'
 import NavButton from './styles/NavButton'
 import { FilterContext } from '../filterContext'
+import { UserContext } from '../userContext'
 
 const Container = styled.div`
   width: 100%;
@@ -33,6 +34,7 @@ const NavList = styled.ul`
     transform: translateX(0);
   }
   @media (min-width: 576px) {
+    margin-right: 2rem;
     position: static;
     flex-direction: row;
     align-items: center;
@@ -66,6 +68,16 @@ const NavList = styled.ul`
     text-decoration: none;
     color: white;
   }
+  .logoutButton {
+    color: white;
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    font-size: inherit;
+    font-family: inherit;
+    cursor: pointer;
+  }
 `
 
 const NavElement = styled(WidthContainer)`
@@ -74,6 +86,7 @@ const NavElement = styled(WidthContainer)`
   align-items: center;
   .filterButton {
     margin-right: auto;
+    margin-left: 2rem;
   }
 `
 
@@ -84,9 +97,46 @@ const Nav = (props) => {
   const {
     isFilterOpen, toggleFilter,
   } = useContext(FilterContext)
+  const { userId, setUserId } = useContext(UserContext)
+
   const handleLinkClick = e => {
+    if (navOpen === false) return
     if (e.target.nodeName.toLowerCase() === 'a') toggleNavOpen(false)
   }
+  const logoutUser = () => {
+    localStorage.removeItem('userId')
+    localStorage.removeItem('token')
+    setUserId('')
+  }
+
+  const publicLinks = (
+    <Fragment>
+      <li>
+        <NavLink to="/login">Login</NavLink>
+      </li>
+      <li>
+        <NavLink to="/register">Register</NavLink>
+      </li>
+    </Fragment>
+  )
+  const privateLinks = (
+    <Fragment>
+      <li>
+        <NavLink to="/me">Me</NavLink>
+      </li>
+      <li>
+        <NavLink to="/cart">Cart</NavLink>
+      </li>
+      <li>
+        <NavLink to="/orders">Orders</NavLink>
+      </li>
+      <li>
+        <button type="button" className="logoutButton" onClick={logoutUser}>
+          Logout
+        </button>
+      </li>
+    </Fragment>
+  )
   return (
     <Container>
       <NavElement as="nav">
@@ -105,27 +155,14 @@ const Nav = (props) => {
             <NavLink to="/">Shop</NavLink>
           </li>
           <li>
-            <NavLink to="/sell">Sell</NavLink>
-          </li>
-          <li>
             <NavLink to="/pokedex">pokedex</NavLink>
           </li>
           <li>
-            <NavLink to="/login">Login</NavLink>
+            <NavLink to="/sell">Sell</NavLink>
           </li>
-          <li>
-            <NavLink to="/register">Register</NavLink>
-          </li>
-          <li>
-            <NavLink to="/me">Me</NavLink>
-          </li>
-          <li>
-            <NavLink to="/cart">Cart</NavLink>
-          </li>
-          <li>
-            <NavLink to="/orders">Orders</NavLink>
-          </li>
-
+          {!userId && publicLinks}
+          {userId && privateLinks}
+          
 
         </NavList>
       </NavElement>

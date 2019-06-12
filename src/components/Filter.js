@@ -71,9 +71,13 @@ const Form = styled.form`
     justify-content: space-between;
     margin-bottom: .5rem;
     input {
-      border: 1px solid ${props => props.theme.colorLightGrey};
+      border: 1px solid ${props => props.theme.colorGrey};
       border-radius: 5px;
       padding: 0 .5rem;
+      color: ${props => props.theme.colorLightGrey};
+      &.touched {
+        color: black;
+      }
     }
   }
 
@@ -103,6 +107,8 @@ const Filter = () => {
   const [filterMaxPrice, setFilterMaxPrice] = useState(maxPrice)
   const [typeValue, setTypeValue] = useState('')
   const [chosenTypes, setChosenTypes] = useState(pokemonTypes)
+  const [minTouched, setMinTouched] = useState(false)
+  const [maxTouched, setMaxTouched] = useState(false)
 
   const applyFilter = (e) => {
     e.preventDefault()
@@ -112,13 +118,14 @@ const Filter = () => {
     toggleFilter(false)
   }
 
+
   const removeFromChosenTypes = type => {
     const newChosenTypes = chosenTypes.filter(item => item !== type)
     setChosenTypes(newChosenTypes)
   }
   return (
     <Container isOpen={isFilterOpen} aria-expanded={isFilterOpen}>
-      <NavButton type="button" onClick={() => toggleFilter(false)}>
+      <NavButton type="button" onClick={() => toggleFilter(false)} wide>
         <FontAwesomeIcon icon="times" />
       </NavButton>
       <Form onSubmit={applyFilter}>
@@ -126,11 +133,29 @@ const Filter = () => {
         <h3 className="heading-3">Set price:</h3>
         <div className="inputGroupPrice">
           <label htmlFor="minPrice">Min: </label>
-          <input type="number" id="minPrice" value={filterMinPrice} onChange={e => setFilterMinPrice(parseInt(e.target.value))} />
+          <input
+            className={minTouched ? 'touched' : ''}
+            type="number"
+            id="minPrice"
+            value={filterMinPrice}
+            onChange={e => {
+              setMinTouched(true)
+              setFilterMinPrice(parseInt(e.target.value))
+            }}
+          />
         </div>
         <div className="inputGroupPrice">
           <label htmlFor="maxPrice">Max: </label>
-          <input type="number" id="maxPrice" value={filterMaxPrice} onChange={e => setFilterMaxPrice(parseInt(e.target.value))} />
+          <input
+            className={maxTouched ? 'touched' : ''}
+            type="number"
+            id="maxPrice"
+            value={filterMaxPrice}
+            onChange={e => {
+              setMaxTouched(true)
+              setFilterMaxPrice(parseInt(e.target.value))
+            }}
+          />
         </div>
         <PokeTypesContainer>
           {chosenTypes.length > 0 && chosenTypes.map(item => (
