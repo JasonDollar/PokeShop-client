@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 
@@ -29,6 +29,7 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     font-size: 1.6rem;
+    width: 100%;
   }
 
   *, *::after, *::before {

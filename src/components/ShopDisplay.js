@@ -55,6 +55,7 @@ const ShopDisplay = (props) => {
       }) => {
         if (loading) return <p />
         if (error) return <p>{error.message}</p>
+        console.log(data.pokemonOffers.count)
         const maxPage = Math.ceil(data.pokemonOffers.count / itemsPerPage)
         return (
           <WidthContainer>

@@ -3,7 +3,7 @@ import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import RemoveFromCart from './RemoveFromCart'
 import Checkout from './Checkout'
-import ShowMyMoney from './ShowMyMoney'
+// import ShowMyMoney from './ShowMyMoney'
 import WidthContainer from './styles/WidthContainer'
 
 export const CART_ITEMS_QUERY = gql`

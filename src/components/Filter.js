@@ -3,16 +3,17 @@ import Downshift from 'downshift'
 import styled from 'styled-components'
 import { FilterContext } from '../filterContext'
 import { pokeTypes } from '../config'
-import { DropDown, DropDownItem, SearchStyles } from './styles/Dropdown'
+import { DropDown, DropDownItem } from './styles/Dropdown'
 
 const Container = styled.aside`
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
-  width: 30rem;
+  width: 80%;
   background: orangered;
   transform: ${props => (props.isOpen ? 'translateX(0)' : 'translateX(-100%)')};
+  z-index: 100;
   /* width: 100px; */
   /* height: 200px; */
 `

@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState } from 'react'
 import { Mutation, ApolloConsumer } from 'react-apollo'
 import gql from 'graphql-tag'
 import debounce from 'lodash.debounce'
@@ -6,7 +6,7 @@ import debounce from 'lodash.debounce'
 import Downshift from 'downshift'
 import { POKEMON_OFFERS_QUERY } from './ShopDisplay'
 import AuthForm from './styles/AuthForm'
-import { DropDown, DropDownItem, SearchStyles } from './styles/Dropdown'
+import { DropDown, DropDownItem } from './styles/Dropdown'
 
 const SELL_POKEMON_MUTATION = gql`
   mutation SELL_POKEMON_MUTATION($name: String!, $price: Int!) {

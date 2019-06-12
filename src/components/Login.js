@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-import { Redirect, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { UserContext } from '../userContext'
 
 import AuthForm from './styles/AuthForm'
