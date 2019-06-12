@@ -15,7 +15,12 @@ const Container = styled.aside`
   width: 80%;
   background: ${props => props.theme.primaryRed};
   transform: ${props => (props.isOpen ? 'translateX(0)' : 'translateX(-100%)')};
+  transition: transform .3s;
   z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   /* width: 100px; */
   /* height: 200px; */
   @media (min-width: 576px) {
@@ -25,15 +30,69 @@ const Container = styled.aside`
 
 const PokeTypeElement = styled.span`
   background: white;
+  font-size: 1.6rem;
   padding: .3rem 1rem;
   border-radius: 10rem;
-  margin: .5rem 0;
+  margin-top: 2rem;
   margin-right: 1rem;
+  color: black;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  .icon {
+    color: black;
+    margin-left: .5rem;
+  }
 `
 
 const PokeTypesContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+  
+  /* margin: 1rem 0; */
+`
+
+const Form = styled.form`
+  color: white;
+  
+  margin: 0 1rem;
+  .heading-3 {
+    font-size: 3rem;
+    margin: 1rem 0;
+  }
+
+  input {
+    color: black;
+  }
+
+  .inputGroupPrice {
+    font-size: 2rem;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: .5rem;
+    input {
+      border: 1px solid ${props => props.theme.colorLightGrey};
+      border-radius: 5px;
+      padding: 0 .5rem;
+    }
+  }
+
+  .inputWide {
+    border: 1px solid ${props => props.theme.colorLightGrey};
+      border-radius: 5px;
+      padding: .5rem;
+    width: 100%;
+    font-size: 2rem;
+  }
+
+  .filterButton {
+    display: block;
+    margin: 1rem auto;
+    border: 1px solid white;
+    border-radius: 5px;
+    background: white;
+    padding: 1rem 3rem;
+  }
 `
 
 const Filter = () => {
@@ -50,6 +109,7 @@ const Filter = () => {
     setMinPrice(filterMinPrice)
     setMaxPrice(filterMaxPrice)
     setPokemonTypes(chosenTypes)
+    toggleFilter(false)
   }
 
   const removeFromChosenTypes = type => {
@@ -61,14 +121,14 @@ const Filter = () => {
       <NavButton type="button" onClick={() => toggleFilter(false)}>
         <FontAwesomeIcon icon="times" />
       </NavButton>
-      <form onSubmit={applyFilter}>
+      <Form onSubmit={applyFilter}>
 
-        Set price:
-        <div>
+        <h3 className="heading-3">Set price:</h3>
+        <div className="inputGroupPrice">
           <label htmlFor="minPrice">Min: </label>
           <input type="number" id="minPrice" value={filterMinPrice} onChange={e => setFilterMinPrice(parseInt(e.target.value))} />
         </div>
-        <div>
+        <div className="inputGroupPrice">
           <label htmlFor="maxPrice">Max: </label>
           <input type="number" id="maxPrice" value={filterMaxPrice} onChange={e => setFilterMaxPrice(parseInt(e.target.value))} />
         </div>
@@ -78,7 +138,7 @@ const Filter = () => {
               key={item}
             >
               {item}
-              <button type="button" onClick={() => removeFromChosenTypes(item)}>&times;</button>
+              <FontAwesomeIcon className="icon" icon="times" onClick={() => removeFromChosenTypes(item)} />
             </PokeTypeElement>
           )) }
 
@@ -87,7 +147,11 @@ const Filter = () => {
           onChange={selection => {
             if (selection === '') return
             const isAlreadyChosen = chosenTypes.includes(selection)
-            if (isAlreadyChosen) alert(`You have already chosen ${selection} type`)
+            if (isAlreadyChosen) {
+              alert(`You have already chosen ${selection} type`)
+              setTypeValue('')
+              return
+            }
             setChosenTypes([...chosenTypes, selection])
             setTypeValue('')
           }}
@@ -107,10 +171,12 @@ const Filter = () => {
               <label {...getLabelProps({
                 htmlFor: 'pokeTypeDropdown',
               })}
-              >Choose pokemon types:
+              >
+                <h3 className="heading-3">Choose pokemon types:</h3>
               </label>
               <input {...getInputProps({
                 id: 'pokeTypeDropdown',
+                className: 'inputWide',
                 value: typeValue,
                 onChange: e => setTypeValue(e.target.value),
               })}
@@ -140,8 +206,8 @@ const Filter = () => {
             </div>
           )}
         </Downshift>
-        <button>Filter</button>
-      </form>
+        <button type="submit" className="filterButton">Filter</button>
+      </Form>
     </Container>
   )
 }

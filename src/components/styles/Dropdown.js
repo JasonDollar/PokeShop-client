@@ -13,9 +13,12 @@ const DropDownItem = styled.div`
   background: ${props => (props.highlighted ? '#f7f7f7' : 'white')};
   padding: 1rem;
   transition: all 0.2s;
+  color: black;
+  font-size: 2rem;
   ${props => (props.highlighted ? 'padding-left: 2rem;' : null)};
   display: flex;
   align-items: center;
+
   /* border-left: 10px solid ${props => (props.highlighted ? props.theme.lightgrey : 'white')}; */
   img {
     margin-right: 10px;

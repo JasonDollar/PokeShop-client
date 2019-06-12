@@ -6,7 +6,7 @@ const NavButton = styled.button`
   /* border-radius: 7px; */
   padding: .5rem;
   margin: .5rem;
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: white;
 `
 
