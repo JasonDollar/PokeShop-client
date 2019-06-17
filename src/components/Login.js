@@ -28,7 +28,7 @@ const Login = props => {
   return (
 
         <Mutation mutation={LOGIN_MUTATION} variables={{ email, password }} refetchQueries={[{ query: CURRENT_USER_QUERY }]}>
-          {(login, { data, error, loading }) => 
+          {(login, { error, loading }) => 
             
           // if (data && data.login && data.login.token) {
 
@@ -41,7 +41,6 @@ const Login = props => {
                   onSubmit={async e => {
                     e.preventDefault()
                     const data = await login()
-                    console.log(data)
                     if (data) {
 
                       localStorage.setItem('token', data.data.login.token)
@@ -70,10 +69,10 @@ const Login = props => {
                   {error && <span className="errorMessage">{error.message}</span> }
 
                   <button type="submit" className="form__button" disabled={loading}>Login</button>
-                  <div className="form__link--container">
+                  {/* <div className="form__link--container">
                     <Link to="/signup" className="form__link">New User? Create an account</Link>
                     <Link to="/reset" className="form__link">Forgot your password?</Link>
-                  </div>
+                  </div> */}
                 </form>
               </AuthForm>
             )

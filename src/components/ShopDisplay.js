@@ -67,7 +67,7 @@ const ShopDisplay = (props) => {
             </GridList>
 
           </WidthContainer>
-        )
+        ) 
       }}
     </Query>
   )
