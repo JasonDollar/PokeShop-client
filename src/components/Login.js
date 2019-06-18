@@ -56,15 +56,13 @@ const Login = props => {
                   <h1 className="form__name">Login</h1>
 
                   <div className="inputGroup">
-                    <label htmlFor="email">Email:
+                    <label htmlFor="email">Email:</label>
                     <input type="email" id="email" value={email} onChange={e => changeEmail(e.target.value)} />
-                    </label>
                   </div>
 
                   <div className="inputGroup">
-                    <label htmlFor="password">Password:
+                    <label htmlFor="password">Password:</label>
                     <input type="password" id="password" value={password} onChange={e => changePassword(e.target.value)} />
-                    </label>
                   </div>
                   {error && <span className="errorMessage">{error.message}</span> }
 

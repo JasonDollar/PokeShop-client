@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-import { Redirect, Link } from 'react-router-dom'
 import { CURRENT_USER_QUERY } from './User'
 import { UserContext } from '../userContext'
 
@@ -51,21 +50,18 @@ const Login = (props) => {
               <h1 className="form__name">Register</h1>
 
               <div className="inputGroup">
-                <label htmlFor="name">Name:
-                  <input type="name" id="name" value={name} onChange={e => changeName(e.target.value)} />
-                </label>
+                <label htmlFor="name">Name:</label>
+                <input type="name" id="name" value={name} onChange={e => changeName(e.target.value)} />
               </div>
               
               <div className="inputGroup">
-                <label htmlFor="email">Email:
-                  <input type="email" id="email" value={email} onChange={e => changeEmail(e.target.value)} />
-                </label>
+                <label htmlFor="email">Email:</label>
+                <input type="email" id="email" value={email} onChange={e => changeEmail(e.target.value)} />
               </div>
 
               <div className="inputGroup">
-                <label htmlFor="password">Password:
-                  <input type="password" id="password" value={password} onChange={e => changePassword(e.target.value)} />
-                </label>
+                <label htmlFor="password">Password:</label>
+                <input type="password" id="password" value={password} onChange={e => changePassword(e.target.value)} />
               </div>
               {error && <span className="errorMessage">{error.message}</span> }
 
@@ -76,7 +72,7 @@ const Login = (props) => {
               </div> */}
             </form>
           </AuthForm>
-        )
+      )
       }
     </Mutation>
   )
