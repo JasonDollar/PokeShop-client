@@ -100,7 +100,6 @@ const OrderList = () => (
         if (error) return (<p>{error.message}</p>)
         
         if (data.orders.length <= 0) return <p>No orders found</p>
-        console.log(data)
         return (
             <OrdersUl>
               {data.orders.map(order => (
@@ -120,7 +119,7 @@ const OrderList = () => (
                       </SinglePokemonInfo>
                     ))}
                   </ul>
-                  <p className="total">Price: {order.price}</p>
+                  <p className="total">Price: {order.price}CR</p>
                 </OrderItem>
               ))}
             </OrdersUl>
