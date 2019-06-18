@@ -36,7 +36,7 @@ const OrdersUl = styled.ul`
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
-  margin: 2rem 0;
+  margin: 2rem 1rem;
   padding: 0;
 `
 
@@ -45,14 +45,19 @@ const OrderItem = styled.li`
   /* border: 1px solid ${props => props.theme.colorLightGrey}; */
   box-shadow: 0 2px 5px 0 ${props => props.theme.colorGrey};
   padding: 1rem;
+  margin-bottom: 1rem;
   header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    /* align-items: center; */
     border-bottom: 2px solid ${props => props.theme.primaryRed};
     margin-bottom: 1rem;
     padding: .5rem;
     padding-bottom: 1.5rem;
+    @media (min-width: 576px) {
+      flex-direction: row;
+    }
     & .title {
       margin: 0;
     }
@@ -71,10 +76,13 @@ const SinglePokemonInfo = styled.li`
   display: flex;
   align-items: center;
   list-style: none;
-    font-size: 2rem;
+  font-size: 2rem;
+  .pokemonText {
+    margin: 1rem 0;
+  }
   .pokemonImage {
-    width: 5rem;
-    height: 5rem;
+    width: 6rem;
+    height: 6rem;
   }
   & p span.pokemonName {
     display: inline-block;
@@ -102,11 +110,11 @@ const OrderList = () => (
                     <p className="date">{format(parseInt(order.createdAt), 'DD/MM/YYYY H:mm')}</p>
                   </header>
                   
-                  <ul>
+                  <ul style={{ padding: 0 }}>
                     {order.items.map(item => (
                       <SinglePokemonInfo key={item.id}>
                         <img src={item.pokemon.image} alt={item.pokemon.name + ' image'} className="pokemonImage" />
-                        <p>
+                        <p className="pokemonText">
                           <span className="pokemonName">{item.pokemon.name}</span> x{item.quantity} - <strong>{item.price}CR</strong>
                         </p>
                       </SinglePokemonInfo>

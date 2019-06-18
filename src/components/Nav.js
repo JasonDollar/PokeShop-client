@@ -88,6 +88,9 @@ const NavElement = styled(WidthContainer)`
     margin-right: auto;
     margin-left: 2rem;
   }
+  .menuButton {
+    margin-right: 2rem;
+  }
 `
 
 
@@ -147,7 +150,7 @@ const Nav = (props) => {
             <FontAwesomeIcon icon="filter" />
           </NavButton>
         )}
-        <NavButton type="button" className="onlyMobile" onClick={() => toggleNavOpen(!navOpen)}>
+        <NavButton type="button" className="onlyMobile menuButton" onClick={() => toggleNavOpen(!navOpen)}>
           <FontAwesomeIcon icon="bars" />
         </NavButton>
         <NavList className={navOpen ? 'open' : ''} onClick={handleLinkClick} aria-expanded={navOpen}>
