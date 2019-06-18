@@ -32,15 +32,20 @@ const ListItem = styled.li`
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid ${props => props.theme.colorLightGrey};
+    
   }
   .name {
     font-size: 2rem;
+    margin: 0.5rem 0;
+    margin-bottom: 1rem;
     &::first-letter {
       text-transform: uppercase;
     }
   }
   .price {
-    font-size: 2.6rem;
+    font-size: 2.2rem;
+    margin: 0.5rem 0;
+    margin-bottom: 1rem;
     font-weight: bold;
     color: ${props => props.theme.colorGrey};
   }
