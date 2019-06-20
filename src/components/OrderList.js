@@ -4,6 +4,7 @@ import gql from 'graphql-tag'
 import styled from 'styled-components'
 import { format } from 'date-fns'
 import WidthContainer from './styles/WidthContainer'
+import SinglePokemonInfo from './styles/SinglePokemonInfo'
 
 export const USER_ORDERS_QUERY = gql`
   query USER_ORDERS_QUERY {
@@ -72,25 +73,25 @@ const OrderItem = styled.li`
   }
 `
 
-const SinglePokemonInfo = styled.li`
-  display: flex;
-  align-items: center;
-  list-style: none;
-  font-size: 2rem;
-  .pokemonText {
-    margin: 1rem 0;
-  }
-  .pokemonImage {
-    width: 6rem;
-    height: 6rem;
-  }
-  & p span.pokemonName {
-    display: inline-block;
-    &::first-letter {
-      text-transform: uppercase;
-    }
-  }
-`
+// const SinglePokemonInfo = styled.li`
+//   display: flex;
+//   align-items: center;
+//   list-style: none;
+//   font-size: 2rem;
+//   .pokemonText {
+//     margin: 1rem 0;
+//   }
+//   .pokemonImage {
+//     width: 6rem;
+//     height: 6rem;
+//   }
+//   & p span.pokemonName {
+//     display: inline-block;
+//     &::first-letter {
+//       text-transform: uppercase;
+//     }
+//   }
+// `
 
 const OrderList = () => (
     <WidthContainer>

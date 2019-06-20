@@ -27,8 +27,8 @@ const AuthForm = styled.div`
     padding: 2rem;
     background-color: white;
     border-radius: 8px;
+    transform: translateY(-5rem);
     @media (max-width: 576px) {
-    transform: translateY(-2rem);
     width: 80%;
     }
   }

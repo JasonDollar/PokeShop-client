@@ -2,8 +2,7 @@ import styled from 'styled-components'
 
 const GridList = styled.ul`
   list-style: none;
-  margin: 0;
-  margin-top: 2rem;
+  margin: 2rem 0;
   padding: 0;
   display: grid;
   grid-template-columns: minmax(16rem, 30rem);
@@ -11,7 +10,7 @@ const GridList = styled.ul`
   justify-content: center;
   justify-items: center;
   @media (min-width: 576px) {
-    grid-template-columns: repeat(auto-fit, minmax(24rem, 24rem));
+    grid-template-columns: repeat(auto-fit, 24rem);
   }
 `
 

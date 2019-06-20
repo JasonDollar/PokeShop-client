@@ -12,15 +12,15 @@ const REMOVE_FROM_CART_MUTATION = gql`
   }
 `
 
-const RemoveFromCart = ({ cartItemId }) => (
+const RemoveFromCart = ({ cartItemId, children, CSSclass }) => (
     <Mutation mutation={REMOVE_FROM_CART_MUTATION} variables={{ id: cartItemId }} refetchQueries={[{ query: CART_ITEMS_QUERY }]}>
       {(removeFromCart, { data, loading, error }) => {
         if (data) {
           console.log(data)
         }
         return (
-          <button onClick={removeFromCart} disabled={loading}>
-            &times;
+          <button type="button" onClick={removeFromCart} disabled={loading} className={CSSclass}>
+            {children}
           </button>
         )
       }}
@@ -30,4 +30,8 @@ const RemoveFromCart = ({ cartItemId }) => (
 export default RemoveFromCart
 RemoveFromCart.propTypes = {
   cartItemId: PropTypes.string.isRequired,
+}
+
+RemoveFromCart.defaultProps = {
+  children: 'X',
 }

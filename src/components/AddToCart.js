@@ -18,14 +18,16 @@ const ADD_TO_CART_MUTATION = gql`
   }
 `
 
-const AddToCart = ({ pokemonOfferId, children, disabledButton }) => (
+const AddToCart = ({
+  pokemonOfferId, children, disabledButton, CSSclass, 
+}) => (
     <Mutation mutation={ADD_TO_CART_MUTATION} variables={{ id: pokemonOfferId }} refetchQueries={[{ query: CART_ITEMS_QUERY }]}>
       {(addToCart, { data, loading, error }) => {
         if (data) {
           console.log(data)
         }
         return (
-          <button type="button" onClick={addToCart} disabled={loading || disabledButton}>
+          <button type="button" className={CSSclass} onClick={addToCart} disabled={loading || disabledButton}>
             {children}
           </button>
         )
@@ -39,6 +41,7 @@ AddToCart.propTypes = {
   pokemonOfferId: PropTypes.string.isRequired,
   children: PropTypes.string,
   disabledButton: PropTypes.bool.isRequired,
+  CSSclass: PropTypes.string,
 }
 
 AddToCart.defaultProps = {

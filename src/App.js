@@ -4,7 +4,7 @@ import { ThemeProvider, createGlobalStyle } from 'styled-components'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { 
-  faTimes, faFilter, faBars, faChevronLeft, faChevronRight,
+  faTimes, faFilter, faBars, faChevronLeft, faChevronRight, faPlus, faMinus,
 } from '@fortawesome/free-solid-svg-icons'
 import { UserProvider } from './userContext'
 import { FilterProvider } from './filterContext'
@@ -25,7 +25,7 @@ import theme from './components/styles/theme'
 
 import Nav from './components/Nav'
 
-library.add(faTimes, faFilter, faBars, faChevronLeft, faChevronRight)
+library.add(faTimes, faFilter, faBars, faChevronLeft, faChevronRight, faPlus, faMinus)
 
 const GlobalStyle = createGlobalStyle`
   html {
