@@ -45,7 +45,6 @@ const Login = props => {
                       localStorage.setItem('token', data.data.login.token)
                       localStorage.setItem('userId', data.data.login.user.id)
                       setUserId(data.data.login.user.id)
-                      // document.cookie = `token=${data.data.login.token}`
                       props.history.push('/')
                     }
                   }}

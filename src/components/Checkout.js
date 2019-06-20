@@ -30,17 +30,15 @@ const Checkout = ({ buttonDisabled, totalPrice }) => (
             ]}
           
           >
-          {(orderPokemons, { loading, error }) => 
-            // let message
-            (
+          {(orderPokemons, { loading, error }) => (
               <Fragment>
                 <button type="button" onClick={orderPokemons} disabled={loading || loadingCredits || buttonDisabled || (userCredits && userCredits.balance < totalPrice)}>
                   Buy these shine pokemons!
                 </button>
                 {errorCredits && <p>{errorCredits.message}</p> }
-                {error && <p> {alert(error.message)}</p>}
+                {error && <p> {error.message}</p>}
               </Fragment>
-            )
+          )
           }
           </Mutation>
         )

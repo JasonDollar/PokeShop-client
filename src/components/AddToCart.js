@@ -24,7 +24,7 @@ const AddToCart = ({
     <Mutation mutation={ADD_TO_CART_MUTATION} variables={{ id: pokemonOfferId }} refetchQueries={[{ query: CART_ITEMS_QUERY }]}>
       {(addToCart, { data, loading, error }) => {
         if (data) {
-          console.log(data)
+          // console.log(data)
         }
         return (
           <button type="button" className={CSSclass} onClick={addToCart} disabled={loading || disabledButton}>
@@ -46,4 +46,5 @@ AddToCart.propTypes = {
 
 AddToCart.defaultProps = {
   children: 'Add to Cart',
+  CSSclass: '',
 }

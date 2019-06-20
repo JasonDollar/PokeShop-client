@@ -1,7 +1,6 @@
 import React from 'react'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
-// import { Link } from 'react-router-dom'
 import PokemonListItem from './PokemonListItem'
 import WidthContainer from './styles/WidthContainer'
 import GridList from './styles/GridList'
@@ -24,7 +23,6 @@ const PokemonList = () => (
         }) => {
           if (loading) return <p>Loading...</p>
           if (error) return <p>{error.message}</p>
-          console.log(data)
           return (
             <WidthContainer>
               <GridList>

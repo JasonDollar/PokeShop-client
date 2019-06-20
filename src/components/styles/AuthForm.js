@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const AuthForm = styled.div`
 
-  background: linear-gradient(to bottom right, rgba(0,0,0,.7), rgba(0,0,0,.3)), url('/images/bg_small.jpg');
+  background: linear-gradient(to bottom right, rgba(0,0,0,.7), rgba(0,0,0,.3));
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -13,15 +13,11 @@ const AuthForm = styled.div`
   min-height: 100vh;
   width: 100%;
   @media (min-height: 678px) {
-    background: linear-gradient(to bottom right, rgba(0,0,0,.7), rgba(0,0,0,.3)), url('/images/bg_big.jpg');
+    background: linear-gradient(to bottom right, rgba(0,0,0,.7), rgba(0,0,0,.3));
     background-size: cover;
     background-repeat: no-repeat;
     background-position-x: 53%;
   }
-  /* @media (min-width: 576px) {
-    background-position: center;
-  } */
-
 
   .form {
     padding: 2rem;
@@ -60,10 +56,12 @@ const AuthForm = styled.div`
       justify-content: space-between;
     }
 
-    input {
+    input,
+    .input {
       width: 30rem;
       max-width: 100%;
       padding: 1rem;
+      border-radius: 5px;
     }
     
   }

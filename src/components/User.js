@@ -31,3 +31,7 @@ const User = props => (
 )
 
 export default User
+
+User.propTypes = {
+  children: PropTypes.element.isRequired,
+}

@@ -30,8 +30,11 @@ const RemoveFromCart = ({ cartItemId, children, CSSclass }) => (
 export default RemoveFromCart
 RemoveFromCart.propTypes = {
   cartItemId: PropTypes.string.isRequired,
+  CSSclass: PropTypes.string,
+  children: PropTypes.element,
 }
 
 RemoveFromCart.defaultProps = {
   children: 'X',
+  CSSclass: '',
 }

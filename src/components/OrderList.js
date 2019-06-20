@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import styled from 'styled-components'
@@ -72,26 +72,6 @@ const OrderItem = styled.li`
     margin: 1rem;
   }
 `
-
-// const SinglePokemonInfo = styled.li`
-//   display: flex;
-//   align-items: center;
-//   list-style: none;
-//   font-size: 2rem;
-//   .pokemonText {
-//     margin: 1rem 0;
-//   }
-//   .pokemonImage {
-//     width: 6rem;
-//     height: 6rem;
-//   }
-//   & p span.pokemonName {
-//     display: inline-block;
-//     &::first-letter {
-//       text-transform: uppercase;
-//     }
-//   }
-// `
 
 const OrderList = () => (
     <WidthContainer>

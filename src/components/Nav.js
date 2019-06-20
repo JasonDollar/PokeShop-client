@@ -95,7 +95,7 @@ const NavElement = styled(WidthContainer)`
 
 
 
-const Nav = (props) => {
+const Nav = props => {
   const [navOpen, toggleNavOpen] = useState(false)
   const {
     isFilterOpen, toggleFilter,
@@ -156,9 +156,6 @@ const Nav = (props) => {
         <NavList className={navOpen ? 'open' : ''} onClick={handleLinkClick} aria-expanded={navOpen}>
           <li>
             <NavLink to="/">Shop</NavLink>
-          </li>
-          <li>
-            <NavLink to="/pokedex">pokedex</NavLink>
           </li>
           <li>
             <NavLink to="/sell">Sell</NavLink>

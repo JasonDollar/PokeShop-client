@@ -48,8 +48,6 @@ const PokeTypeElement = styled.span`
 const PokeTypesContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  
-  /* margin: 1rem 0; */
 `
 
 const Form = styled.form`

@@ -38,13 +38,6 @@ const Sell = props => {
   const [pokemonNames, setPokemonNames] = useState([])
 
   const onChange = debounce(async (value, client) => {
-    console.log(value)
-    // if (name === '') {
-    //   setPokemonNames([])
-    //   return
-    // }
-    // setName(value)
-
     const res = await client.query({
       query: SEARCH_POKEMON_NAME,
       variables: { name: value },

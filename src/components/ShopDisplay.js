@@ -3,7 +3,6 @@ import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import qs from 'query-string'
 import OfferListItem from './OfferListItem'
-// import { CURRENT_USER_QUERY } from './User'
 import GridList from './styles/GridList'
 import WidthContainer from './styles/WidthContainer'
 import Pagination from './Pagination'
@@ -29,11 +28,10 @@ export const POKEMON_OFFERS_QUERY = gql`
   }
 `
 
-const ShopDisplay = (props) => {
-  // console.log(props.location.search)
+const ShopDisplay = props => {
 
   const {
-    minPrice, maxPrice, toggleFilter, pokemonTypes,
+    minPrice, maxPrice, pokemonTypes,
   } = useContext(FilterContext)
   const { page = 1 } = qs.parse(props.location.search)
   // console.log(page)
@@ -55,7 +53,7 @@ const ShopDisplay = (props) => {
       }) => {
         if (loading) return <p />
         if (error) return <p>{error.message}</p>
-        console.log(data.pokemonOffers.count)
+        
         const maxPage = Math.ceil(data.pokemonOffers.count / itemsPerPage)
         return (
           <WidthContainer>

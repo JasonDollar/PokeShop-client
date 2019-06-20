@@ -55,7 +55,7 @@ function App() {
       <UserProvider>
         <FilterProvider>
           <GlobalStyle />
-          <div className="App">
+          <div>
             <Nav />
             <Route path="/" exact component={Filter} />
             <Switch>

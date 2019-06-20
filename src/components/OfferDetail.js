@@ -27,7 +27,7 @@ const POKEMON_OFFER_QUERY = gql`
 
 const OfferDetail = props => {
   const { userId } = useContext(UserContext)
-  console.log(userId)
+  
   return (
     <Query query={POKEMON_OFFER_QUERY} variables={{ id: props.match.params.offerId }}>
       {({ data, loading, error }) => {

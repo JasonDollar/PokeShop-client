@@ -5,14 +5,13 @@ import WidthContainer from './styles/WidthContainer'
 import GridList from './styles/GridList'
 import UserInfo from './styles/UserInfo'
 
-const Me = props => (
+const Me = () => (
     <WidthContainer>
 
     <User>
       {({ data, loading, error }) => {
         if (loading) return <p>Loading...</p>
         if (error) return <p>{error.message}</p>
-        console.log(data)
         return (
           <UserInfo>
             <h2 className="user">{data.me.name}</h2>

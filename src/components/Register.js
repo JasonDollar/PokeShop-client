@@ -20,7 +20,7 @@ const CREATE_USER_MUTATION = gql`
 }
 `
 
-const Login = (props) => {
+const Login = props => {
   const [email, changeEmail] = useState('')
   const [password, changePassword] = useState('')
   const [name, changeName] = useState('')
