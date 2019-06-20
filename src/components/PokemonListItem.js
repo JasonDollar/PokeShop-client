@@ -19,6 +19,5 @@ PokemonListItem.propTypes = {
     id: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired,
   }).isRequired,
 }

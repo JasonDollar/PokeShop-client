@@ -4,6 +4,7 @@ import { Query } from 'react-apollo'
 // import { Link } from 'react-router-dom'
 import PokemonListItem from './PokemonListItem'
 import WidthContainer from './styles/WidthContainer'
+import GridList from './styles/GridList'
 
 const GET_POKEMONS = gql`
   query GET_POKEMONS($skip: Int!) {
@@ -26,13 +27,13 @@ const PokemonList = () => (
           console.log(data)
           return (
             <WidthContainer>
-              <ul>
+              <GridList>
                 {data.pokemons && data.pokemons.map(item => (
                   <li key={item.id}>
                     <PokemonListItem pokemon={item} />
                   </li>
                 ))}
-              </ul>
+              </GridList>
               <button
                 type="button"
                 onClick={() => {

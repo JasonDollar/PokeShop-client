@@ -17,7 +17,7 @@ const Me = props => (
           <UserInfo>
             <h2 className="user">{data.me.name}</h2>
             <h3 className="email">{data.me.email}</h3>
-            <p className="balance">You have {data.me.wallet.balance} CR in your wallet</p>
+            <p className="balance">You have {Intl.NumberFormat('de-DE').format(data.me.wallet.balance)} CR in your wallet</p>
             <p className="selling">You are selling:</p>
             <GridList>
               {data.me.offers.map(item => (

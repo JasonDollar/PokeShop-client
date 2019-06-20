@@ -4,6 +4,7 @@ import { Query } from 'react-apollo'
 // import { Link } from 'react-router-dom'
 import PokemonListItem from './PokemonListItem'
 import WidthContainer from './styles/WidthContainer'
+import GridList from './styles/GridList'
 
 const TYPE_POKEMONS = gql`
   query TYPE_POKEMONS($id: ID!) {
@@ -28,13 +29,13 @@ const TypeDetail = props => (
           return (
             <div>
               <h2>{data.pokeType.name}</h2>
-              <ul>
+              <GridList>
                 {data.pokeType.pokemon.map(item => (
                   <li key={item.id}>
                     <PokemonListItem pokemon={item} />
                   </li>
                 ))}
-              </ul>
+              </GridList>
             </div>
           )
         }}

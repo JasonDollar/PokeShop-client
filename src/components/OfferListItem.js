@@ -11,7 +11,7 @@ const ListItem = styled.li`
   align-items: center;
   
   &:hover {
-    background: yellow;
+    background: ${props => props.theme.colorWhiteGrey};
 
   }
   a {
