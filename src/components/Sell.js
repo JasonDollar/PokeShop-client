@@ -7,6 +7,7 @@ import Downshift from 'downshift'
 import { POKEMON_OFFERS_QUERY } from './ShopDisplay'
 import AuthForm from './styles/AuthForm'
 import { DropDown, DropDownItem } from './styles/Dropdown'
+import ActionButton from './styles/ActionButton'
 
 const SELL_POKEMON_MUTATION = gql`
   mutation SELL_POKEMON_MUTATION($name: String!, $price: Int!) {
@@ -130,7 +131,7 @@ const Sell = props => {
               </div>
               {error && <span className="errorMessage">{error.message}</span> }
 
-              <button type="submit" className="form__button" disabled={loading}>Sell</button>
+              <ActionButton type="submit" className="form_button_NOT" disabled={loading} wide>Sell</ActionButton>
             </form>
           </AuthForm>
       )}

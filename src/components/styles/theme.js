@@ -3,6 +3,7 @@ const theme = {
   colorLightGrey: '#aaa',
   colorWhiteGrey: '#ddd',
   primaryRed: '#c54242',
+  secondaryRed: '#bd7272',
 }
 
 export default theme

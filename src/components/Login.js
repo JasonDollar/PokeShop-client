@@ -2,9 +2,9 @@ import React, { useState, useContext } from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import { UserContext } from '../userContext'
-
 import AuthForm from './styles/AuthForm'
 import { CURRENT_USER_QUERY } from './User'
+import ActionButton from './styles/ActionButton'
 
 const LOGIN_MUTATION = gql`
   mutation login($email: String!, $password:String!) {
@@ -64,7 +64,7 @@ const Login = props => {
                   </div>
                   {error && <span className="errorMessage">{error.message}</span> }
 
-                  <button type="submit" className="form__button" disabled={loading}>Login</button>
+                  <ActionButton type="submit" disabled={loading} wide>Login</ActionButton>
                   {/* <div className="form__link--container">
                     <Link to="/signup" className="form__link">New User? Create an account</Link>
                     <Link to="/reset" className="form__link">Forgot your password?</Link>

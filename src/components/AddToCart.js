@@ -26,6 +26,7 @@ const AddToCart = ({
         if (data) {
           // console.log(data)
         }
+        console.log(children)
         return (
           <button type="button" className={CSSclass} onClick={addToCart} disabled={loading || disabledButton}>
             {children}
@@ -39,7 +40,7 @@ export default AddToCart
 
 AddToCart.propTypes = {
   pokemonOfferId: PropTypes.string.isRequired,
-  children: PropTypes.string,
+  children: PropTypes.any,
   disabledButton: PropTypes.bool.isRequired,
   CSSclass: PropTypes.string,
 }

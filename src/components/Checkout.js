@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import PropTypes from 'prop-types'
@@ -7,6 +7,7 @@ import styled from 'styled-components'
 import { CART_ITEMS_QUERY } from './Cart'
 import { USER_ORDERS_QUERY } from './OrderList'
 import ShowMyMoney, { USER_CREDITS_QUERY } from './ShowMyMoney'
+import ActionButton from './styles/ActionButton'
 
 const ORDER_POKEMONS_MUTATION = gql`
   mutation ORDER_POKEMONS_MUTATION {
@@ -21,15 +22,6 @@ const CheckoutContainer = styled.div`
   text-align: center;
 `
 
-const CheckoutButton = styled.button`
-  margin-top: 1rem;
-  border: 1px solid yellow;
-  border-radius: 100px;
-  background: ${props => props.theme.primaryRed};
-  color: white;
-  font-size: 2rem;
-  padding: 1rem 2rem;
-`
 
 const Checkout = ({ buttonDisabled, totalPrice }) => (
     <ShowMyMoney>
@@ -51,9 +43,9 @@ const Checkout = ({ buttonDisabled, totalPrice }) => (
             }
             return (
               <CheckoutContainer>
-                <CheckoutButton type="button" onClick={orderPokemons} disabled={loading || loadingCredits || buttonDisabled || (userCredits && userCredits.balance < totalPrice)}>
+                <ActionButton type="button" onClick={orderPokemons} disabled={loading || loadingCredits || buttonDisabled || (userCredits && userCredits.balance < totalPrice)}>
                   Buy these shiny pokemons!
-                </CheckoutButton>
+                </ActionButton>
                 {errorCredits && <p>{errorCredits.message}</p> }
                 {error && <p> {error.message}</p>}
                 

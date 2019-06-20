@@ -3,6 +3,7 @@ import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import { CURRENT_USER_QUERY } from './User'
 import { UserContext } from '../userContext'
+import ActionButton from './styles/ActionButton'
 
 import AuthForm from './styles/AuthForm'
 
@@ -65,7 +66,7 @@ const Login = props => {
               </div>
               {error && <span className="errorMessage">{error.message}</span> }
 
-              <button type="submit" className="form__button" disabled={loading}>Register</button>
+              <ActionButton type="submit" disabled={loading} wide>Register</ActionButton>
               {/* <div className="form__link--container">
                 <Link to="/signup" className="form__link">New User? Create an account</Link>
                 <Link to="/reset" className="form__link">Forgot your password?</Link>

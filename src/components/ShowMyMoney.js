@@ -21,5 +21,5 @@ const ShowMyMoney = props => (
 export default ShowMyMoney
 
 ShowMyMoney.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.func.isRequired,
 }

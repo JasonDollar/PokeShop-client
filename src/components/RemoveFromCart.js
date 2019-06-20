@@ -16,7 +16,7 @@ const RemoveFromCart = ({ cartItemId, children, CSSclass }) => (
     <Mutation mutation={REMOVE_FROM_CART_MUTATION} variables={{ id: cartItemId }} refetchQueries={[{ query: CART_ITEMS_QUERY }]}>
       {(removeFromCart, { data, loading, error }) => {
         if (data) {
-          console.log(data)
+          // console.log(data)
         }
         return (
           <button type="button" onClick={removeFromCart} disabled={loading} className={CSSclass}>
