@@ -96,6 +96,7 @@ const Form = styled.form`
     border-radius: 5px;
     background: white;
     padding: 1rem 3rem;
+    font-size: 2rem;
   }
 `
 
@@ -203,7 +204,7 @@ const Filter = () => {
                 id: 'pokeTypeDropdown',
                 className: 'inputWide',
                 value: typeValue,
-                onChange: e => setTypeValue(e.target.value),
+                onChange: e => setTypeValue(e.target.value.toLowerCase()),
               })}
               />
               <DropDown {...getMenuProps()} isOpen={isOpen || typeValue.length > 0}>

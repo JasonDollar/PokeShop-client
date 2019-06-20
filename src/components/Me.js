@@ -1,10 +1,9 @@
 import React from 'react'
-
 import OfferListItem from './OfferListItem'
 import User from './User'
-import OrderList from './OrderList'
 import WidthContainer from './styles/WidthContainer'
 import GridList from './styles/GridList'
+import UserInfo from './styles/UserInfo'
 
 const Me = props => (
     <WidthContainer>
@@ -15,19 +14,17 @@ const Me = props => (
         if (error) return <p>{error.message}</p>
         console.log(data)
         return (
-          <div>
-            <h2>{data.me.name}</h2>
-            <h3>{data.me.email}</h3>
-            <p>Balance: {data.me.wallet.balance}</p>
-              Selling:
+          <UserInfo>
+            <h2 className="user">{data.me.name}</h2>
+            <h3 className="email">{data.me.email}</h3>
+            <p className="balance">You have {data.me.wallet.balance} CR in your wallet</p>
+            <p className="selling">You are selling:</p>
             <GridList>
               {data.me.offers.map(item => (
                 <OfferListItem key={item.id} pokemonOffer={item} />
               ))}
             </GridList>
-            Orders: 
-            <OrderList />
-          </div>
+          </UserInfo>
         )
       }}
     </User>

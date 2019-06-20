@@ -28,6 +28,11 @@ export const CART_ITEMS_QUERY = gql`
   }
 `
 
+const EmptyCart = styled.h3`
+  font-size: 4rem;
+  text-align: center;
+`
+
 const CartContainer = styled.div`
 margin: 1rem 2rem;
   ul {
@@ -90,6 +95,11 @@ const Cart = props => (
       <Query query={CART_ITEMS_QUERY} fetchPolicy="cache-and-network">
         {({ data, loading, error }) => {
           if (loading) return <p>Loading...</p>
+          if (error) return <p>{error.message}</p>
+
+          if (data.userCart.length <= 0) {
+            return <EmptyCart>Your cart is empty!</EmptyCart>
+          }
           let totalPrice = 0
           if (data && data.userCart) {
             totalPrice = data.userCart.reduce((acc, item) => acc + (item.pokemon.price * item.quantity), 0)
