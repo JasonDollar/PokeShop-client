@@ -102,7 +102,7 @@ const OrderList = () => (
                   </ul>
                   <p className="total">Price: {order.price}CR</p>
                 </OrderItem>
-              ))}
+              )).reverse()}
             </OrdersUl>
         )
       }}
