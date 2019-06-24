@@ -26,9 +26,8 @@ const AddToCart = ({
         if (data) {
           // console.log(data)
         }
-        console.log(children)
         return (
-          <button type="button" className={CSSclass} onClick={addToCart} disabled={loading || disabledButton}>
+          <button type="button" className={`${CSSclass} ${loading && 'loading'}`} onClick={addToCart} disabled={loading || disabledButton}>
             {children}
           </button>
         )

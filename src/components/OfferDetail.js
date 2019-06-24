@@ -32,7 +32,7 @@ const DetailContainer = styled(WidthContainer)`
     height: auto;
     margin-right: 2.5rem;
     justify-self: end;
-    transform: scale(1.4);
+    transform: scale(1.35);
     @media (min-width: 576px) {
       
       width: 30%;
@@ -53,18 +53,22 @@ const DetailContainer = styled(WidthContainer)`
     margin: 1.5rem 0;
     grid-column: 1 /-1;
     font-size: 2rem;
+    padding: 0 1rem;
     @media (min-width: 576px) {
       grid-column: 1 / 2;
       justify-self: end;
       margin-right: 2rem;
+      margin: 1.5rem 0;
     }
   }
   .seller {
     margin: 1.5rem 0;
     grid-column: 1 /-1;
     font-size: 2rem;
+    padding: 0 1rem;
     @media (min-width: 576px) {
       grid-column: 2 / 3;
+      margin: 1.5rem 0;
     }
     & .sellerLink {
       text-decoration: none;
@@ -79,6 +83,12 @@ const DetailContainer = styled(WidthContainer)`
       color: ${props => props.theme.colorLightGrey};
     }
   }
+  .description {
+    grid-column: 1 /-1;
+    text-align: center;
+    font-size: 2rem;
+    font-style: italic;
+  }
   .addToCart {
     display: block;
     grid-column: 1 /-1;
@@ -86,12 +96,15 @@ const DetailContainer = styled(WidthContainer)`
     margin-top: 2.5rem;
     border: 1px solid ${props => props.theme.primaryRed};
     border-radius: 100px;
-    background: ${props => (props.disabled ? props.theme.secondaryRed : props.theme.primaryRed)};
+    background: ${props => props.theme.primaryRed};
     color: white;
     font-size: 2.2rem;
     padding: 1rem 2rem;
     cursor: pointer;
     width: ${props => (props.wide ? '100%' : 'auto')};
+    &.loading {
+      background: ${props => props.theme.secondaryRed};
+    }
   }
 `
 
@@ -135,11 +148,7 @@ const OfferDetail = props => {
 
               <img className="pokeImage" src={data.pokemonOffer.pokemon.image} alt={data.pokemonOffer.name} />
               <p className="price"><span>Price: </span> <strong>{data.pokemonOffer.price} CR</strong></p>
-              {
-                data.pokemonOffer.description && (
-                  <p>{data.pokemonOffer.description}</p>
-                )
-              }
+              
               <p className="type">Pokemon type: {types.join(', ')}</p>
               <p className="seller">
                 <span>Seller: </span> 
@@ -147,6 +156,11 @@ const OfferDetail = props => {
                   {data.pokemonOffer.seller.name}{data.pokemonOffer.seller.id === userId ? <span className="curentUser"> It's you!</span> : ''}
                 </Link>
               </p>
+              {
+                data.pokemonOffer.description && (
+                  <p className="description">{data.pokemonOffer.description}</p>
+                )
+              }
               {data.pokemonOffer.seller.id !== userId && (
 
                 <AddToCart 

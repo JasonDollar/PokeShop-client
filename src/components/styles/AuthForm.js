@@ -23,7 +23,7 @@ const AuthForm = styled.div`
     padding: 2rem;
     background-color: white;
     border-radius: 8px;
-    transform: translateY(-5rem);
+    transform: translateY(-4rem);
     @media (max-width: 576px) {
     width: 80%;
     }
@@ -64,6 +64,7 @@ const AuthForm = styled.div`
       padding: 1rem;
       border-radius: 5px;
       font-family: inherit;
+      border: 1px solid ${props => props.theme.secondaryRed};
     }
     
   }
