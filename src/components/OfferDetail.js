@@ -9,7 +9,7 @@ import WidthContainer from './styles/WidthContainer'
 import ActionButton from './styles/ActionButton'
 
 const DetailContainer = styled(WidthContainer)`
-  margin: 1rem;
+  /* margin: 1rem; */
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 1.5rem;
