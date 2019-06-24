@@ -86,7 +86,8 @@ const NavElement = styled(WidthContainer)`
   align-items: center;
   .filterButton {
     margin-right: auto;
-    margin-left: 2rem;
+    /* margin-left: 2rem; */
+    padding: .5rem 2rem;
   }
   .menuButton {
     margin-right: 2rem;
@@ -111,7 +112,7 @@ const Nav = props => {
     localStorage.removeItem('token')
     setUserId('')
   }
-
+  console.log(props.history)
   const publicLinks = (
     <Fragment>
       <li>
@@ -148,6 +149,11 @@ const Nav = props => {
         {props.location.pathname === '/' && (
           <NavButton className="filterButton" type="button" onClick={() => toggleFilter(true)}>
             <FontAwesomeIcon icon="filter" />
+          </NavButton>
+        )}
+        {props.location.pathname !== '/' && (
+          <NavButton className="filterButton" type="button" onClick={() => props.history.goBack()}>
+            <FontAwesomeIcon icon="chevron-left" />
           </NavButton>
         )}
         <NavButton type="button" className="onlyMobile menuButton" onClick={() => toggleNavOpen(!navOpen)}>

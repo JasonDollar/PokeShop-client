@@ -4,7 +4,7 @@ const ActionButton = styled.button`
   display: block;
   margin: 0 auto;
   margin-top: 1rem;
-  border: 1px solid yellow;
+  border: 1px solid ${props => props.theme.primaryRed};
   border-radius: 100px;
   background: ${props => (props.disabled ? props.theme.secondaryRed : props.theme.primaryRed)};
   color: white;
