@@ -8,6 +8,7 @@ import AddToCart from './AddToCart'
 import Checkout from './Checkout'
 import WidthContainer from './styles/WidthContainer'
 import SinglePokemonInfo from './styles/SinglePokemonInfo'
+import Loading from './Loading'
 
 export const CART_ITEMS_QUERY = gql`
   query CART_ITEMS_QUERY {
@@ -92,7 +93,7 @@ const Cart = () => (
 
     <Query query={CART_ITEMS_QUERY} fetchPolicy="cache-and-network">
       {({ data, loading, error }) => {
-        if (loading) return <p>Loading...</p>
+        if (loading) return <Loading />
         if (error) return <p>{error.message}</p>
 
         if (data.userCart.length <= 0) {

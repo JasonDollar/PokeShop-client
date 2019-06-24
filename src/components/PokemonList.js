@@ -4,6 +4,7 @@ import { Query } from 'react-apollo'
 import PokemonListItem from './PokemonListItem'
 import WidthContainer from './styles/WidthContainer'
 import GridList from './styles/GridList'
+import Loading from './Loading'
 
 const GET_POKEMONS = gql`
   query GET_POKEMONS($skip: Int!) {
@@ -21,7 +22,7 @@ const PokemonList = () => (
         {({
           data, error, loading, fetchMore,
         }) => {
-          if (loading) return <p>Loading...</p>
+          if (loading) return <Loading />
           if (error) return <p>{error.message}</p>
           return (
             <WidthContainer>

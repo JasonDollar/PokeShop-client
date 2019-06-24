@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import { UserContext } from '../userContext'
 import AddToCart from './AddToCart'
 import WidthContainer from './styles/WidthContainer'
-import ActionButton from './styles/ActionButton'
+import Loading from './Loading'
 
 const DetailContainer = styled(WidthContainer)`
   /* margin: 1rem; */
@@ -102,6 +102,7 @@ const POKEMON_OFFER_QUERY = gql`
       id
       name
       price
+      description
       pokemon {
         id
         image
@@ -120,10 +121,9 @@ const OfferDetail = props => {
   return (
     <Query query={POKEMON_OFFER_QUERY} variables={{ id: props.match.params.offerId }}>
       {({ data, loading, error }) => {
-        if (loading) return <p>Loading...</p>
+        if (loading) return <Loading />
         if (error) return <p>{error.message}</p>
         const types = data.pokemonOffer.pokemon.pokeType.map(item => item[0].toUpperCase() + item.substring(1, item.length))
-        console.log(types)
 
         return (
           <DetailContainer>
@@ -135,6 +135,11 @@ const OfferDetail = props => {
 
               <img className="pokeImage" src={data.pokemonOffer.pokemon.image} alt={data.pokemonOffer.name} />
               <p className="price"><span>Price: </span> <strong>{data.pokemonOffer.price} CR</strong></p>
+              {
+                data.pokemonOffer.description && (
+                  <p>{data.pokemonOffer.description}</p>
+                )
+              }
               <p className="type">Pokemon type: {types.join(', ')}</p>
               <p className="seller">
                 <span>Seller: </span> 

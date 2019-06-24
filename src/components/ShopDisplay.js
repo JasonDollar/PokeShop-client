@@ -8,6 +8,7 @@ import WidthContainer from './styles/WidthContainer'
 import Pagination from './Pagination'
 import { itemsPerPage } from '../config'
 import { FilterContext } from '../filterContext'
+import Loading from './Loading'
 
 
 export const POKEMON_OFFERS_QUERY = gql`
@@ -51,7 +52,7 @@ const ShopDisplay = props => {
       {({
         data, loading, error,
       }) => {
-        if (loading) return <p />
+        if (loading) return <Loading />
         if (error) return <p>{error.message}</p>
         
         const maxPage = Math.ceil(data.pokemonOffers.count / itemsPerPage)

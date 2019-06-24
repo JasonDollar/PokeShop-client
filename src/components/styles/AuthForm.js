@@ -57,11 +57,13 @@ const AuthForm = styled.div`
     }
 
     input,
+    textarea,
     .input {
       width: 30rem;
       max-width: 100%;
       padding: 1rem;
       border-radius: 5px;
+      font-family: inherit;
     }
     
   }

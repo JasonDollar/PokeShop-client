@@ -112,7 +112,6 @@ const Nav = props => {
     localStorage.removeItem('token')
     setUserId('')
   }
-  console.log(props.history)
   const publicLinks = (
     <Fragment>
       <li>

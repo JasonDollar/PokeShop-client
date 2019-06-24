@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { format } from 'date-fns'
 import WidthContainer from './styles/WidthContainer'
 import SinglePokemonInfo from './styles/SinglePokemonInfo'
+import Loading from './Loading'
 
 export const USER_ORDERS_QUERY = gql`
   query USER_ORDERS_QUERY {
@@ -77,7 +78,7 @@ const OrderList = () => (
     <WidthContainer>
     <Query query={USER_ORDERS_QUERY} fetchPolicy="cache-and-network">
       {({ data, loading, error }) => {
-        if (loading) return (<p>Loading...</p>)
+        if (loading) return <Loading />
         if (error) return (<p>{error.message}</p>)
         
         if (data.orders.length <= 0) return <p>No orders found</p>

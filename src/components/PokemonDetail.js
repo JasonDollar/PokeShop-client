@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import WidthContainer from './styles/WidthContainer'
+import Loading from './Loading'
 
 const SINGLE_POKEMON = gql`
   query SINGLE_POKEMON($id: ID!) {
@@ -23,7 +24,7 @@ const PokemonDetail = props => (
     <WidthContainer>
       <Query query={SINGLE_POKEMON} variables={{ id: props.match.params.pokemonId }}>
         {({ data, loading, error }) => {
-          if (loading) return <p>Loading...</p>
+          if (loading) return <Loading />
           if (error) {
             return <p>Error...</p>
           }

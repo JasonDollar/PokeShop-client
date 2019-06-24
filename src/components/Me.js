@@ -4,13 +4,14 @@ import User from './User'
 import WidthContainer from './styles/WidthContainer'
 import GridList from './styles/GridList'
 import UserInfo from './styles/UserInfo'
+import Loading from './Loading'
 
 const Me = () => (
     <WidthContainer>
 
     <User>
       {({ data, loading, error }) => {
-        if (loading) return <p>Loading...</p>
+        if (loading) return <Loading />
         if (error) return <p>{error.message}</p>
         return (
           <UserInfo>

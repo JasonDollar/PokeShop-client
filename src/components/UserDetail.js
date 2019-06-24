@@ -7,6 +7,8 @@ import WidthContainer from './styles/WidthContainer'
 import GridList from './styles/GridList'
 import UserInfo from './styles/UserInfo'
 import { UserContext } from '../userContext'
+import Loading from './Loading'
+
 
 const USER_DETAIL_QUERY = gql`
   query USER_DETAIL_QUERY($userId: ID!) {
@@ -35,7 +37,7 @@ const UserDetail = props => {
   return (
     <Query query={USER_DETAIL_QUERY} variables={{ userId: props.match.params.userId }}>
       {({ data, loading, error }) => {
-        if (loading) return <p>Loading...</p>
+        if (loading) return <Loading />
         if (error) return <p>{error.message}</p>
 
         return (

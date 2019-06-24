@@ -10,8 +10,8 @@ import { DropDown, DropDownItem } from './styles/Dropdown'
 import ActionButton from './styles/ActionButton'
 
 const SELL_POKEMON_MUTATION = gql`
-  mutation SELL_POKEMON_MUTATION($name: String!, $price: Int!) {
-    sellPokemon(data: {name: $name, price: $price}) {
+  mutation SELL_POKEMON_MUTATION($name: String!, $price: Int!, $description: String) {
+    sellPokemon(data: {name: $name, price: $price, description: $description}) {
       id
       name
       price
@@ -36,6 +36,7 @@ const SEARCH_POKEMON_NAME = gql`
 const Sell = props => {
   const [name, setName] = useState('')
   const [price, setPrice] = useState(0)
+  const [description, setDescription] = useState('')
   const [pokemonNames, setPokemonNames] = useState([])
 
   const onChange = debounce(async (value, client) => {
@@ -48,7 +49,7 @@ const Sell = props => {
   }, 350)
 
   return (
-    <Mutation mutation={SELL_POKEMON_MUTATION} variables={{ name: name.toLowerCase(), price: parseInt(price) }} refetchQueries={[{ query: POKEMON_OFFERS_QUERY }]}>
+    <Mutation mutation={SELL_POKEMON_MUTATION} variables={{ name: name.toLowerCase(), price: parseInt(price), description }} refetchQueries={[{ query: POKEMON_OFFERS_QUERY }]}>
       {(sellPokemon, { 
         data, loading, error, ...rest
       }) => (
@@ -128,6 +129,10 @@ const Sell = props => {
               <div className="inputGroup">
                 <label htmlFor="price">Price:</label>
                 <input type="number" id="price" max={999999} value={price} onChange={e => setPrice(e.target.value)} />
+              </div>
+              <div className="inputGroup">
+                <label htmlFor="description">Description:</label>
+                <textarea name="description" id="description" value={description} onChange={e => setDescription(e.target.value)} />
               </div>
               {error && <span className="errorMessage">{error.message}</span> }
 
