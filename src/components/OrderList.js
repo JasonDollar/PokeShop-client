@@ -6,6 +6,7 @@ import { format } from 'date-fns'
 import WidthContainer from './styles/WidthContainer'
 import SinglePokemonInfo from './styles/SinglePokemonInfo'
 import Loading from './Loading'
+import { formatBigNumber } from '../utils'
 
 export const USER_ORDERS_QUERY = gql`
   query USER_ORDERS_QUERY {
@@ -96,12 +97,12 @@ const OrderList = () => (
                       <SinglePokemonInfo key={item.id}>
                         <img src={item.pokemon.image} alt={item.pokemon.name + ' image'} className="pokemonImage" />
                         <p className="pokemonText">
-                          <span className="pokemonName">{item.pokemon.name}</span> x{item.quantity} - <strong>{item.price}CR</strong>
+                          <span className="pokemonName">{item.pokemon.name}</span> x{item.quantity} - <strong>{formatBigNumber(item.price)}CR</strong>
                         </p>
                       </SinglePokemonInfo>
                     ))}
                   </ul>
-                  <p className="total">Price: {order.price}CR</p>
+                  <p className="total">Price: {formatBigNumber(order.price)}CR</p>
                 </OrderItem>
               )).reverse()}
             </OrdersUl>

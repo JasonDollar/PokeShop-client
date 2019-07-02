@@ -15,3 +15,5 @@ export const checkTokenValidity = () => {
   return token
   
 }
+
+export const formatBigNumber = number => Intl.NumberFormat('de-DE').format(number)

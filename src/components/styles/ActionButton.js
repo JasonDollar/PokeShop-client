@@ -12,6 +12,10 @@ const ActionButton = styled.button`
   padding: 1rem 2rem;
   cursor: pointer;
   width: ${props => (props.wide ? '100%' : 'auto')};
+  &[disabled] {
+    background: ${props => props.theme.secondaryRed};
+    border: ${props => props.theme.secondaryRed};
+  }
 `
 
 export default ActionButton

@@ -7,6 +7,7 @@ import { UserContext } from '../userContext'
 import AddToCart from './AddToCart'
 import WidthContainer from './styles/WidthContainer'
 import Loading from './Loading'
+import { formatBigNumber } from '../utils'
 
 const DetailContainer = styled(WidthContainer)`
   /* margin: 1rem; */
@@ -105,6 +106,10 @@ const DetailContainer = styled(WidthContainer)`
     &.loading {
       background: ${props => props.theme.secondaryRed};
     }
+    &[disabled] {
+      background: ${props => props.theme.secondaryRed};
+      border: ${props => props.theme.secondaryRed};
+    }
   }
 `
 
@@ -147,7 +152,7 @@ const OfferDetail = props => {
               </h2>
 
               <img className="pokeImage" src={data.pokemonOffer.pokemon.image} alt={data.pokemonOffer.name} />
-              <p className="price"><span>Price: </span> <strong>{data.pokemonOffer.price} CR</strong></p>
+              <p className="price"><span>Price: </span> <strong>{formatBigNumber(data.pokemonOffer.price)} CR</strong></p>
               
               <p className="type">Pokemon type: {types.join(', ')}</p>
               <p className="seller">
@@ -165,7 +170,7 @@ const OfferDetail = props => {
 
                 <AddToCart 
                   pokemonOfferId={data.pokemonOffer.id} 
-                  disabledButton={data.pokemonOffer.seller.id === userId}
+                  disabledButton={data.pokemonOffer.seller.id === userId || !userId}
                   CSSclass="addToCart"
                 >
                   Add to cart
