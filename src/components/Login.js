@@ -23,6 +23,10 @@ const Login = props => {
   const [email, changeEmail] = useState('')
   const [password, changePassword] = useState('')
   const { setUserId } = useContext(UserContext)
+  const usePrevAccount = () => {
+    changeEmail('qwe@qwe.qwe')
+    changePassword('qweqwe')
+  }
 
   return (
 
@@ -63,7 +67,7 @@ const Login = props => {
                     <input type="password" id="password" value={password} onChange={e => changePassword(e.target.value)} />
                   </div>
                   {error && <span className="errorMessage">{error.message}</span> }
-
+                  <button className="previewButton" type="button" onClick={usePrevAccount}>Use Preview Account</button>
                   <ActionButton type="submit" disabled={loading} wide>Login</ActionButton>
                   {/* <div className="form__link--container">
                     <Link to="/signup" className="form__link">New User? Create an account</Link>

@@ -114,6 +114,22 @@ const AuthForm = styled.div`
     border: none;
     color: black;
   }
+
+  .previewButton {
+    /* text-align: center; */
+    display: block;
+    margin: 0 auto;
+    padding: .2rem .5rem;
+    font-size: 1.8rem;
+    font-family: inherit;
+    border: 1px solid transparent;
+    background: none;
+    cursor: pointer;
+    transition: border .1s;
+    &:hover {
+      border-bottom: 1px solid ${props => props.theme.secondaryRed};
+    }
+  }
   
 `
 
