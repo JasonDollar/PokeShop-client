@@ -1,13 +1,14 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import { Redirect } from 'react-router-dom'
 import { UserContext } from '../userContext'
+import UserTableRow from './UserTableRow'
 import WidthContainer from './styles/WidthContainer'
 import Loading from './Loading'
 import UsersTable from './styles/UsersTable'
 
-const USERS_ADMIN_QUERY = gql`
+export const USERS_ADMIN_QUERY = gql`
   query USERS_ADMIN_QUERY {
     users {
       id
@@ -18,17 +19,7 @@ const USERS_ADMIN_QUERY = gql`
   }
 `
 
-const UserRows = user => (
-  <tr>
-    <td>{user.user.id}</td>
-    <td>{user.user.name}</td>
-    <td>{user.user.email}</td>
-    <td>{user.user.role}</td>
-    <td>
-      <button>placeholder</button>
-    </td>
-  </tr>
-)
+
 
 const AdminPanel = () => {
   const { userId } = useContext(UserContext)
@@ -49,11 +40,13 @@ const AdminPanel = () => {
                     <th>Name</th>
                     <th>Email</th>
                     <th>Role</th>
-                    <th>🔥🔥🔥</th>
+                    <th>
+                      <span role="img" aria-label="Actions">🔥🔥🔥</span>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {data.users.map(item => <UserRows key={item.id} user={item} />)}
+                  {data.users.map(item => <UserTableRow key={item.id} user={item} />)}
                 </tbody>
               </UsersTable> 
 
