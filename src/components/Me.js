@@ -17,6 +17,7 @@ const Me = () => (
           <UserInfo>
             <h2 className="user">{data.me.name}</h2>
             <h3 className="email">{data.me.email}</h3>
+            <p>{data.me.role}</p>
             <p className="balance">You have {Intl.NumberFormat('de-DE').format(data.me.wallet.balance)} CR in your wallet</p>
             <p className="selling">You are selling:</p>
             <GridList>

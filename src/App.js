@@ -21,6 +21,7 @@ import Sell from './components/Sell'
 import Cart from './components/Cart'
 import OrderList from './components/OrderList'
 import Filter from './components/Filter'
+import AdminPanel from './components/AdminPanel'
 import theme from './components/styles/theme'
 
 import Nav from './components/Nav'
@@ -71,6 +72,7 @@ function App() {
               <Route path="/register" component={Register} />
               <Route path="/cart" component={Cart} />
               <Route path="/orders" component={OrderList} />
+              <Route path="/admin" component={AdminPanel} />
             </Switch>
           </div>
         </FilterProvider>
