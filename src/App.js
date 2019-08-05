@@ -22,6 +22,7 @@ import Cart from './components/Cart'
 import OrderList from './components/OrderList'
 import Filter from './components/Filter'
 import AdminPanel from './components/AdminPanel'
+import ResetPassword from './com./components/ResetPassword
 import theme from './components/styles/theme'
 
 import Nav from './components/Nav'
@@ -72,6 +73,7 @@ function App() {
               <Route path="/register" component={Register} />
               <Route path="/cart" component={Cart} />
               <Route path="/orders" component={OrderList} />
+              <Route path="/resetPassword" component={ResetPassword} />
               <Route path="/admin" component={AdminPanel} />
             </Switch>
           </div>
