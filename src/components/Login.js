@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
+import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { UserContext } from '../userContext'
 import AuthForm from './styles/AuthForm'
 import { CURRENT_USER_QUERY } from './User'
@@ -68,6 +70,10 @@ const Login = props => {
                   </div>
                   {error && <span className="errorMessage">{error.message}</span> }
                   <button className="previewButton" type="button" onClick={usePrevAccount}>Use Preview Account</button>
+                  <Link to="/resetPassword" className="resetLink">
+                    Reset password
+                    <FontAwesomeIcon icon="chevron-right" />
+                  </Link>
                   <ActionButton type="submit" disabled={loading} wide>Login</ActionButton>
                   {/* <div className="form__link--container">
                     <Link to="/signup" className="form__link">New User? Create an account</Link>

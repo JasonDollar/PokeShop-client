@@ -22,7 +22,7 @@ import Cart from './components/Cart'
 import OrderList from './components/OrderList'
 import Filter from './components/Filter'
 import AdminPanel from './components/AdminPanel'
-import ResetPassword from './com./components/ResetPassword
+import ResetPassword from './components/ResetPassword'
 import theme from './components/styles/theme'
 
 import Nav from './components/Nav'

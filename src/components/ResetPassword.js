@@ -4,6 +4,8 @@ import gql from 'graphql-tag'
 import qs from 'query-string'
 import { Redirect } from 'react-router-dom'
 import { UserContext } from '../userContext'
+import AuthForm from './styles/AuthForm'
+import ActionButton from './styles/ActionButton'
 
 const CREATE_RESET_TOKEN = gql`
   mutation CREATE_RESET_TOKEN ($email: String!) {
@@ -48,7 +50,10 @@ const ResetPasswordStart = (props) => {
     return (
       <Mutation mutation={CREATE_RESET_TOKEN} variables={{ email: resetEmail }}>
         {(createReset, { data, loading, error }) => (
-            <form onSubmit={async e => {
+          <AuthForm>
+            <form
+className="form"
+onSubmit={async e => {
               e.preventDefault()
               if (resetEmail.length <= 0) {
                 setValidationError('Please provide an email!')
@@ -58,12 +63,18 @@ const ResetPasswordStart = (props) => {
               const res = await createReset()
             }}
             >
-              <label htmlFor="resetEmailInput">Your email: </label>
-              <input type="email" id="resetEmailInput" value={resetEmail} onChange={e => setResetEmail(e.target.value)} />
-              <button type="submit">Reset</button>
+              <h2 className="form__name">Reset</h2>
+              <div className="inputGroup">
+
+                <label htmlFor="resetEmailInput">Your email: </label>
+                <input type="email" id="resetEmailInput" value={resetEmail} onChange={e => setResetEmail(e.target.value)} />
+              </div>
+              <ActionButton type="submit" disabled={loading} wide>Reset</ActionButton>
               {data && <p>{data.createResetToken.message}</p>}
-              {validationError && <p>{validationError}</p>}
+              {validationError && <p className="errorMessage">{validationError}</p>}
             </form>
+
+          </AuthForm>
         )}
       </Mutation>
     )
@@ -72,13 +83,16 @@ const ResetPasswordStart = (props) => {
   return (
     <Mutation mutation={RESET_PASSWORD} variables={{ resetToken, password, confirmPassword }}>
       {(resetPass, { loading, error }) => (
-          <form onSubmit={async e => {
+        <AuthForm>
+          <form
+className="form"
+onSubmit={async e => {
             e.preventDefault()
             if (password !== confirmPassword) {
               setValidationError('Your password must match!')
               return
             }
-            if (password.length <= 6 || confirmPassword.length <= 6) {
+            if (password.length < 6 || confirmPassword.length < 6) {
               setValidationError('Your password is too short!')
               return
             }
@@ -93,14 +107,22 @@ const ResetPasswordStart = (props) => {
             }
           }}
           >
-            <label htmlFor="password1">Password: </label>
-            <input type="password" id="password1" value={password} onChange={e => setPassword(e.target.value)} />
-            <label htmlFor="password2">Password: </label>
-            <input type="password" id="password2" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
-            <button type="submit">Change Password</button>
-            {error && <p>{error.message}</p>}
-            {validationError && <p>{validationError}</p>}
+            <h2 className="form__name">Reset</h2>
+            <div className="inputGroup">
+              <label htmlFor="password1">Password: </label>
+              <input type="password" id="password1" value={password} onChange={e => setPassword(e.target.value)} />
+            </div>
+            <div className="inputGroup">
+              <label htmlFor="password2">Confirm password: </label>
+              <input type="password" id="password2" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
+
+            </div>
+            <ActionButton type="submit" disabled={loading} wide>Change Password</ActionButton>
+            {error && <p className="errorMessage">{error.message}</p>}
+            {validationError && <p className="errorMessage">{validationError}</p>}
           </form>
+
+        </AuthForm>
       )}
     </Mutation>
   )

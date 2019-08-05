@@ -89,20 +89,22 @@ const AuthForm = styled.div`
     margin: 0 auto;
     margin-top: 1rem;
     padding-bottom: .3rem;
-    color :${props => props.theme.fontColorGrey};
+    color :${props => props.theme.colorGrey};
     text-decoration: none;
     text-align: center;
     border-bottom: 1px solid transparent; 
   }
   .form__link:hover {
-    border-bottom: 1px solid ${props => props.theme.fontColorGrey};
+    border-bottom: 1px solid ${props => props.theme.colorGrey};
 
     /* text-decoration: underline; */
   }
   .errorMessage {
     display: block;
-    margin: 1rem 0;
-    color :${props => props.theme.fontColorGrey};
+    font-size: 2.2rem;
+    margin: 1rem 0 0;
+    color :${props => props.theme.primaryRed};
+    text-align: center;
   }
 
   .testAccount {
@@ -117,6 +119,7 @@ const AuthForm = styled.div`
 
   .previewButton {
     /* text-align: center; */
+    color: ${props => props.theme.colorLightGrey};
     display: block;
     margin: 0 auto;
     padding: .2rem .5rem;
@@ -128,6 +131,32 @@ const AuthForm = styled.div`
     transition: border .1s;
     &:hover {
       border-bottom: 1px solid ${props => props.theme.secondaryRed};
+    }
+  }
+
+  .resetLink {
+    width: 60%;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    padding: .2rem .5rem;
+    font-size: 1.8rem;
+    font-family: inherit;
+    text-decoration: none;
+    text-align: center;
+    color: inherit;
+    border: 1px solid transparent;
+    transition: border .1s;
+    @media (max-width: 405px) {
+      width: 90%;
+    }
+    &:hover {
+      border-bottom: 1px solid ${props => props.theme.secondaryRed};
+    }
+
+    svg {
+      margin-left: 4px;
+      transform: translateY(1px) scale(.8);
     }
   }
   
