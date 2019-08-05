@@ -52,16 +52,16 @@ const ResetPasswordStart = (props) => {
         {(createReset, { data, loading, error }) => (
           <AuthForm>
             <form
-className="form"
-onSubmit={async e => {
-              e.preventDefault()
-              if (resetEmail.length <= 0) {
-                setValidationError('Please provide an email!')
-                return
-              }
-              setValidationError('')
-              const res = await createReset()
-            }}
+              className="form"
+              onSubmit={async e => {
+                e.preventDefault()
+                if (resetEmail.length <= 0) {
+                  setValidationError('Please provide an email!')
+                  return
+                }
+                setValidationError('')
+                const res = await createReset()
+              }}
             >
               <h2 className="form__name">Reset</h2>
               <div className="inputGroup">
@@ -70,7 +70,7 @@ onSubmit={async e => {
                 <input type="email" id="resetEmailInput" value={resetEmail} onChange={e => setResetEmail(e.target.value)} />
               </div>
               <ActionButton type="submit" disabled={loading} wide>Reset</ActionButton>
-              {data && <p>{data.createResetToken.message}</p>}
+              {error && <p className="errorMessage">{error.message}</p>}
               {validationError && <p className="errorMessage">{validationError}</p>}
             </form>
 
@@ -85,27 +85,27 @@ onSubmit={async e => {
       {(resetPass, { loading, error }) => (
         <AuthForm>
           <form
-className="form"
-onSubmit={async e => {
-            e.preventDefault()
-            if (password !== confirmPassword) {
-              setValidationError('Your password must match!')
-              return
-            }
-            if (password.length < 6 || confirmPassword.length < 6) {
-              setValidationError('Your password is too short!')
-              return
-            }
-            setValidationError('')
-            const data = await resetPass()
+            className="form"
+            onSubmit={async e => {
+              e.preventDefault()
+              if (password !== confirmPassword) {
+                setValidationError('Your password must match!')
+                return
+              }
+              if (password.length < 6 || confirmPassword.length < 6) {
+                setValidationError('Your password is too short!')
+                return
+              }
+              setValidationError('')
+              const data = await resetPass()
             
-            if (data) {
-              localStorage.setItem('token', data.data.resetPassword.token)
-              localStorage.setItem('userId', data.data.resetPassword.user.id)
-              setUserId(data.data.resetPassword.user.id)
-              props.history.push('/')
-            }
-          }}
+              if (data) {
+                localStorage.setItem('token', data.data.resetPassword.token)
+                localStorage.setItem('userId', data.data.resetPassword.user.id)
+                setUserId(data.data.resetPassword.user.id)
+                props.history.push('/')
+              }
+            }}
           >
             <h2 className="form__name">Reset</h2>
             <div className="inputGroup">
