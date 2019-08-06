@@ -111,6 +111,7 @@ const Nav = props => {
     localStorage.removeItem('userId')
     localStorage.removeItem('token')
     setUserId('')
+    props.history.push('/')
   }
   const publicLinks = (
     <Fragment>

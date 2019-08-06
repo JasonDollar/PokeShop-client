@@ -1,4 +1,5 @@
 import React from 'react'
+import { Redirect } from 'react-router-dom'
 import OfferListItem from './OfferListItem'
 import User from './User'
 import WidthContainer from './styles/WidthContainer'
@@ -13,6 +14,7 @@ const Me = () => (
       {({ data, loading, error }) => {
         if (loading) return <Loading />
         if (error) return <p>{error.message}</p>
+        if (!data.me) return <p>We could fetch your information. Check back later</p>
         return (
           <UserInfo>
             <h2 className="user">{data.me.name}</h2>

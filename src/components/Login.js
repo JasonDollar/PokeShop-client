@@ -8,7 +8,7 @@ import AuthForm from './styles/AuthForm'
 import { CURRENT_USER_QUERY } from './User'
 import ActionButton from './styles/ActionButton'
 
-const LOGIN_MUTATION = gql`
+export const LOGIN_MUTATION = gql`
   mutation login($email: String!, $password:String!) {
     login(data: { email: $email, password: $password}) {
       user {
