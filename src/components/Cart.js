@@ -137,7 +137,7 @@ const Cart = () => (
                 </ul>
                 <p className="cartTotal">Total Price: {formatBigNumber(totalPrice)}CR</p>
                 <Checkout buttonDisabled={!data || data.userCart.length <= 0 || !userHasEnoughCredits} totalPrice={totalPrice} />
-                {!userHasEnoughCredits && <p className="overTheLimitError">You don't have enough credits! {formatBigNumber(totalPrice - userCredits)}CR over the limit.</p>}
+                {!userHasEnoughCredits && <p className="overTheLimitError">You don&apos;t have enough credits! {formatBigNumber(totalPrice - userCredits)}CR over the limit.</p>}
               </CartContainer>
     
             )

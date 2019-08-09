@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import { Redirect } from 'react-router-dom'
@@ -26,10 +26,9 @@ const AdminPanel = () => {
   if (!userId) return <Redirect to="/" />
   return (
     <WidthContainer>
-      <Query query={USERS_ADMIN_QUERY} variables={{adminId: userId}}>
-        {({data, loading, error}) => {
-          // console.log(data);
-          if(loading) return <Loading />
+      <Query query={USERS_ADMIN_QUERY} variables={{ adminId: userId }}>
+        {({ data, loading, error }) => {
+          if (loading) return <Loading />
           if (error) return <p>{error.message}</p>
           return (
             <div>

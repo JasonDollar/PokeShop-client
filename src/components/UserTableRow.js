@@ -32,7 +32,7 @@ const UserTableRow = user => {
   }, [role, name, email])
 
   const buttonFunc = async (mutation) => {
-    const data = await mutation()
+    await mutation()
 
     // setRole(data.data.adminUpdateUserData.role)
     // changeName(data.data.adminUpdateUserData.name)
@@ -62,7 +62,7 @@ const UserTableRow = user => {
         })
       }}
     >
-      {(updateUserData, { loading, error }) => (
+      {(updateUserData, { loading }) => (
           <tr>
             <td>{user.user.id}</td>
             <td className="editable">{editFields.name 

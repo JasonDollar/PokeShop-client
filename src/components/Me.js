@@ -1,11 +1,11 @@
 import React from 'react'
-import { Redirect } from 'react-router-dom'
 import OfferListItem from './OfferListItem'
 import User from './User'
 import WidthContainer from './styles/WidthContainer'
 import GridList from './styles/GridList'
 import UserInfo from './styles/UserInfo'
 import Loading from './Loading'
+import { formatBigNumber } from '../utils'
 
 const Me = () => (
     <WidthContainer>
@@ -20,7 +20,7 @@ const Me = () => (
             <h2 className="user">{data.me.name}</h2>
             <h3 className="email">{data.me.email}</h3>
             <p>{data.me.role}</p>
-            <p className="balance">You have {Intl.NumberFormat('de-DE').format(data.me.wallet.balance)} CR in your wallet</p>
+            <p className="balance">You have {formatBigNumber(data.me.wallet.balance)} CR in your wallet</p>
             <p className="selling">You are selling:</p>
             <GridList>
               {data.me.offers.map(item => (

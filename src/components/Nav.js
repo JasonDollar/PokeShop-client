@@ -13,8 +13,6 @@ const Container = styled.div`
   background:  ${props => props.theme.primaryRed};
 `
 
-
-
 const NavList = styled.ul`
   position: fixed;
   top: 0;
@@ -93,8 +91,6 @@ const NavElement = styled(WidthContainer)`
     margin-right: 2rem;
   }
 `
-
-
 
 const Nav = props => {
   const [navOpen, toggleNavOpen] = useState(false)

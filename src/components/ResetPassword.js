@@ -35,13 +35,6 @@ const ResetPasswordStart = (props) => {
   const { userId, setUserId } = useContext(UserContext)
   const { resetToken } = qs.parse(props.location.search)
 
-
-  const handleFormSubmit = async (e, mutationFunc) => {
-    e.preventDefault()
-    const res = await mutationFunc()
-    console.log(res)
-  }
-
   if (userId) {
     return <Redirect to="/" />
   }
@@ -49,7 +42,7 @@ const ResetPasswordStart = (props) => {
   if (!resetToken) {
     return (
       <Mutation mutation={CREATE_RESET_TOKEN} variables={{ email: resetEmail }}>
-        {(createReset, { data, loading, error }) => (
+        {(createReset, { loading, error }) => (
           <AuthForm>
             <form
               className="form"
@@ -60,7 +53,7 @@ const ResetPasswordStart = (props) => {
                   return
                 }
                 setValidationError('')
-                const res = await createReset()
+                await createReset()
               }}
             >
               <h2 className="form__name">Reset</h2>

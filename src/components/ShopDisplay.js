@@ -35,8 +35,7 @@ const ShopDisplay = props => {
     minPrice, maxPrice, pokemonTypes,
   } = useContext(FilterContext)
   const { page = 1 } = qs.parse(props.location.search)
-  // console.log(page)
-  // }
+
   return (
     <Query
       query={POKEMON_OFFERS_QUERY}

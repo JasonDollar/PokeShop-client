@@ -22,7 +22,7 @@ const AddToCart = ({
   pokemonOfferId, children, disabledButton, CSSclass, 
 }) => (
     <Mutation mutation={ADD_TO_CART_MUTATION} variables={{ id: pokemonOfferId }} refetchQueries={[{ query: CART_ITEMS_QUERY }]}>
-      {(addToCart, { data, loading, error }) => {
+      {(addToCart, { data, loading }) => {
         if (data) {
           // console.log(data)
         }

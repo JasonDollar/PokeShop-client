@@ -113,7 +113,6 @@ const DetailContainer = styled(WidthContainer)`
   }
 `
 
-
 const POKEMON_OFFER_QUERY = gql`
   query POKEMON_OFFER_QUERY($id: ID!) {
     pokemonOffer(id: $id) {
@@ -141,7 +140,8 @@ const OfferDetail = props => {
       {({ data, loading, error }) => {
         if (loading) return <Loading />
         if (error) return <p>{error.message}</p>
-        const types = data.pokemonOffer.pokemon.pokeType.map(item => item[0].toUpperCase() + item.substring(1, item.length))
+        const types = data.pokemonOffer.pokemon.pokeType
+          .map(item => item[0].toUpperCase() + item.substring(1, item.length))
 
         return (
           <DetailContainer>
