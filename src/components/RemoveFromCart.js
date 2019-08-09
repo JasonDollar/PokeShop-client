@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Mutation } from 'react-apollo'
+import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { CART_ITEMS_QUERY } from './Cart'
 
@@ -12,16 +12,18 @@ const REMOVE_FROM_CART_MUTATION = gql`
   }
 `
 
-const RemoveFromCart = ({ cartItemId, children, CSSclass }) => (
-    <Mutation mutation={REMOVE_FROM_CART_MUTATION} variables={{ id: cartItemId }} refetchQueries={[{ query: CART_ITEMS_QUERY }]}>
-      {(removeFromCart, { data, loading }) => (
-        <button type="button" onClick={removeFromCart} disabled={loading} className={CSSclass}>
-          {children}
-        </button>
-      )
-      }
-    </Mutation>
-)
+const RemoveFromCart = ({ cartItemId, children, CSSclass }) => {
+  const [removeFromCart, { data, loading, error }] = useMutation(REMOVE_FROM_CART_MUTATION, {
+    variables: { id: cartItemId },
+    refetchQueries: [{ query: CART_ITEMS_QUERY }],
+  })
+
+  return (
+    <button type="button" onClick={removeFromCart} disabled={loading} className={CSSclass}>
+      {children}
+    </button>
+  )
+}
 
 export default RemoveFromCart
 RemoveFromCart.propTypes = {
