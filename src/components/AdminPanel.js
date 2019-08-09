@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { Query } from 'react-apollo'
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { Redirect } from 'react-router-dom'
 import { UserContext } from '../userContext'
@@ -23,38 +24,31 @@ export const USERS_ADMIN_QUERY = gql`
 
 const AdminPanel = () => {
   const { userId } = useContext(UserContext)
+  const { data, loading, error } = useQuery(USERS_ADMIN_QUERY, {
+    variables: { adminId: userId },
+  })
   if (!userId) return <Redirect to="/" />
+  if (loading) return <Loading />
+  if (error) return <p>{error.message}</p>
   return (
-    <WidthContainer>
-      <Query query={USERS_ADMIN_QUERY} variables={{ adminId: userId }}>
-        {({ data, loading, error }) => {
-          if (loading) return <Loading />
-          if (error) return <p>{error.message}</p>
-          return (
-            <div>
-              <UsersTable>
-                <thead>
-                  <tr className="table-items">
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>
-                      <span role="img" aria-label="Actions">🔥🔥🔥</span>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.users.map(item => <UserTableRow key={item.id} user={item} />)}
-                </tbody>
-              </UsersTable> 
-
-            </div>
-          )
-        
-        }}
-      </Query>
-    </WidthContainer>
+    <div>
+      <UsersTable>
+        <thead>
+          <tr className="table-items">
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>
+              <span role="img" aria-label="Actions">🔥🔥🔥</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.users.map(item => <UserTableRow key={item.id} user={item} />)}
+        </tbody>
+      </UsersTable> 
+    </div>
   )
 }
 
