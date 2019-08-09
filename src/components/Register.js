@@ -66,10 +66,6 @@ const Login = ({ history }) => {
         {error && <span className="errorMessage">{error.message}</span> }
 
         <ActionButton type="submit" disabled={loading} wide>Register</ActionButton>
-        {/* <div className="form__link--container">
-          <Link to="/signup" className="form__link">New User? Create an account</Link>
-          <Link to="/reset" className="form__link">Forgot your password?</Link>
-        </div> */}
       </form>
     </AuthForm>
   )

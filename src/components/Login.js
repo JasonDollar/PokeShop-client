@@ -36,46 +36,42 @@ const Login = ({ history }) => {
   }
 
   return (
-  <AuthForm>
-    <form
-      onSubmit={async e => {
-        e.preventDefault()
-        const data = await login()
-        if (data) {
+    <AuthForm>
+      <form
+        onSubmit={async e => {
+          e.preventDefault()
+          const data = await login()
+          if (data) {
 
-          localStorage.setItem('token', data.data.login.token)
-          localStorage.setItem('userId', data.data.login.user.id)
-          setUserId(data.data.login.user.id)
-          history.push('/')
-        }
-      }}
-      className="form"
-    >
+            localStorage.setItem('token', data.data.login.token)
+            localStorage.setItem('userId', data.data.login.user.id)
+            setUserId(data.data.login.user.id)
+            history.push('/')
+          }
+        }}
+        className="form"
+      >
 
-      <h1 className="form__name">Login</h1>
+        <h1 className="form__name">Login</h1>
 
-      <div className="inputGroup">
-        <label htmlFor="email">Email:</label>
-        <input type="email" id="email" value={email} onChange={e => changeEmail(e.target.value)} />
-      </div>
+        <div className="inputGroup">
+          <label htmlFor="email">Email:</label>
+          <input type="email" id="email" value={email} onChange={e => changeEmail(e.target.value)} />
+        </div>
 
-      <div className="inputGroup">
-        <label htmlFor="password">Password:</label>
-        <input type="password" id="password" value={password} onChange={e => changePassword(e.target.value)} />
-      </div>
-      {error && <span className="errorMessage">{error.message}</span> }
-      <button className="previewButton" type="button" onClick={usePrevAccount}>Use Preview Account</button>
-      <Link to="/resetPassword" className="resetLink">
-        Reset password
-        <FontAwesomeIcon icon="chevron-right" />
-      </Link>
-      <ActionButton type="submit" disabled={loading} wide>Login</ActionButton>
-      {/* <div className="form__link--container">
-        <Link to="/signup" className="form__link">New User? Create an account</Link>
-        <Link to="/reset" className="form__link">Forgot your password?</Link>
-      </div> */}
-    </form>
-  </AuthForm>
+        <div className="inputGroup">
+          <label htmlFor="password">Password:</label>
+          <input type="password" id="password" value={password} onChange={e => changePassword(e.target.value)} />
+        </div>
+        {error && <span className="errorMessage">{error.message}</span> }
+        <button className="previewButton" type="button" onClick={usePrevAccount}>Use Preview Account</button>
+        <Link to="/resetPassword" className="resetLink">
+          Reset password
+          <FontAwesomeIcon icon="chevron-right" />
+        </Link>
+        <ActionButton type="submit" disabled={loading} wide>Login</ActionButton>
+      </form>
+    </AuthForm>
   )
 
 }

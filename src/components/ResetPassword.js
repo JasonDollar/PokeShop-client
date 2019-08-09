@@ -3,6 +3,7 @@ import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import qs from 'query-string'
 import { Redirect } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import { UserContext } from '../userContext'
 import AuthForm from './styles/AuthForm'
 import ActionButton from './styles/ActionButton'
@@ -27,13 +28,13 @@ const RESET_PASSWORD = gql`
   }
 `
 
-const ResetPasswordStart = (props) => {
+const ResetPasswordStart = ({ location, history }) => {
   const [resetEmail, setResetEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [validationError, setValidationError] = useState('')
   const { userId, setUserId } = useContext(UserContext)
-  const { resetToken } = qs.parse(props.location.search)
+  const { resetToken } = qs.parse(location.search)
   const [createReset, { loading, error }] = useMutation(CREATE_RESET_TOKEN, {
     variables: { email: resetEmail },
   })
@@ -94,7 +95,7 @@ const ResetPasswordStart = (props) => {
             localStorage.setItem('token', data.data.resetPassword.token)
             localStorage.setItem('userId', data.data.resetPassword.user.id)
             setUserId(data.data.resetPassword.user.id)
-            props.history.push('/')
+            history.push('/')
           }
         }}
       >
@@ -117,3 +118,8 @@ const ResetPasswordStart = (props) => {
 }
 
 export default ResetPasswordStart
+
+ResetPasswordStart.propTypes = {
+  location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+}

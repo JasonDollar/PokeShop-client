@@ -1,6 +1,7 @@
 import React from 'react'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
+import PropTypes from 'prop-types'
 import PokemonListItem from './PokemonListItem'
 import WidthContainer from './styles/WidthContainer'
 import GridList from './styles/GridList'
@@ -20,12 +21,12 @@ const TYPE_POKEMONS = gql`
   }
 `
 
-const TypeDetail = props => {
+const TypeDetail = ({ match }) => {
   const { data, loading, error } = useQuery(TYPE_POKEMONS, {
-    variables: { id: props.match.params.typeId },
+    variables: { id: match.params.typeId },
   })
-  if (loading) return <WidthContainer><Loading /></WidthContainer>
-  if (error) return <WidthContainer><p>Error</p></WidthContainer> 
+  if (loading) return <Loading />
+  if (error) return <p>Error</p>
 
   return (
     <WidthContainer>
@@ -45,3 +46,7 @@ const TypeDetail = props => {
 
 
 export default TypeDetail
+
+TypeDetail.propTypes = {
+  match: PropTypes.object.isRequired,
+}

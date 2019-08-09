@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import debounce from 'lodash.debounce'
 import { useMutation, ApolloConsumer } from '@apollo/react-hooks'
 import Downshift from 'downshift'
+import PropTypes from 'prop-types'
 import { POKEMON_OFFERS_QUERY } from './ShopDisplay'
 import AuthForm from './styles/AuthForm'
 import { DropDown, DropDownItem } from './styles/Dropdown'
@@ -32,7 +33,7 @@ const SEARCH_POKEMON_NAME = gql`
   }
 `
 
-const Sell = props => {
+const Sell = ({ history }) => {
   const [name, setName] = useState('')
   const [price, setPrice] = useState(0)
   const [description, setDescription] = useState('')
@@ -59,7 +60,7 @@ const Sell = props => {
           e.preventDefault()
 
           const res = await sellPokemon()
-          props.history.push(`/offer/${res.data.sellPokemon.id}`)
+          history.push(`/offer/${res.data.sellPokemon.id}`)
         }}
         className="form"
       >
@@ -143,3 +144,7 @@ const Sell = props => {
 }
 
 export default Sell
+
+Sell.propTypes = {
+  history: PropTypes.object.isRequired,
+}

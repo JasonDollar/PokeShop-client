@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 import { UserContext } from '../userContext'
 import AddToCart from './AddToCart'
 import WidthContainer from './styles/WidthContainer'
@@ -133,10 +134,10 @@ const POKEMON_OFFER_QUERY = gql`
   }
 `
 
-const OfferDetail = props => {
+const OfferDetail = ({ match }) => {
   const { userId } = useContext(UserContext)
   const { data, loading, error } = useQuery(POKEMON_OFFER_QUERY, {
-    variables: { id: props.match.params.offerId },
+    variables: { id: match.params.offerId },
   })
   if (loading) return <Loading />
   if (error) return <p>{error.message}</p>
@@ -180,3 +181,7 @@ const OfferDetail = props => {
 }
 
 export default OfferDetail
+
+OfferDetail.propTypes = {
+  match: PropTypes.object.isRequired,
+}

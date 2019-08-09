@@ -13,7 +13,7 @@ const REMOVE_FROM_CART_MUTATION = gql`
 `
 
 const RemoveFromCart = ({ cartItemId, children, CSSclass }) => {
-  const [removeFromCart, { data, loading, error }] = useMutation(REMOVE_FROM_CART_MUTATION, {
+  const [removeFromCart, { loading }] = useMutation(REMOVE_FROM_CART_MUTATION, {
     variables: { id: cartItemId },
     refetchQueries: [{ query: CART_ITEMS_QUERY }],
   })

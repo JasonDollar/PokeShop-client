@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { Redirect } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import OfferListItem from './OfferListItem'
 import WidthContainer from './styles/WidthContainer'
 import GridList from './styles/GridList'
@@ -29,20 +30,20 @@ const USER_DETAIL_QUERY = gql`
   }
 `
 
-const UserDetail = props => {
+const UserDetail = ({ match }) => {
   const { userId } = useContext(UserContext)
 
 
   const { data, loading, error } = useQuery(USER_DETAIL_QUERY, {
-    variables: { userId: props.match.params.userId },
+    variables: { userId: match.params.userId },
   })
 
-  if (userId === props.match.params.userId) {
+  if (userId === match.params.userId) {
     return <Redirect to="/me" />
   }
 
-  if (loading) return <WidthContainer><Loading /></WidthContainer>
-  if (error) return <WidthContainer><p>Error</p></WidthContainer> 
+  if (loading) return <Loading />
+  if (error) return <p>Error</p>
 
   return (
     <WidthContainer>
@@ -61,3 +62,7 @@ const UserDetail = props => {
 }
 
 export default UserDetail
+
+UserDetail.propTypes = {
+  match: PropTypes.object.isRequired,
+}

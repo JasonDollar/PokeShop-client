@@ -2,6 +2,7 @@ import React, { useState, useContext, Fragment } from 'react'
 import { NavLink, withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import PropTypes from 'prop-types'
 import WidthContainer from './styles/WidthContainer'
 import Backdrop from './styles/Backdrop'
 import NavButton from './styles/NavButton'
@@ -92,23 +93,23 @@ const NavElement = styled(WidthContainer)`
   }
 `
 
-const Nav = props => {
+const Nav = ({ history, location }) => {
   const [navOpen, toggleNavOpen] = useState(false)
-  const {
-    isFilterOpen, toggleFilter,
-  } = useContext(FilterContext)
+  const { isFilterOpen, toggleFilter } = useContext(FilterContext)
   const { userId, setUserId } = useContext(UserContext)
 
   const handleLinkClick = e => {
     if (navOpen === false) return
     if (e.target.nodeName.toLowerCase() === 'a') toggleNavOpen(false)
   }
+
   const logoutUser = () => {
     localStorage.removeItem('userId')
     localStorage.removeItem('token')
     setUserId('')
-    props.history.push('/')
+    history.push('/')
   }
+
   const publicLinks = (
     <Fragment>
       <li>
@@ -119,6 +120,7 @@ const Nav = props => {
       </li>
     </Fragment>
   )
+
   const privateLinks = (
     <Fragment>
       <li>
@@ -137,18 +139,19 @@ const Nav = props => {
       </li>
     </Fragment>
   )
+
   return (
     <Container>
       <NavElement as="nav">
         {navOpen && <Backdrop onClick={() => toggleNavOpen(false)} />}
         {isFilterOpen && <Backdrop onClick={() => toggleFilter(false)} />}
-        {props.location.pathname === '/' && (
+        {location.pathname === '/' && (
           <NavButton className="filterButton" type="button" onClick={() => toggleFilter(true)}>
             <FontAwesomeIcon icon="filter" />
           </NavButton>
         )}
-        {props.location.pathname !== '/' && (
-          <NavButton className="filterButton" type="button" onClick={() => props.history.goBack()}>
+        {location.pathname !== '/' && (
+          <NavButton className="filterButton" type="button" onClick={() => history.goBack()}>
             <FontAwesomeIcon icon="chevron-left" />
           </NavButton>
         )}
@@ -164,8 +167,6 @@ const Nav = props => {
           </li>
           {!userId && publicLinks}
           {userId && privateLinks}
-          
-
         </NavList>
       </NavElement>
     </Container>
@@ -173,3 +174,8 @@ const Nav = props => {
 }
 
 export default withRouter(Nav)
+
+Nav.propTypes = {
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+}

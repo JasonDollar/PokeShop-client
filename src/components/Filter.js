@@ -21,8 +21,6 @@ const Container = styled.aside`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  /* width: 100px; */
-  /* height: 200px; */
   @media (min-width: 576px) {
     width: 38rem;
   }
@@ -37,7 +35,6 @@ const PokeTypeElement = styled.span`
   margin-right: 1rem;
   color: black;
   display: flex;
-  /* justify-content: center; */
   align-items: center;
   .icon {
     color: black;
