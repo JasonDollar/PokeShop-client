@@ -1,5 +1,5 @@
 import React from 'react'
-import { Mutation } from 'react-apollo'
+import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import PropTypes from 'prop-types'
 import { Redirect } from 'react-router-dom'
@@ -23,41 +23,38 @@ const CheckoutContainer = styled.div`
 `
 
 
-const Checkout = ({ buttonDisabled, totalPrice }) => (
+const Checkout = ({ buttonDisabled, totalPrice }) => {
+  const [orderPokemons, { data, loading, error }] = useMutation(ORDER_POKEMONS_MUTATION, {
+    refetchQueries: [
+      { query: CART_ITEMS_QUERY }, 
+      { query: USER_ORDERS_QUERY },
+      { query: USER_CREDITS_QUERY },
+    ],
+  })
+
+  return (
     <ShowMyMoney>
       {({ data: { userCredits }, loading: loadingCredits, error: errorCredits }) => {
         if (loadingCredits) return <p>Loading...</p>
+        
+        if (data) {
+          return <Redirect to="/orders" />
+        }
         return (
-          <Mutation 
-            mutation={ORDER_POKEMONS_MUTATION} 
-            refetchQueries={[
-              { query: CART_ITEMS_QUERY }, 
-              { query: USER_ORDERS_QUERY },
-              { query: USER_CREDITS_QUERY },
-            ]}
-          
-          >
-          {(orderPokemons, { data, loading, error }) => {
-            if (data) {
-              return <Redirect to="/orders" />
-            }
-            return (
-              <CheckoutContainer>
-                <ActionButton type="button" onClick={orderPokemons} disabled={loading || loadingCredits || buttonDisabled || (userCredits && userCredits.balance < totalPrice)}>
-                  Buy these shiny pokemons!
-                </ActionButton>
-                {errorCredits && <p>{errorCredits.message}</p> }
-                {error && <p> {error.message}</p>}
-                
-              </CheckoutContainer>
-            )
-          }
-          }
-          </Mutation>
+          <CheckoutContainer>
+            <ActionButton type="button" onClick={orderPokemons} disabled={loading || loadingCredits || buttonDisabled || (userCredits && userCredits.balance < totalPrice)}>
+              Buy these shiny pokemons!
+            </ActionButton>
+            {errorCredits && <p>{errorCredits.message}</p> }
+            {error && <p> {error.message}</p>}
+            
+          </CheckoutContainer>
         )
       }}
     </ShowMyMoney>
-)
+  )
+}
+
 
 export default Checkout
 

@@ -1,5 +1,4 @@
-import React from 'react'
-import { Query } from 'react-apollo'
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import PropTypes from 'prop-types'
 
@@ -12,11 +11,12 @@ export const USER_CREDITS_QUERY = gql`
   }
 `
 
-const ShowMyMoney = props => (
-    <Query query={USER_CREDITS_QUERY}>
-      {payload => props.children(payload)}
-    </Query>
-)
+const ShowMyMoney = props => {
+  const payload = useQuery(USER_CREDITS_QUERY)
+
+  return props.children(payload)
+}
+
 
 export default ShowMyMoney
 

@@ -8,13 +8,13 @@ import Loading from './Loading'
 import { formatBigNumber } from '../utils'
 
 const Me = () => (
-    <WidthContainer>
+  <WidthContainer>
 
     <User>
       {({ data, loading, error }) => {
         if (loading) return <Loading />
         if (error) return <p>{error.message}</p>
-        if (!data.me) return <p>We could fetch your information. Check back later</p>
+        if (!data.me) return <p>We could not fetch your information. Check back later</p>
         return (
           <UserInfo>
             <h2 className="user">{data.me.name}</h2>
@@ -31,8 +31,7 @@ const Me = () => (
         )
       }}
     </User>
-    </WidthContainer>
-
+  </WidthContainer>
 )
 
 export default Me

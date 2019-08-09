@@ -1,8 +1,9 @@
 import React from 'react'
 import { mount } from 'enzyme'
+import { act } from 'react-dom/test-utils'
 import toJSON from 'enzyme-to-json'
 import wait from 'waait'
-import { MockedProvider } from 'react-apollo/test-utils'
+import { MockedProvider } from '@apollo/react-testing'
 import User, { CURRENT_USER_QUERY } from '../components/User'
 import { fakeUser } from '../testUtils'
 
@@ -23,7 +24,11 @@ describe('<User/>', () => {
         </User>
       </MockedProvider>,
     )
-    await wait(0)
-    wrapper.update()
+    await act(async () => {
+      await wait(0)
+      wrapper.update()
+    })
+    
+    expect(toJSON(wrapper.find('Hey'))).toMatchSnapshot()
   })
 })

@@ -31,24 +31,26 @@ const AdminPanel = () => {
   if (loading) return <Loading />
   if (error) return <p>{error.message}</p>
   return (
-    <div>
-      <UsersTable>
-        <thead>
-          <tr className="table-items">
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>
-              <span role="img" aria-label="Actions">🔥🔥🔥</span>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.users.map(item => <UserTableRow key={item.id} user={item} />)}
-        </tbody>
-      </UsersTable> 
-    </div>
+    <WidthContainer>
+      <div>
+        <UsersTable>
+          <thead>
+            <tr className="table-items">
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>
+                <span role="img" aria-label="Actions">🔥🔥🔥</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.users.map(item => <UserTableRow key={item.id} user={item} />)}
+          </tbody>
+        </UsersTable> 
+      </div>
+    </WidthContainer>
   )
 }
 

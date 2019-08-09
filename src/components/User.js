@@ -1,5 +1,4 @@
-import React from 'react'
-import { Query } from 'react-apollo'
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import PropTypes from 'prop-types'
 
@@ -27,11 +26,14 @@ export const CURRENT_USER_QUERY = gql`
   }
 `
 
-const User = props => (
-    <Query query={CURRENT_USER_QUERY} fetchPolicy="cache-and-network">
-      {payload => props.children(payload)}
-    </Query>
-)
+const User = props => {
+  const payload = useQuery(CURRENT_USER_QUERY, {
+    fetchPolicy: 'cache-and-network',
+  })
+
+  return props.children(payload)
+}
+
 
 export default User
 

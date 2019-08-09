@@ -1,5 +1,5 @@
 import React from 'react'
-import { Mutation } from 'react-apollo'
+import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import PropTypes from 'prop-types'
 
@@ -20,20 +20,23 @@ const ADD_TO_CART_MUTATION = gql`
 
 const AddToCart = ({
   pokemonOfferId, children, disabledButton, CSSclass, 
-}) => (
-    <Mutation mutation={ADD_TO_CART_MUTATION} variables={{ id: pokemonOfferId }} refetchQueries={[{ query: CART_ITEMS_QUERY }]}>
-      {(addToCart, { data, loading }) => {
-        if (data) {
-          // console.log(data)
-        }
-        return (
-          <button type="button" className={`${CSSclass} ${loading && 'loading'}`} onClick={addToCart} disabled={loading || disabledButton}>
-            {children}
-          </button>
-        )
-      }}
-    </Mutation>
-)
+}) => {
+  const [addToCart, { loading }] = useMutation(ADD_TO_CART_MUTATION, {
+    variables: { id: pokemonOfferId },
+    refetchQueries: [{ query: CART_ITEMS_QUERY }],
+  })
+
+  return (
+    <button 
+      type="button"
+      className={`${CSSclass} ${loading && 'loading'}`}
+      onClick={addToCart}
+      disabled={loading || disabledButton}
+    >
+      {children}
+    </button>
+  )
+}
 
 export default AddToCart
 
