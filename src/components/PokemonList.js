@@ -1,6 +1,6 @@
 import React from 'react'
 import gql from 'graphql-tag'
-import { Query } from 'react-apollo'
+import { useQuery } from '@apollo/react-hooks'
 import PokemonListItem from './PokemonListItem'
 import WidthContainer from './styles/WidthContainer'
 import GridList from './styles/GridList'
@@ -17,46 +17,48 @@ const GET_POKEMONS = gql`
   }
 `
 
-const PokemonList = () => (
-    <Query query={GET_POKEMONS} variables={{ skip: 0 }}>
-        {({
-          data, error, loading, fetchMore,
-        }) => {
-          if (loading) return <Loading />
-          if (error) return <p>{error.message}</p>
-          return (
-            <WidthContainer>
-              <GridList>
-                {data.pokemons && data.pokemons.map(item => (
-                  <li key={item.id}>
-                    <PokemonListItem pokemon={item} />
-                  </li>
-                ))}
-              </GridList>
-              <button
-                type="button"
-                onClick={() => {
-                  fetchMore({
-                    variables: {
-                      skip: data.pokemons.length,
-                    },
-                    updateQuery: (prev, { fetchMoreResult, ...rest }) => {
-                      if (!fetchMoreResult) return prev
-                      return {
-                        pokemons: [
-                          ...prev.pokemons,
-                          ...fetchMoreResult.pokemons,
-                        ],
-                      }
-                    },
-                  })
-                }}
-              >Fetch More
-              </button>
-            </WidthContainer>
-          )
+const PokemonList = () => {
+  const {
+    data, loading, error, fetchMore, 
+  } = useQuery(GET_POKEMONS, {
+    variables: { skip: 0 },
+  })
+
+  if (loading) return <Loading />
+  if (error) return <p>{error.message}</p>
+  return (
+    <WidthContainer>
+      <GridList>
+        {data.pokemons && data.pokemons.map(item => (
+          <li key={item.id}>
+            <PokemonListItem pokemon={item} />
+          </li>
+        ))}
+      </GridList>
+      <button
+        type="button"
+        onClick={() => {
+          fetchMore({
+            variables: {
+              skip: data.pokemons.length,
+            },
+            updateQuery: (prev, { fetchMoreResult, ...rest }) => {
+              if (!fetchMoreResult) return prev
+              return {
+                pokemons: [
+                  ...prev.pokemons,
+                  ...fetchMoreResult.pokemons,
+                ],
+              }
+            },
+          })
         }}
-    </Query>
-)
+      >
+        Fetch More
+      </button>
+    </WidthContainer>
+  )
+}
+
 
 export default PokemonList
