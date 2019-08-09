@@ -1,5 +1,5 @@
 import React from 'react'
-import { Query } from 'react-apollo'
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import styled from 'styled-components'
 import { format } from 'date-fns'
@@ -75,41 +75,41 @@ const OrderItem = styled.li`
   }
 `
 
-const OrderList = () => (
-    <WidthContainer>
-    <Query query={USER_ORDERS_QUERY} fetchPolicy="cache-and-network">
-      {({ data, loading, error }) => {
-        if (loading) return <Loading />
-        if (error) return (<p>{error.message}</p>)
+const OrderList = () => {
+  const { data, loading, error } = useQuery(USER_ORDERS_QUERY, {
+    fetchPolicy: 'cache-and-network',
+  })
+  if (loading) return <Loading />
+  if (error) return (<p>{error.message}</p>)
         
-        if (data.orders.length <= 0) return <p>No orders found</p>
-        return (
-            <OrdersUl>
-              {data.orders.map(order => (
-                <OrderItem key={order.id}>
-                  <header>
-                    <h3 className="title">Order {order.id}</h3>
-                    <p className="date">{format(parseInt(order.createdAt), 'DD/MM/YYYY H:mm')}</p>
-                  </header>
-                  
-                  <ul style={{ padding: 0 }}>
-                    {order.items.map(item => (
-                      <SinglePokemonInfo key={item.id}>
-                        <img src={item.pokemon.image} alt={item.pokemon.name + ' image'} className="pokemonImage" />
-                        <p className="pokemonText">
-                          <span className="pokemonName">{item.pokemon.name}</span> x{item.quantity} - <strong>{formatBigNumber(item.price)}CR</strong>
-                        </p>
-                      </SinglePokemonInfo>
-                    ))}
-                  </ul>
-                  <p className="total">Price: {formatBigNumber(order.price)}CR</p>
-                </OrderItem>
-              )).reverse()}
-            </OrdersUl>
-        )
-      }}
-    </Query>
+  if (data.orders.length <= 0) return <p>No orders found</p>
+  return (
+    <WidthContainer>
+      <OrdersUl>
+        {data.orders.map(order => (
+          <OrderItem key={order.id}>
+            <header>
+              <h3 className="title">Order {order.id}</h3>
+              <p className="date">{format(parseInt(order.createdAt), 'DD/MM/YYYY H:mm')}</p>
+            </header>
+            
+            <ul style={{ padding: 0 }}>
+              {order.items.map(item => (
+                <SinglePokemonInfo key={item.id}>
+                  <img src={item.pokemon.image} alt={item.pokemon.name + ' image'} className="pokemonImage" />
+                  <p className="pokemonText">
+                    <span className="pokemonName">{item.pokemon.name}</span> x{item.quantity} - <strong>{formatBigNumber(item.price)}CR</strong>
+                  </p>
+                </SinglePokemonInfo>
+              ))}
+            </ul>
+            <p className="total">Price: {formatBigNumber(order.price)}CR</p>
+          </OrderItem>
+        )).reverse()}
+      </OrdersUl>
     </WidthContainer>
-)
+  )
+}
+
 
 export default OrderList

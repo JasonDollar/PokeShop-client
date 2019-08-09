@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import gql from 'graphql-tag'
-import { Query } from 'react-apollo'
+import { useQuery } from '@apollo/react-hooks'
 import WidthContainer from './styles/WidthContainer'
 import Loading from './Loading'
 
@@ -20,34 +20,33 @@ const SINGLE_POKEMON = gql`
   }
 `
 
-const PokemonDetail = props => (
-    <WidthContainer>
-      <Query query={SINGLE_POKEMON} variables={{ id: props.match.params.pokemonId }}>
-        {({ data, loading, error }) => {
-          if (loading) return <Loading />
-          if (error) {
-            return <p>Error...</p>
-          }
+const PokemonDetail = props => {
+  const { data, loading, error } = useQuery(SINGLE_POKEMON)
+
+  if (loading) return <Loading />
+  if (error) {
+    return <p>Error...</p>
+  }
           
-          return (
-            <div>
-              <Link to="/">Home</Link>
-              <h2>#{data.pokemon.id} {data.pokemon.name}</h2>
-              <img src={data.pokemon.image} alt={data.pokemon.name} style={{ width: '20%', height: '20%' }} />
-              <ul>
-                {data.pokemon.pokeType.map(item => (
-                  <li key={item.id + 'type'}>
-                    <Link to={`/type/${item.name}`}>
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )
-        }}
-      </Query>
+  return (
+    <WidthContainer>
+      <div>
+        <Link to="/">Home</Link>
+        <h2>#{data.pokemon.id} {data.pokemon.name}</h2>
+        <img src={data.pokemon.image} alt={data.pokemon.name} style={{ width: '20%', height: '20%' }} />
+        <ul>
+          {data.pokemon.pokeType.map(item => (
+            <li key={item.id + 'type'}>
+              <Link to={`/type/${item.name}`}>
+                {item.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </WidthContainer>
-)
+  )
+}
+
 
 export default PokemonDetail
