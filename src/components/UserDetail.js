@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Query } from 'react-apollo'
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { Redirect } from 'react-router-dom'
 import OfferListItem from './OfferListItem'
@@ -31,31 +31,32 @@ const USER_DETAIL_QUERY = gql`
 
 const UserDetail = props => {
   const { userId } = useContext(UserContext)
+
+
+  const { data, loading, error } = useQuery(USER_DETAIL_QUERY, {
+    variables: { userId: props.match.params.userId },
+  })
+
   if (userId === props.match.params.userId) {
     return <Redirect to="/me" />
   }
-  return (
-    <Query query={USER_DETAIL_QUERY} variables={{ userId: props.match.params.userId }}>
-      {({ data, loading, error }) => {
-        if (loading) return <Loading />
-        if (error) return <p>{error.message}</p>
 
-        return (
-          <WidthContainer>
-            <UserInfo>
-              <h2 className="user">{data.user.name}</h2>
-              <h3 className="email">{data.user.email}</h3>
-              <p className="selling">{data.user.name} is selling:</p>
-              <GridList>
-                {data.user.offers.map(item => (
-                  <OfferListItem key={item.id} pokemonOffer={item} />
-                ))}
-              </GridList>
-            </UserInfo>
-          </WidthContainer>
-        )
-      }}
-    </Query>
+  if (loading) return <WidthContainer><Loading /></WidthContainer>
+  if (error) return <WidthContainer><p>Error</p></WidthContainer> 
+
+  return (
+    <WidthContainer>
+      <UserInfo>
+        <h2 className="user">{data.user.name}</h2>
+        <h3 className="email">{data.user.email}</h3>
+        <p className="selling">{data.user.name} is selling:</p>
+        <GridList>
+          {data.user.offers.map(item => (
+            <OfferListItem key={item.id} pokemonOffer={item} />
+          ))}
+        </GridList>
+      </UserInfo>
+    </WidthContainer>
   )
 }
 

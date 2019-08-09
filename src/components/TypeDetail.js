@@ -1,6 +1,6 @@
 import React from 'react'
 import gql from 'graphql-tag'
-import { Query } from 'react-apollo'
+import { useQuery } from '@apollo/react-hooks'
 import PokemonListItem from './PokemonListItem'
 import WidthContainer from './styles/WidthContainer'
 import GridList from './styles/GridList'
@@ -20,27 +20,28 @@ const TYPE_POKEMONS = gql`
   }
 `
 
-const TypeDetail = props => (
+const TypeDetail = props => {
+  const { data, loading, error } = useQuery(TYPE_POKEMONS, {
+    variables: { id: props.match.params.typeId },
+  })
+  if (loading) return <WidthContainer><Loading /></WidthContainer>
+  if (error) return <WidthContainer><p>Error</p></WidthContainer> 
+
+  return (
     <WidthContainer>
-      <Query query={TYPE_POKEMONS} variables={{ id: props.match.params.typeId }}>
-        {({ data, loading, error }) => {
-          if (loading) return <Loading />
-          if (error) return <p>Error</p>
-          return (
-            <div>
-              <h2>{data.pokeType.name}</h2>
-              <GridList>
-                {data.pokeType.pokemon.map(item => (
-                  <li key={item.id}>
-                    <PokemonListItem pokemon={item} />
-                  </li>
-                ))}
-              </GridList>
-            </div>
-          )
-        }}
-      </Query>
+      <div>
+        <h2>{data.pokeType.name}</h2>
+        <GridList>
+          {data.pokeType.pokemon.map(item => (
+            <li key={item.id}>
+              <PokemonListItem pokemon={item} />
+            </li>
+          ))}
+        </GridList>
+      </div>
     </WidthContainer>
-)
+  )
+}
+
 
 export default TypeDetail
