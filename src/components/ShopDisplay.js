@@ -1,7 +1,8 @@
 import React, { useContext } from 'react'
-import { Query } from 'react-apollo'
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import qs from 'query-string'
+import PropTypes from 'prop-types'
 import OfferListItem from './OfferListItem'
 import GridList from './styles/GridList'
 import WidthContainer from './styles/WidthContainer'
@@ -29,46 +30,43 @@ export const POKEMON_OFFERS_QUERY = gql`
   }
 `
 
-const ShopDisplay = props => {
-
+const ShopDisplay = ({ location }) => {
   const {
     minPrice, maxPrice, pokemonTypes,
   } = useContext(FilterContext)
-  const { page = 1 } = qs.parse(props.location.search)
+  const { page = 1 } = qs.parse(location.search)
+  const { data, loading, error } = useQuery(POKEMON_OFFERS_QUERY, {
+    variables: { 
+      skip: page * itemsPerPage - itemsPerPage, 
+      limit: itemsPerPage,
+      minPrice, 
+      maxPrice,
+      pokemonTypes,
+    },
+    fetchPolicy: 'cache-and-network',
+  })
+
+  if (loading) return <Loading />
+  if (error) return <p>{error.message}</p>
+
+  const maxPage = Math.ceil(data.pokemonOffers.count / itemsPerPage)
 
   return (
-    <Query
-      query={POKEMON_OFFERS_QUERY}
-      variables={{ 
-        skip: page * itemsPerPage - itemsPerPage, 
-        limit: itemsPerPage,
-        minPrice, 
-        maxPrice,
-        pokemonTypes,
-      }}
-      fetchPolicy="cache-and-network"
-    >
-      {({
-        data, loading, error,
-      }) => {
-        if (loading) return <Loading />
-        if (error) return <p>{error.message}</p>
-        
-        const maxPage = Math.ceil(data.pokemonOffers.count / itemsPerPage)
-        return (
-          <WidthContainer>
-            <Pagination maxPage={maxPage} page={parseInt(page)} />
-            <GridList>
-              {data.pokemonOffers.offers && data.pokemonOffers.offers.map(item => (
-                <OfferListItem key={item.id} pokemonOffer={item} />
-              ))}
-            </GridList>
+    <WidthContainer>
+      <Pagination maxPage={maxPage} page={parseInt(page)} />
+      <GridList>
+        {data.pokemonOffers.offers && data.pokemonOffers.offers.map(item => (
+          <OfferListItem key={item.id} pokemonOffer={item} />
+        ))}
+      </GridList>
 
-          </WidthContainer>
-        ) 
-      }}
-    </Query>
-  )
+    </WidthContainer>
+  ) 
+
 }
 
 export default ShopDisplay
+
+ShopDisplay.propTypes = {
+  location: PropTypes.object.isRequired,
+}

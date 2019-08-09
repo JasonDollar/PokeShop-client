@@ -7,7 +7,7 @@ import { HttpLink } from 'apollo-link-http'
 import { setContext } from 'apollo-link-context'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloProvider } from 'react-apollo'
-// import { ApolloProvider } from '@apollo/react-hooks'
+import { ApolloProvider as ApolloProviderHooks } from '@apollo/react-hooks'
 import * as serviceWorker from './serviceWorker'
 import App from './App'
 import { checkTokenValidity } from './utils'
@@ -37,9 +37,12 @@ const client = new ApolloClient({
 
 ReactDOM.render((
   <ApolloProvider client={client}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter> 
+    <ApolloProviderHooks client={client}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter> 
+
+    </ApolloProviderHooks>
   </ApolloProvider>
 ), document.getElementById('root'))
 
