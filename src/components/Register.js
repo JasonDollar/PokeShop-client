@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import PropTypes from 'prop-types'
-import { CURRENT_USER_QUERY } from './User'
+import { CURRENT_USER_QUERY } from './Me'
 import { UserContext } from '../userContext'
 import ActionButton from './styles/ActionButton'
 

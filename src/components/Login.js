@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import PropTypes from 'prop-types'
 import { UserContext } from '../userContext'
 import AuthForm from './styles/AuthForm'
-import { CURRENT_USER_QUERY } from './User'
+import { CURRENT_USER_QUERY } from './Me'
 import ActionButton from './styles/ActionButton'
 
 export const LOGIN_MUTATION = gql`
