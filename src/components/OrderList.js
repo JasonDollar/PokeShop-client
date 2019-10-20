@@ -90,7 +90,7 @@ const OrderList = () => {
           <OrderItem key={order.id}>
             <header>
               <h3 className="title">Order {order.id}</h3>
-              <p className="date">{format(parseInt(order.createdAt), 'DD/MM/YYYY H:mm')}</p>
+              <p className="date">{format(parseInt(order.createdAt), 'dd/MM/yyyy H:mm')}</p>
             </header>
             
             <ul style={{ padding: 0 }}>
