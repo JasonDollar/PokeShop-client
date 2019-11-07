@@ -51,7 +51,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-function App() {
+const App: React.FC = (): JSX.Element => {
   return (  
     <ThemeProvider theme={theme}>
       <UserProvider>
