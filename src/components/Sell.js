@@ -4,7 +4,7 @@ import debounce from 'lodash.debounce'
 import { useMutation, ApolloConsumer } from '@apollo/react-hooks'
 import Downshift from 'downshift'
 import PropTypes from 'prop-types'
-import { POKEMON_OFFERS_QUERY } from './ShopDisplay'
+import { POKEMON_OFFERS_QUERY } from './ShopOffers'
 import AuthForm from './styles/AuthForm'
 import { DropDown, DropDownItem } from './styles/Dropdown'
 import ActionButton from './styles/ActionButton'
@@ -68,64 +68,64 @@ const Sell = ({ history }) => {
         <h1 className="form__name">Sell</h1>
 
         
-          <Downshift
-            onChange={selection => setName(selection)}
-            itemToString={item => (item || '')}
-          >
-            {({
-              getInputProps,
-              getItemProps,
-              getLabelProps,
-              getMenuProps,
-              isOpen,
-              inputValue,
-              highlightedIndex,
-              selectedItem,
-            }) => (
-              <div>
-                <ApolloConsumer>
-                  {client => (
-                    <div className="inputGroup">
-                      <label {...getLabelProps()}>Pokemon:</label>
-                      <input
-                        {...getInputProps({
-                          type: 'search',
-                          onChange: e => {
-                            const { value } = e.target
-                            setName(value)
-                            onChange(value, client)
-                          },
-                          value: name,
-                        })}
-                      />
+        <Downshift
+          onChange={selection => setName(selection)}
+          itemToString={item => (item || '')}
+        >
+          {({
+            getInputProps,
+            getItemProps,
+            getLabelProps,
+            getMenuProps,
+            isOpen,
+            inputValue,
+            highlightedIndex,
+            selectedItem,
+          }) => (
+            <div>
+              <ApolloConsumer>
+                {client => (
+                  <div className="inputGroup">
+                    <label {...getLabelProps()}>Pokemon:</label>
+                    <input
+                      {...getInputProps({
+                        type: 'search',
+                        onChange: e => {
+                          const { value } = e.target
+                          setName(value)
+                          onChange(value, client)
+                        },
+                        value: name,
+                      })}
+                    />
 
-                    </div>
-                  )}
-                </ApolloConsumer>
-                <DropDown {...getMenuProps()} isOpen={isOpen || pokemonNames.length > 0}>
-                  {isOpen
-                    ? pokemonNames
-                      .map((item, index) => (
-                          <DropDownItem
-                            {...getItemProps({
-                              key: item,
-                              index,
-                              item,
-                              style: {
-                                backgroundColor:
+                  </div>
+                )}
+              </ApolloConsumer>
+              <DropDown {...getMenuProps()} isOpen={isOpen || pokemonNames.length > 0}>
+                {isOpen
+                  ? pokemonNames
+                    .map((item, index) => (
+                      <DropDownItem
+                        {...getItemProps({
+                          key: item,
+                          index,
+                          item,
+                          style: {
+                            backgroundColor:
                                   highlightedIndex === index ? 'lightgray' : 'white',
-                                fontWeight: selectedItem === item ? 'bold' : 'normal',
-                              },
-                            })}
-                          >
-                            {item}
-                          </DropDownItem> 
-                      ))
-                    : null}
-                </DropDown>
-              </div>
-            )}
-          </Downshift>
+                            fontWeight: selectedItem === item ? 'bold' : 'normal',
+                          },
+                        })}
+                      >
+                        {item}
+                      </DropDownItem> 
+                    ))
+                  : null}
+              </DropDown>
+            </div>
+          )}
+        </Downshift>
 
         <div className="inputGroup">
           <label htmlFor="price">Price:</label>
