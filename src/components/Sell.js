@@ -58,9 +58,13 @@ const Sell = ({ history }) => {
       <form
         onSubmit={async e => {
           e.preventDefault()
+          try {
+            const res = await sellPokemon()
+            history.push(`/offer/${res.data.sellPokemon.id}`)
 
-          const res = await sellPokemon()
-          history.push(`/offer/${res.data.sellPokemon.id}`)
+          } catch (e) {
+            console.error(e.message)
+          }
         }}
         className="form"
       >

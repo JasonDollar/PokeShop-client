@@ -36,12 +36,16 @@ const Login = ({ history }) => {
       <form
         onSubmit={async e => {
           e.preventDefault()
-          const res = await createUser()
-          if (res.data.createUser) {
-            localStorage.setItem('token', res.data.createUser.token)
-            localStorage.setItem('userId', res.data.createUser.user.id)
-            setUserId(res.data.createUser.user.id)
-            history.push('/')
+          try {
+            const res = await createUser()
+            if (res.data.createUser) {
+              localStorage.setItem('token', res.data.createUser.token)
+              localStorage.setItem('userId', res.data.createUser.user.id)
+              setUserId(res.data.createUser.user.id)
+              history.push('/')
+            }
+          } catch (e) {
+            console.error(e.message)
           }
         }}
         className="form"

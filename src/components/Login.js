@@ -25,6 +25,7 @@ export const LOGIN_MUTATION = gql`
 const Login = ({ history }) => {
   const [email, changeEmail] = useState('')
   const [password, changePassword] = useState('')
+  const [loginError, setLoginError] = useState('')
   const { setUserId } = useContext(UserContext)
   const [login, { error, loading }] = useMutation(LOGIN_MUTATION, {
     variables: { email, password },
@@ -40,13 +41,16 @@ const Login = ({ history }) => {
       <form
         onSubmit={async e => {
           e.preventDefault()
-          const data = await login()
-          if (data) {
-
-            localStorage.setItem('token', data.data.login.token)
-            localStorage.setItem('userId', data.data.login.user.id)
-            setUserId(data.data.login.user.id)
-            history.push('/')
+          try {
+            const data = await login()
+            if (data) {
+              localStorage.setItem('token', data.data.login.token)
+              localStorage.setItem('userId', data.data.login.user.id)
+              setUserId(data.data.login.user.id)
+              history.push('/')
+            }
+          } catch (e) {
+            console.error(e.message)
           }
         }}
         className="form"
