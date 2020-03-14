@@ -1,16 +1,21 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, {
+  useState, useEffect, useContext, memo, 
+} from 'react'
 import { useMutation, gql } from '@apollo/client'
 import { USERS_ADMIN_QUERY } from './AdminPanel'
 import ActionButton from './styles/ActionButton'
 import { UserContext } from '../userContext'
 
 const ADMIN_UPDATE_USER_DATA = gql`
-  mutation ADMIN_UPDATE_USER_DATA($userId: ID!, $role: Role, $name: String, $email: String) {
-    adminUpdateUserData(userId: $userId, role: $role, name: $name, email: $email) {
+  mutation ADMIN_UPDATE_USER_DATA($userId: ID!, $role: Role, $name: String, $email: String, $wallet: Int) {
+    adminUpdateUserData(userId: $userId, role: $role, name: $name, email: $email, wallet: $wallet) {
       id
       name
       email
       role
+      wallet {
+        balance
+      }
     }
   }
 `
@@ -20,15 +25,17 @@ const UserTableRow = user => {
     name: false,
     email: false,
   })
+  console.log(user)
   const [role, setRole] = useState(user.user.role)
   const [name, changeName] = useState(user.user.name)
   const [email, changeEmail] = useState(user.user.email)
+  const [walletBalance, changeWalletBallance] = useState(user.user.wallet.balance)
   const { userId } = useContext(UserContext)
   const [inputsTouched, changeInputsTouched] = useState(false)
   
   const [updateUserData, { loading }] = useMutation(ADMIN_UPDATE_USER_DATA, {
     variables: {
-      userId: user.user.id, role, name, email, 
+      userId: user.user.id, role, name, email, wallet: walletBalance,
     },
     update: (cache, { data: { adminUpdateUserData } }) => {
       const { users } = cache.readQuery({ query: USERS_ADMIN_QUERY })    
@@ -49,15 +56,23 @@ const UserTableRow = user => {
   })
 
   useEffect(() => {
-    if (role !== user.user.role || name !== user.user.name || email !== user.user.email) {
+    if (role !== user.user.role || name !== user.user.name || email !== user.user.email || walletBalance !== user.user.wallet.balance) {
       changeInputsTouched(true)
     }
     // eslint-disable-next-line
-  }, [role, name, email])
+  }, [role, name, email, walletBalance])
 
   const buttonFunc = async (mutation) => {
     await mutation()
     toggleEditFields({ name: false, email: false })
+  }
+
+  const handlebalanceInput = e => {
+    const { value } = e.target
+    if (value > 2147483647) {
+      return
+    }
+    changeWalletBallance(Number(e.target.value))
   }
 
   return (
@@ -96,6 +111,9 @@ const UserTableRow = user => {
         </select>
       </td>
       <td>
+        <input type="number" value={walletBalance} onChange={e => handlebalanceInput(e)} />  
+      </td>
+      <td>
         <ActionButton type="button" onClick={() => buttonFunc(updateUserData)} disabled={!inputsTouched || loading}>Update</ActionButton>
       </td>
     </tr>
@@ -103,4 +121,4 @@ const UserTableRow = user => {
 
 }
 
-export default UserTableRow
+export default memo(UserTableRow)
