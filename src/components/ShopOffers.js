@@ -1,7 +1,6 @@
 import React from 'react'
 import { useQuery, gql } from '@apollo/client'
 import PropTypes from 'prop-types'
-
 import OfferListItem from './OfferListItem'
 import GridList from './styles/GridList'
 import Loading from './Loading'

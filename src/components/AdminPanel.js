@@ -19,8 +19,6 @@ export const USERS_ADMIN_QUERY = gql`
   }
 `
 
-
-
 const AdminPanel = () => {
   const { userId } = useContext(UserContext)
   const { data, loading, error } = useQuery(USERS_ADMIN_QUERY, {
@@ -29,6 +27,7 @@ const AdminPanel = () => {
   if (!userId) return <Redirect to="/" />
   if (loading) return <Loading />
   if (error) return <ErrorMessage message={error.message} />
+  
   return (
     <WidthContainer>
       <div>

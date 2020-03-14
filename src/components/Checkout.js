@@ -9,7 +9,6 @@ import ShowMyMoney, { USER_CREDITS_QUERY } from './ShowMyMoney'
 import ErrorMessage from './ErrorMessage'
 import ActionButton from './styles/ActionButton'
 
-
 const ORDER_POKEMONS_MUTATION = gql`
   mutation ORDER_POKEMONS_MUTATION {
     orderPokemons  {
@@ -22,7 +21,6 @@ const ORDER_POKEMONS_MUTATION = gql`
 const CheckoutContainer = styled.div`
   text-align: center;
 `
-
 
 const Checkout = ({ buttonDisabled, totalPrice }) => {
   const [orderPokemons, { data, loading, error }] = useMutation(ORDER_POKEMONS_MUTATION, {

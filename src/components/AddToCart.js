@@ -1,7 +1,6 @@
 import React from 'react'
 import { useMutation, gql } from '@apollo/client'
 import PropTypes from 'prop-types'
-
 import { CART_ITEMS_QUERY } from './Cart'
 
 const ADD_TO_CART_MUTATION = gql`

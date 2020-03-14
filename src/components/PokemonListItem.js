@@ -1,15 +1,14 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-
 import { Link } from 'react-router-dom'
 
 const PokemonListItem = ({ pokemon }) => (
-    <Fragment>
-      <Link to={`/pokemon/${pokemon.name}`}>
-        <img src={pokemon.image} alt={pokemon.name} />
-        <p>{pokemon.name}</p>
-      </Link>
-    </Fragment>
+  <>
+    <Link to={`/pokemon/${pokemon.name}`}>
+      <img src={pokemon.image} alt={pokemon.name} />
+      <p>{pokemon.name}</p>
+    </Link>
+  </>
 )
 
 export default PokemonListItem

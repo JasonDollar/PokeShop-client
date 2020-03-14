@@ -1,16 +1,15 @@
 import React from 'react'
 import { useQuery, gql } from '@apollo/client'
-import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import RemoveFromCart from './RemoveFromCart'
 import AddToCart from './AddToCart'
 import Checkout from './Checkout'
 import ShowMyMoney from './ShowMyMoney'
-import WidthContainer from './styles/WidthContainer'
-import SinglePokemonInfo from './styles/SinglePokemonInfo'
 import Loading from './Loading'
 import ErrorMessage from './ErrorMessage'
 import { formatBigNumber } from '../utils'
+import WidthContainer from './styles/WidthContainer'
+import { EmptyCart, CartContainer, SinglePokemonCartItem } from './styles/Cart'
 
 export const CART_ITEMS_QUERY = gql`
   query CART_ITEMS_QUERY {
@@ -28,70 +27,6 @@ export const CART_ITEMS_QUERY = gql`
       }
     }
   }
-`
-
-const EmptyCart = styled.h3`
-  font-size: 4rem;
-  text-align: center;
-`
-
-const CartContainer = styled.div`
-margin: 1rem 2rem;
-  ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    display: grid;
-    grid-template-columns: 1fr;
-    @media (min-width: 768px) {
-      grid-template-columns: 1fr 1fr;
-    }
-    @media (min-width: 900px) {
-      grid-template-columns: 1fr 1fr 1fr;
-    }
-  }
-  .cartTotal {
-    font-size: 2.4rem;
-  }
-  .overTheLimitError {
-    text-align: center;
-  }
-`
-
-const SinglePokemonCartItem = styled(SinglePokemonInfo)`
-  margin-bottom: 1.5rem;
-  .cartControls {
-    display: flex;
-    width: 100%;
-    margin: .5rem 1rem;
-  }
-  .cartButton {
-    background: none;
-    border: none;
-    font-size: 1.6rem;
-    &:first-of-type {
-      margin-left: 1rem;
-    }
-  }
-  .cartItemQuantity {
-    font-size: 2rem;
-  }
-  
-  .cartItemQuantity,
-  .cartButton {
-    margin-right: 1rem;
-  }
-  .cartButton {
-    transform: translateY(2px);
-  }
-  .quantityTitle {
-    display: inline-block;
-  }
-  .cartItemTotal {
-    margin: 1rem;
-  }
-
-  
 `
 
 const Cart = () => {
