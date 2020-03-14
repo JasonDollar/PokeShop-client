@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useMutation, gql } from '@apollo/client'
 import { USERS_ADMIN_QUERY } from './AdminPanel'
 import ActionButton from './styles/ActionButton'
+import { UserContext } from '../userContext'
 
 const ADMIN_UPDATE_USER_DATA = gql`
   mutation ADMIN_UPDATE_USER_DATA($userId: ID!, $role: Role, $name: String, $email: String) {
@@ -22,6 +23,7 @@ const UserTableRow = user => {
   const [role, setRole] = useState(user.user.role)
   const [name, changeName] = useState(user.user.name)
   const [email, changeEmail] = useState(user.user.email)
+  const { userId } = useContext(UserContext)
   const [inputsTouched, changeInputsTouched] = useState(false)
   
   const [updateUserData, { loading }] = useMutation(ADMIN_UPDATE_USER_DATA, {
@@ -88,7 +90,7 @@ const UserTableRow = user => {
         <button type="button" onClick={() => toggleEditFields(prev => ({ ...prev, email: !prev.email }))}>X</button>
       </td>
       <td>
-        <select name="role" id={'role' + user.id} onChange={e => setRole(e.target.value)} defaultValue={user.user.role}>
+        <select name="role" id={'role' + user.id} onChange={e => setRole(e.target.value)} disabled={user.user.id === userId} defaultValue={user.user.role}>
           <option value="user">User</option>
           <option value="admin">Admin</option>
         </select>

@@ -31,7 +31,7 @@ const Login = ({ history }) => {
   })
   const usePrevAccount = () => {
     changeEmail('qwe@qwe.qwe')
-    changePassword('qweqwe')
+    changePassword('qweqweqwe')
   }
 
   return (

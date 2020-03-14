@@ -15,6 +15,9 @@ export const USERS_ADMIN_QUERY = gql`
       name
       email
       role
+      wallet {
+        balance
+      }
     }
   }
 `

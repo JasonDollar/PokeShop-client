@@ -42,7 +42,7 @@ const OrderList = () => {
   if (loading) return <Loading />
   if (error) return <ErrorMessage message={error.message} />
         
-  if (data.orders.length <= 0) return <p>No orders found</p>
+  if (data.orders.length <= 0) return <ErrorMessage message="No orders found" />
   return (
     <WidthContainer>
       <OrdersUl>
