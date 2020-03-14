@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import gql from 'graphql-tag'
 import debounce from 'lodash.debounce'
-import { useMutation, ApolloConsumer } from '@apollo/react-hooks'
+import { useMutation, ApolloConsumer, gql } from '@apollo/client'
 import Downshift from 'downshift'
 import PropTypes from 'prop-types'
 import { POKEMON_OFFERS_QUERY } from './ShopOffers'

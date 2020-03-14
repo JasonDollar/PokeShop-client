@@ -1,6 +1,5 @@
 import React from 'react'
-import { useMutation } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useMutation, gql } from '@apollo/client'
 import PropTypes from 'prop-types'
 
 import { CART_ITEMS_QUERY } from './Cart'

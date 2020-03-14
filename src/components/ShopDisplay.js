@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useQuery, gql } from '@apollo/client'
 import qs from 'query-string'
 import PropTypes from 'prop-types'
 import OfferListItem from './OfferListItem'

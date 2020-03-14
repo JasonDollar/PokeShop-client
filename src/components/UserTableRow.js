@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useMutation } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useMutation, gql } from '@apollo/client'
 import { USERS_ADMIN_QUERY } from './AdminPanel'
 import ActionButton from './styles/ActionButton'
 

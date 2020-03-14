@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import gql from 'graphql-tag'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery, gql } from '@apollo/client'
 import WidthContainer from './styles/WidthContainer'
 import Loading from './Loading'
 import ErrorMessage from './ErrorMessage'

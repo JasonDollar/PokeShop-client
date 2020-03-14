@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useQuery, gql } from '@apollo/client'
 import { Redirect } from 'react-router-dom'
 import { UserContext } from '../userContext'
 import UserTableRow from './UserTableRow'

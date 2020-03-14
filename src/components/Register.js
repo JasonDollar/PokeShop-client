@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { useMutation } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useMutation, gql } from '@apollo/client'
 import PropTypes from 'prop-types'
 import { CURRENT_USER_QUERY } from './Me'
 import { UserContext } from '../userContext'

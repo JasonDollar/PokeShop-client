@@ -1,6 +1,5 @@
 import React from 'react'
-import gql from 'graphql-tag'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery, gql } from '@apollo/client'
 import PokemonListItem from './PokemonListItem'
 import ErrorMessage from './ErrorMessage'
 import WidthContainer from './styles/WidthContainer'

@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useMutation } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useMutation, gql } from '@apollo/client'
 import { CART_ITEMS_QUERY } from './Cart'
 
 const REMOVE_FROM_CART_MUTATION = gql`
