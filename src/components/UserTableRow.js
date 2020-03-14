@@ -51,6 +51,7 @@ const UserTableRow = user => {
     if (role !== user.user.role || name !== user.user.name || email !== user.user.email) {
       changeInputsTouched(true)
     }
+    // eslint-disable-next-line
   }, [role, name, email])
 
   const buttonFunc = async (mutation) => {

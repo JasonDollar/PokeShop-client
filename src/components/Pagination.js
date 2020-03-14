@@ -33,8 +33,11 @@ const PaginationStyles = styled.div`
     /* align-items: center; */
     & .arrowIcon {
       margin: 0 .5rem;
-      transform: translateY(.5rem);
+      transform: translateY(.3rem);
       transition: color .1s;
+      @media (min-width: 576px) {
+        transform: translateY(.4rem);
+      }
     }
     &:hover .arrowIcon {
       color: ${props => props.theme.primaryRed};
@@ -47,31 +50,31 @@ const PaginationStyles = styled.div`
 `
 
 const Pagination = ({ page, maxPage }) => (
-    <PaginationStyles>
-      <Link
-        className="link"
-        aria-disabled={page <= 1}
-        to={{
-          path: '/',
-          search: `?page=${page - 1}`,
-        }}
-      >
-        <FontAwesomeIcon icon="chevron-left" className="arrowIcon" />
+  <PaginationStyles>
+    <Link
+      className="link"
+      aria-disabled={page <= 1}
+      to={{
+        path: '/',
+        search: `?page=${page - 1}`,
+      }}
+    >
+      <FontAwesomeIcon icon="chevron-left" className="arrowIcon" />
         Previous
-      </Link>
-      <p>Page {page} of {maxPage}</p>
-      <Link
-        className="link"
-        aria-disabled={page >= maxPage}
-        to={{
-          path: '/',
-          search: `?page=${page + 1}`,
-        }}
-      >
+    </Link>
+    <p>Page {page} of {maxPage}</p>
+    <Link
+      className="link"
+      aria-disabled={page >= maxPage}
+      to={{
+        path: '/',
+        search: `?page=${page + 1}`,
+      }}
+    >
         Next
-        <FontAwesomeIcon icon="chevron-right" className="arrowIcon" />
-      </Link>
-    </PaginationStyles>
+      <FontAwesomeIcon icon="chevron-right" className="arrowIcon" />
+    </Link>
+  </PaginationStyles>
 )
 
 export default Pagination

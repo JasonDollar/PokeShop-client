@@ -25,7 +25,6 @@ export const LOGIN_MUTATION = gql`
 const Login = ({ history }) => {
   const [email, changeEmail] = useState('')
   const [password, changePassword] = useState('')
-  const [loginError, setLoginError] = useState('')
   const { setUserId } = useContext(UserContext)
   const [login, { error, loading }] = useMutation(LOGIN_MUTATION, {
     variables: { email, password },
