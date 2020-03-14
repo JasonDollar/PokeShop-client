@@ -6,6 +6,7 @@ import { UserContext } from '../userContext'
 import UserTableRow from './UserTableRow'
 import WidthContainer from './styles/WidthContainer'
 import Loading from './Loading'
+import ErrorMessage from './ErrorMessage'
 import UsersTable from './styles/UsersTable'
 
 export const USERS_ADMIN_QUERY = gql`
@@ -28,7 +29,7 @@ const AdminPanel = () => {
   })
   if (!userId) return <Redirect to="/" />
   if (loading) return <Loading />
-  if (error) return <p>{error.message}</p>
+  if (error) return <ErrorMessage message={error.message} />
   return (
     <WidthContainer>
       <div>

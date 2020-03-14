@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import OfferListItem from './OfferListItem'
 import GridList from './styles/GridList'
 import Loading from './Loading'
+import ErrorMessage from './ErrorMessage'
 
 export const POKEMON_OFFERS_QUERY = gql`
   query POKEMON_OFFERS_QUERY($skip: Int = 0, $limit: Int = 24, $minPrice: Int, $maxPrice: Int, $pokemonTypes: [String!]) {
@@ -45,7 +46,7 @@ const ShopOffers = ({
   })
 
   if (loading) return <Loading />
-  if (error) return <p>{error.message}</p>
+  if (error) return <ErrorMessage message={error.message} />
   setOffersCount(data.pokemonOffers.count)
   return (
     <GridList>

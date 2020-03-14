@@ -4,6 +4,7 @@ import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import WidthContainer from './styles/WidthContainer'
 import Loading from './Loading'
+import ErrorMessage from './ErrorMessage'
 
 const SINGLE_POKEMON = gql`
   query SINGLE_POKEMON($id: ID!) {
@@ -24,9 +25,7 @@ const PokemonDetail = props => {
   const { data, loading, error } = useQuery(SINGLE_POKEMON)
 
   if (loading) return <Loading />
-  if (error) {
-    return <p>Error...</p>
-  }
+  if (error) return <ErrorMessage message={error} />
           
   return (
     <WidthContainer>

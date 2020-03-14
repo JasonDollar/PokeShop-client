@@ -10,6 +10,7 @@ import ShowMyMoney from './ShowMyMoney'
 import WidthContainer from './styles/WidthContainer'
 import SinglePokemonInfo from './styles/SinglePokemonInfo'
 import Loading from './Loading'
+import ErrorMessage from './ErrorMessage'
 import { formatBigNumber } from '../utils'
 
 export const CART_ITEMS_QUERY = gql`
@@ -105,7 +106,7 @@ const Cart = () => {
         {({ data: moneyData, loading: moneyLoading }) => {
   
           if (loading || moneyLoading) return <Loading />
-          if (error) return <p>{error.message}</p>
+          if (error) return <ErrorMessage message={error.message} />
       
           if (data.userCart.length <= 0) {
             return <EmptyCart>Your cart is empty!</EmptyCart>

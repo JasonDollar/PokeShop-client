@@ -6,6 +6,7 @@ import PokemonListItem from './PokemonListItem'
 import WidthContainer from './styles/WidthContainer'
 import GridList from './styles/GridList'
 import Loading from './Loading'
+import ErrorMessage from './ErrorMessage'
 
 const TYPE_POKEMONS = gql`
   query TYPE_POKEMONS($id: ID!) {
@@ -26,7 +27,7 @@ const TypeDetail = ({ match }) => {
     variables: { id: match.params.typeId },
   })
   if (loading) return <Loading />
-  if (error) return <p>Error</p>
+  if (error) return <ErrorMessage message={error} />
 
   return (
     <WidthContainer>

@@ -7,7 +7,9 @@ import styled from 'styled-components'
 import { CART_ITEMS_QUERY } from './Cart'
 import { USER_ORDERS_QUERY } from './OrderList'
 import ShowMyMoney, { USER_CREDITS_QUERY } from './ShowMyMoney'
+import ErrorMessage from './ErrorMessage'
 import ActionButton from './styles/ActionButton'
+
 
 const ORDER_POKEMONS_MUTATION = gql`
   mutation ORDER_POKEMONS_MUTATION {
@@ -45,9 +47,8 @@ const Checkout = ({ buttonDisabled, totalPrice }) => {
             <ActionButton type="button" onClick={orderPokemons} disabled={loading || loadingCredits || buttonDisabled || (userCredits && userCredits.balance < totalPrice)}>
               Buy these shiny pokemons!
             </ActionButton>
-            {errorCredits && <p>{errorCredits.message}</p> }
-            {error && <p> {error.message}</p>}
-            
+            {errorCredits && <ErrorMessage message={errorCredits.message} />}
+            {error && <ErrorMessage message={error.message} />}
           </CheckoutContainer>
         )
       }}

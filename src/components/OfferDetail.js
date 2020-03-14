@@ -8,6 +8,7 @@ import { UserContext } from '../userContext'
 import AddToCart from './AddToCart'
 import WidthContainer from './styles/WidthContainer'
 import Loading from './Loading'
+import ErrorMessage from './ErrorMessage'
 import { formatBigNumber } from '../utils'
 
 const DetailContainer = styled(WidthContainer)`
@@ -140,7 +141,7 @@ const OfferDetail = ({ match }) => {
     variables: { id: match.params.offerId },
   })
   if (loading) return <Loading />
-  if (error) return <p>{error.message}</p>
+  if (error) return <ErrorMessage message={error.message} />
   const types = data.pokemonOffer.pokemon.pokeType
     .map(item => item[0].toUpperCase() + item.substring(1, item.length))
 

@@ -6,6 +6,7 @@ import WidthContainer from './styles/WidthContainer'
 import GridList from './styles/GridList'
 import UserInfo from './styles/UserInfo'
 import Loading from './Loading'
+import ErrorMessage from './ErrorMessage'
 import { formatBigNumber } from '../utils'
 
 export const CURRENT_USER_QUERY = gql`
@@ -37,8 +38,8 @@ const Me = () => {
   })
 
   if (loading) return <Loading />
-  if (error) return <p>{error.message}</p>
-  if (!data.me) return <p>We could not fetch your information. Check back later</p>
+  if (error) return <ErrorMessage message={error.message} />
+  if (!data.me) return <ErrorMessage message="We could not fetch your information. Check back later" />
   return (
     <WidthContainer>
       <UserInfo>

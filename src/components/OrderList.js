@@ -6,6 +6,7 @@ import { format } from 'date-fns'
 import WidthContainer from './styles/WidthContainer'
 import SinglePokemonInfo from './styles/SinglePokemonInfo'
 import Loading from './Loading'
+import ErrorMessage from './ErrorMessage'
 import { formatBigNumber } from '../utils'
 
 export const USER_ORDERS_QUERY = gql`
@@ -80,7 +81,7 @@ const OrderList = () => {
     fetchPolicy: 'cache-and-network',
   })
   if (loading) return <Loading />
-  if (error) return (<p>{error.message}</p>)
+  if (error) return <ErrorMessage message={error.message} />
         
   if (data.orders.length <= 0) return <p>No orders found</p>
   return (

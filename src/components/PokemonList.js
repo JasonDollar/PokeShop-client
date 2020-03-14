@@ -2,6 +2,7 @@ import React from 'react'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import PokemonListItem from './PokemonListItem'
+import ErrorMessage from './ErrorMessage'
 import WidthContainer from './styles/WidthContainer'
 import GridList from './styles/GridList'
 import Loading from './Loading'
@@ -25,7 +26,7 @@ const PokemonList = () => {
   })
 
   if (loading) return <Loading />
-  if (error) return <p>{error.message}</p>
+  if (error) return <ErrorMessage mesage={error.message} />
   return (
     <WidthContainer>
       <GridList>

@@ -9,6 +9,7 @@ import GridList from './styles/GridList'
 import UserInfo from './styles/UserInfo'
 import { UserContext } from '../userContext'
 import Loading from './Loading'
+import ErrorMessage from './ErrorMessage'
 
 
 const USER_DETAIL_QUERY = gql`
@@ -43,7 +44,7 @@ const UserDetail = ({ match }) => {
   }
 
   if (loading) return <Loading />
-  if (error) return <p>Error</p>
+  if (error) return <ErrorMessage message={error} />
 
   return (
     <WidthContainer>
