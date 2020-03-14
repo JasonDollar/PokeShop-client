@@ -165,6 +165,7 @@ const Nav = ({ history, location }) => {
           <li>
             <NavLink to="/sell">Sell</NavLink>
           </li>
+          {console.log(userId)}
           {!userId && publicLinks}
           {userId && privateLinks}
         </NavList>
