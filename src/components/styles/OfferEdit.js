@@ -38,6 +38,11 @@ const DetailContainer = styled(WidthContainer)`
       justify-self: center;
       width: 400px;
     }
+
+    textarea {
+      font-family: inherit;
+      font-size: inherit;
+    }
   }
 
   button {

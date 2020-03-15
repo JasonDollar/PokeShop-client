@@ -30,7 +30,7 @@ const OfferEdit = () => {
     variables: { id: offerId },
   })
 
-  const [editOffer, { loadingMutation, errorMutation }] = useMutation(EDIT_POKEMON_OFFER_MUTATION, {
+  const [editOffer, { loading: loadingMutation, error: errorMutation }] = useMutation(EDIT_POKEMON_OFFER_MUTATION, {
     variables: { offerId, price, description },
     update: (cache, { data: { editPokemonOffer } }) => {
       const { pokemonOffer } = cache.readQuery({ query: POKEMON_OFFER_QUERY, variables: { id: offerId } })
@@ -57,6 +57,18 @@ const OfferEdit = () => {
     }
   }, [data])
 
+  const handleEditMutation = async mutation => {
+    try {
+      await mutation()
+      if (!errorMutation) {
+        history.push(`/offer/${offerId}`)
+      }
+    } catch {
+      console.error('Something went wrong')
+    }
+
+  }
+
   if (loading) return <Loading />
   if (error) return <ErrorMessage error={error} />
   
@@ -74,12 +86,12 @@ const OfferEdit = () => {
       </div>
       <div className="input-group">
         <label htmlFor="description">Edit description</label>
-        <textarea type="number" id="description" value={description} onChange={e => setDescription(Number(e.target.value))} />
+        <textarea id="description" value={description} onChange={e => setDescription(e.target.value)} />
       </div>
-      <ActionButton disabled={loadingMutation} onClick={editOffer}>
+      <ActionButton disabled={loadingMutation} onClick={() => handleEditMutation(editOffer)}>
         Confirm changes
       </ActionButton>
-      {errorMutation && <ErrorMessage error={errorMutation} />}
+      {errorMutation && <ErrorMessage error={errorMutation} inline />}
     </DetailContainer>
   )
 }
