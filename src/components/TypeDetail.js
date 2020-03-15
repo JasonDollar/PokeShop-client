@@ -26,7 +26,7 @@ const TypeDetail = ({ match }) => {
     variables: { id: match.params.typeId },
   })
   if (loading) return <Loading />
-  if (error) return <ErrorMessage message={error} />
+  if (error) return <ErrorMessage error={error} />
 
   return (
     <WidthContainer>

@@ -25,7 +25,7 @@ const PokemonList = () => {
   })
 
   if (loading) return <Loading />
-  if (error) return <ErrorMessage mesage={error.message} />
+  if (error) return <ErrorMessage error={error} />
   return (
     <WidthContainer>
       <GridList>

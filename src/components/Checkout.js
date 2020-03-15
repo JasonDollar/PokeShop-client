@@ -44,8 +44,8 @@ const Checkout = ({ buttonDisabled, totalPrice }) => {
             <ActionButton type="button" onClick={orderPokemons} disabled={loading || loadingCredits || buttonDisabled || (userCredits && userCredits.balance < totalPrice)}>
               Buy these shiny pokemons!
             </ActionButton>
-            {errorCredits && <ErrorMessage message={errorCredits.message} />}
-            {error && <ErrorMessage message={error.message} />}
+            {errorCredits && <ErrorMessage error={errorCredits} />}
+            {error && <ErrorMessage error={error} />}
           </CheckoutContainer>
         )
       }}

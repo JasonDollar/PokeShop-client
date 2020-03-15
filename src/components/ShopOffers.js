@@ -44,7 +44,7 @@ const ShopOffers = ({
   })
 
   if (loading) return <Loading />
-  if (error) return <ErrorMessage message={error.message} />
+  if (error) return <ErrorMessage error={error} />
   setOffersCount(data.pokemonOffers.count)
   return (
     <GridList>

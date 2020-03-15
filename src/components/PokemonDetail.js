@@ -24,7 +24,7 @@ const PokemonDetail = props => {
   const { data, loading, error } = useQuery(SINGLE_POKEMON)
 
   if (loading) return <Loading />
-  if (error) return <ErrorMessage message={error} />
+  if (error) return <ErrorMessage error={error} />
           
   return (
     <WidthContainer>

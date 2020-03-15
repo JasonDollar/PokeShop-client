@@ -4,8 +4,8 @@ import PropTypes from 'prop-types'
 import { CURRENT_USER_QUERY } from './Me'
 import { UserContext } from '../userContext'
 import ActionButton from './styles/ActionButton'
-
 import AuthForm from './styles/AuthForm'
+import ErrorMessage from './ErrorMessage'
 
 const CREATE_USER_MUTATION = gql`
   mutation CREATE_USER_MUTATION($email: String!, $password:String!, $name: String!) {
@@ -66,7 +66,7 @@ const Login = ({ history }) => {
           <label htmlFor="password">Password:</label>
           <input type="password" id="password" value={password} onChange={e => changePassword(e.target.value)} />
         </div>
-        {error && <span className="errorMessage">{error.message}</span> }
+        {error && <ErrorMessage error={error} />}
 
         <ActionButton type="submit" disabled={loading} wide>Register</ActionButton>
       </form>

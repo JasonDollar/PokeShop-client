@@ -40,7 +40,7 @@ const OrderList = () => {
     fetchPolicy: 'cache-and-network',
   })
   if (loading) return <Loading />
-  if (error) return <ErrorMessage message={error.message} />
+  if (error) return <ErrorMessage error={error} />
         
   if (data.orders.length <= 0) return <ErrorMessage message="No orders found" />
   return (

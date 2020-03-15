@@ -35,7 +35,7 @@ const OfferDetail = ({ match }) => {
     variables: { id: match.params.offerId },
   })
   if (loading) return <Loading />
-  if (error) return <ErrorMessage message={error.message} />
+  if (error) return <ErrorMessage error={error} />
   const types = data.pokemonOffer.pokemon.pokeType
     .map(item => item[0].toUpperCase() + item.substring(1, item.length))
 

@@ -40,7 +40,7 @@ const Cart = () => {
         {({ data: moneyData, loading: moneyLoading }) => {
   
           if (loading || moneyLoading) return <Loading />
-          if (error) return <ErrorMessage message={error.message} />
+          if (error) return <ErrorMessage error={error} />
       
           if (data.userCart.length <= 0) {
             return <EmptyCart>Your cart is empty!</EmptyCart>

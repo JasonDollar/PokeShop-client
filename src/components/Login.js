@@ -7,6 +7,7 @@ import { UserContext } from '../userContext'
 import AuthForm from './styles/AuthForm'
 import { CURRENT_USER_QUERY } from './Me'
 import ActionButton from './styles/ActionButton'
+import ErrorMessage from './ErrorMessage'
 
 export const LOGIN_MUTATION = gql`
   mutation login($email: String!, $password:String!) {
@@ -47,6 +48,7 @@ const Login = ({ history }) => {
               setUserId(data.data.login.user.id)
               history.push('/')
             }
+            console.log(error)
           } catch (e) {
             console.error(e.message)
           }
@@ -65,7 +67,7 @@ const Login = ({ history }) => {
           <label htmlFor="password">Password:</label>
           <input type="password" id="password" value={password} onChange={e => changePassword(e.target.value)} />
         </div>
-        {error && <span className="errorMessage">{error.message}</span> }
+        {error && <ErrorMessage error={error} />}
         <button className="previewButton" type="button" onClick={usePrevAccount}>Use Preview Account</button>
         <Link to="/resetPassword" className="resetLink">
           Reset password

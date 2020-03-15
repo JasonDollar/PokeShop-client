@@ -7,6 +7,7 @@ import { POKEMON_OFFERS_QUERY } from './ShopOffers'
 import AuthForm from './styles/AuthForm'
 import { DropDown, DropDownItem } from './styles/Dropdown'
 import ActionButton from './styles/ActionButton'
+import ErrorMessage from './ErrorMessage'
 
 const SELL_POKEMON_MUTATION = gql`
   mutation SELL_POKEMON_MUTATION($name: String!, $price: Int!, $description: String) {
@@ -51,7 +52,7 @@ const Sell = ({ history }) => {
     variables: { name: name.toLowerCase(), price: parseInt(price), description },
     refetchQueries: [{ query: POKEMON_OFFERS_QUERY }],
   })
-
+  console.log(error?.graphQLErrors)
   return (
     <AuthForm>
       <form
@@ -138,7 +139,7 @@ const Sell = ({ history }) => {
           <label htmlFor="description">Description:</label>
           <textarea name="description" id="description" value={description} onChange={e => setDescription(e.target.value)} />
         </div>
-        {error && <span className="errorMessage">{error.message}</span> }
+        {error && <ErrorMessage error={error} />}
 
         <ActionButton type="submit" className="form_button_NOT" disabled={loading} wide>Sell</ActionButton>
       </form>

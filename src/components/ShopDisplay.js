@@ -47,7 +47,7 @@ const ShopDisplay = ({ location }) => {
   })
 
   if (loading) return <Loading />
-  if (error) return <ErrorMessage message={error.message} />
+  if (error) return <ErrorMessage error={error} />
 
   const maxPage = Math.ceil(data.pokemonOffers.count / itemsPerPage)
 
