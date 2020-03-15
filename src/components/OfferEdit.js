@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { useQuery } from '@apollo/client'
+import { useQuery, useMutation, gql } from '@apollo/client'
 import { useParams, useHistory } from 'react-router-dom'
 import { UserContext } from '../userContext'
 
@@ -8,6 +8,16 @@ import ErrorMessage from './ErrorMessage'
 import { POKEMON_OFFER_QUERY } from './OfferDetail'
 import DetailContainer from './styles/OfferEdit'
 import ActionButton from './styles/ActionButton'
+
+const EDIT_POKEMON_OFFER_MUTATION = gql`
+  mutation EDIT_POKEMON_OFFER_MUTATION($offerId: String!, $price: Int, $description: String) {
+    editPokemonOffer(data: {offerId: $offerId, price: $price, description: $description}) {
+      id
+      price
+      description
+    }
+  }
+`
 
 const OfferEdit = () => {
   const [price, setPrice] = useState(0)
@@ -19,6 +29,23 @@ const OfferEdit = () => {
   const { data, loading, error } = useQuery(POKEMON_OFFER_QUERY, {
     variables: { id: offerId },
   })
+
+  const [editOffer, { loadingMutation, errorMutation }] = useMutation(EDIT_POKEMON_OFFER_MUTATION, {
+    variables: { offerId, price, description },
+    update: (cache, { data: { editPokemonOffer } }) => {
+      const { pokemonOffer } = cache.readQuery({ query: POKEMON_OFFER_QUERY, variables: { id: offerId } })
+      cache.writeQuery({
+        query: POKEMON_OFFER_QUERY,
+        variables: { id: offerId },
+        data: {
+          ...pokemonOffer,
+          price: editPokemonOffer.price,
+          description: editPokemonOffer.description,
+        },
+      })
+    },
+  })
+
   useEffect(() => {
     if (data) {
       if (data.pokemonOffer.seller.id !== userId) {
@@ -49,10 +76,10 @@ const OfferEdit = () => {
         <label htmlFor="description">Edit description</label>
         <textarea type="number" id="description" value={description} onChange={e => setDescription(Number(e.target.value))} />
       </div>
-      {/* TODO connect button to mutation */}
-      <ActionButton disabled={true}>
+      <ActionButton disabled={loadingMutation} onClick={editOffer}>
         Confirm changes
       </ActionButton>
+      {errorMutation && <ErrorMessage error={errorMutation} />}
     </DetailContainer>
   )
 }
