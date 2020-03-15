@@ -67,7 +67,7 @@ const Login = ({ history }) => {
           <label htmlFor="password">Password:</label>
           <input type="password" id="password" value={password} onChange={e => changePassword(e.target.value)} />
         </div>
-        {error && <ErrorMessage error={error} />}
+        {error && <ErrorMessage error={error} inline />}
         <button className="previewButton" type="button" onClick={usePrevAccount}>Use Preview Account</button>
         <Link to="/resetPassword" className="resetLink">
           Reset password

@@ -139,7 +139,7 @@ const Sell = ({ history }) => {
           <label htmlFor="description">Description:</label>
           <textarea name="description" id="description" value={description} onChange={e => setDescription(e.target.value)} />
         </div>
-        {error && <ErrorMessage error={error} />}
+        {error && <ErrorMessage error={error} inline/>}
 
         <ActionButton type="submit" className="form_button_NOT" disabled={loading} wide>Sell</ActionButton>
       </form>

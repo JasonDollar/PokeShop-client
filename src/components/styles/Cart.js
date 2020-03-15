@@ -1,11 +1,6 @@
 import styled from 'styled-components'
 import SinglePokemonInfo from './SinglePokemonInfo'
 
-export const EmptyCart = styled.h3`
-  font-size: 4rem;
-  text-align: center;
-`
-
 export const CartContainer = styled.div`
 margin: 1rem 2rem;
   ul {

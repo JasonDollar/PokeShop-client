@@ -9,7 +9,7 @@ import Loading from './Loading'
 import ErrorMessage from './ErrorMessage'
 import { formatBigNumber } from '../utils'
 import WidthContainer from './styles/WidthContainer'
-import { EmptyCart, CartContainer, SinglePokemonCartItem } from './styles/Cart'
+import { CartContainer, SinglePokemonCartItem } from './styles/Cart'
 
 export const CART_ITEMS_QUERY = gql`
   query CART_ITEMS_QUERY {
@@ -43,7 +43,7 @@ const Cart = () => {
           if (error) return <ErrorMessage error={error} />
       
           if (data.userCart.length <= 0) {
-            return <EmptyCart>Your cart is empty!</EmptyCart>
+            return <ErrorMessage message="Your cart is empty!" />
           }
           let totalPrice = 0
           if (data && data.userCart) {

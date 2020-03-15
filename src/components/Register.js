@@ -66,7 +66,7 @@ const Login = ({ history }) => {
           <label htmlFor="password">Password:</label>
           <input type="password" id="password" value={password} onChange={e => changePassword(e.target.value)} />
         </div>
-        {error && <ErrorMessage error={error} />}
+        {error && <ErrorMessage error={error} inline />}
 
         <ActionButton type="submit" disabled={loading} wide>Register</ActionButton>
       </form>
