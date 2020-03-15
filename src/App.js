@@ -23,6 +23,7 @@ import OrderList from './components/OrderList'
 import Filter from './components/Filter'
 import AdminPanel from './components/AdminPanel'
 import ResetPassword from './components/ResetPassword'
+import OfferEdit from './components/OfferEdit'
 import theme from './components/styles/theme'
 
 import Nav from './components/Nav'
@@ -66,6 +67,7 @@ function App() {
               <Route path="/pokemon/:pokemonId" component={PokemonDetail} />
               <Route path="/type/:typeId" component={TypeDetail} />
               <Route path="/offer/:offerId" component={OfferDetail} />
+              <Route path="/edit/:offerId" component={OfferEdit} />
               <Route path="/user/:userId" component={UserDetail} />
               <Route path="/sell" component={Sell} />
               <Route path="/me" component={Me} />

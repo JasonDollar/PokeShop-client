@@ -8,8 +8,9 @@ import Loading from './Loading'
 import ErrorMessage from './ErrorMessage'
 import { formatBigNumber } from '../utils'
 import DetailContainer from './styles/OfferDetail'
+import ActionButton from './styles/ActionButton'
 
-const POKEMON_OFFER_QUERY = gql`
+export const POKEMON_OFFER_QUERY = gql`
   query POKEMON_OFFER_QUERY($id: ID!) {
     pokemonOffer(id: $id) {
       id
@@ -61,7 +62,7 @@ const OfferDetail = ({ match }) => {
           <p className="description">{data.pokemonOffer.description}</p>
         )
       }
-      {data.pokemonOffer.seller.id !== userId && (
+      {data.pokemonOffer.seller.id !== userId ? (
 
         <AddToCart 
           pokemonOfferId={data.pokemonOffer.id} 
@@ -70,6 +71,13 @@ const OfferDetail = ({ match }) => {
         >
           Add to cart
         </AddToCart>
+      ) : (
+        <Link to={`/edit/${data.pokemonOffer.id}`} className="actionButton"> 
+          <ActionButton>
+          Edit
+
+          </ActionButton>
+        </Link>
       )}
     </DetailContainer>
   )

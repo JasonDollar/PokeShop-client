@@ -30,6 +30,12 @@ const DetailContainer = styled(WidthContainer)`
       
       width: 30%;
     }
+    &--wide {
+      justify-self: center;
+      transform: scale(1);
+      grid-column: 1 / -1;
+      /* margin: 0; */
+    }
   }
   .price {
     display: flex;
@@ -102,6 +108,11 @@ const DetailContainer = styled(WidthContainer)`
       background: ${props => props.theme.secondaryRed};
       border: ${props => props.theme.secondaryRed};
     }
+  }
+  .actionButton {
+    grid-column: 1 / -1;
+    text-decoration: none;
+    color: inherit;
   }
 `
 
