@@ -6,7 +6,7 @@ import UserTableRow from './UserTableRow'
 import WidthContainer from './styles/WidthContainer'
 import Loading from './Loading'
 import ErrorMessage from './ErrorMessage'
-import UsersTable from './styles/UsersTable'
+import { UsersTable } from './styles/UsersTable'
 
 export const USERS_ADMIN_QUERY = gql`
   query USERS_ADMIN_QUERY {

@@ -2,9 +2,11 @@ import React, {
   useState, useEffect, useContext, memo, 
 } from 'react'
 import { useMutation, gql } from '@apollo/client'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { USERS_ADMIN_QUERY } from './AdminPanel'
 import ActionButton from './styles/ActionButton'
 import { UserContext } from '../userContext'
+import { EditButton } from './styles/UsersTable'
 
 const ADMIN_UPDATE_USER_DATA = gql`
   mutation ADMIN_UPDATE_USER_DATA($userId: ID!, $role: Role, $name: String, $email: String, $wallet: Int) {
@@ -19,6 +21,7 @@ const ADMIN_UPDATE_USER_DATA = gql`
     }
   }
 `
+
 
 const UserTableRow = user => {
   const [editFields, toggleEditFields] = useState({
@@ -67,7 +70,7 @@ const UserTableRow = user => {
     toggleEditFields({ name: false, email: false })
   }
 
-  const handlebalanceInput = e => {
+  const handleBalanceInput = e => {
     const { value } = e.target
     if (value > 2147483647) {
       return
@@ -78,31 +81,42 @@ const UserTableRow = user => {
   return (
     <tr>
       <td>{user.user.id}</td>
-      <td className="editable">{editFields.name 
-        ? (
-          <input
-            type="text" 
-            defaultValue={name}
-            onChange={e => changeName(e.target.value)}
-          />
-        ) 
-        : <span>{name}</span>
+      <td>
+        <div className="editable">
+
+          {editFields.name 
+            ? (
+              <input
+                type="text" 
+                defaultValue={name}
+                onChange={e => changeName(e.target.value)}
+              />
+            ) 
+            : <span>{name}</span>
         }
-        <button type="button" onClick={() => toggleEditFields(prev => ({ ...prev, name: !prev.name }))}>X</button>
+          <EditButton type="button" onClick={() => toggleEditFields(prev => ({ ...prev, name: !prev.name }))}>
+            <FontAwesomeIcon icon="pencil-alt" />
+          </EditButton>
+        </div>
 
       </td>
-      <td className="editable">
-        {editFields.email 
-          ? (
-            <input
-              type="email" 
-              defaultValue={email}
-              onChange={e => changeEmail(e.target.value)}
-            />
-          ) 
-          : <span>{email}</span>
+      <td>
+        <div className="editable">
+
+          {editFields.email 
+            ? (
+              <input
+                type="email" 
+                defaultValue={email}
+                onChange={e => changeEmail(e.target.value)}
+              />
+            ) 
+            : <span>{email}</span>
         }
-        <button type="button" onClick={() => toggleEditFields(prev => ({ ...prev, email: !prev.email }))}>X</button>
+          <EditButton type="button" onClick={() => toggleEditFields(prev => ({ ...prev, email: !prev.email }))}>
+            <FontAwesomeIcon icon="pencil-alt" />
+          </EditButton>
+        </div>
       </td>
       <td>
         <select name="role" id={'role' + user.id} onChange={e => setRole(e.target.value)} disabled={user.user.id === userId} defaultValue={user.user.role}>
@@ -111,7 +125,7 @@ const UserTableRow = user => {
         </select>
       </td>
       <td>
-        <input type="number" value={walletBalance} onChange={e => handlebalanceInput(e)} />  
+        <input type="number" value={walletBalance} onChange={e => handleBalanceInput(e)} />  
       </td>
       <td>
         <ActionButton type="button" onClick={() => buttonFunc(updateUserData)} disabled={!inputsTouched || loading}>Update</ActionButton>

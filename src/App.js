@@ -4,7 +4,7 @@ import { ThemeProvider, createGlobalStyle } from 'styled-components'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { 
-  faTimes, faFilter, faBars, faChevronLeft, faChevronRight, faPlus, faMinus,
+  faTimes, faFilter, faBars, faChevronLeft, faChevronRight, faPlus, faMinus, faPencilAlt,
 } from '@fortawesome/free-solid-svg-icons'
 import { UserProvider } from './userContext'
 import { FilterProvider } from './filterContext'
@@ -28,7 +28,7 @@ import theme from './components/styles/theme'
 
 import Nav from './components/Nav'
 
-library.add(faTimes, faFilter, faBars, faChevronLeft, faChevronRight, faPlus, faMinus)
+library.add(faTimes, faFilter, faBars, faChevronLeft, faChevronRight, faPlus, faMinus, faPencilAlt)
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -50,6 +50,10 @@ const GlobalStyle = createGlobalStyle`
       display: none;
     }
   }
+  /* .editable {
+    display: flex;
+    justify-content: center;
+  } */
 `
 
 function App() {
