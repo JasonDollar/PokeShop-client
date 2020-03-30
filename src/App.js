@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -77,6 +77,9 @@ function App() {
               <Route path="/orders" component={OrderList} />
               <Route path="/resetPassword" component={ResetPassword} />
               <Route path="/admin" component={AdminPanel} />
+              <Route path="*">
+                <Redirect to="/" />
+              </Route>
             </Switch>
           </div>
         </FilterProvider>
