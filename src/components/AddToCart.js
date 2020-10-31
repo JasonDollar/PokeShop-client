@@ -19,16 +19,16 @@ const ADD_TO_CART_MUTATION = gql`
 const AddToCart = ({
   pokemonOfferId, children, disabledButton, CSSclass, 
 }) => {
-  const [addToCart, { loading }] = useMutation(ADD_TO_CART_MUTATION, {
+  const [addToCart, { loading, error }] = useMutation(ADD_TO_CART_MUTATION, {
     variables: { id: pokemonOfferId },
     refetchQueries: [{ query: CART_ITEMS_QUERY }],
   })
-
+  if (error) console.log(error)
   return (
     <button 
       type="button"
       className={`${CSSclass} ${loading && 'loading'}`}
-      onClick={addToCart}
+      onClick={() => (addToCart()).catch(lol => console.log(lol))}
       disabled={loading || disabledButton}
     >
       {children}
